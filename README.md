@@ -1,1 +1,1 @@
-# 247project
+# A Java hurricane-relief management system that helps organize shelters, volunteers, supplies, and people needing assistance during a disaster. It uses design patterns to keep the program organized and easy to update.
