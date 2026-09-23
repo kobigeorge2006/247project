@@ -1,0 +1,23 @@
+[
+    {
+        "firstName": "Alice",
+        "lastName": "Smith",
+        "username": "AliceS",
+        "password": "Smith123",
+        "email": "AliceS@gmail.com",
+        "phoneNumber": "123-456-7890",
+        "requests": ["r1", "r5", "r6"],
+        "id": "user1"
+    },
+    {
+        "firstName": "Bob",
+        "lastName": "Johnson",
+        "username": "BobJ",
+        "password": "Johnson456",
+        "email": "bobjohnson5@yahoo.com",
+        "phoneNumber": "987-654-3210",
+        "requests": ["r2", "r3"],
+        "id": "user2"
+    }
+
+]
