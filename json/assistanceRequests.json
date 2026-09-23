@@ -1,0 +1,42 @@
+[
+    {
+        "id": "r1",
+        "contactInfo": "aliceS@gmail.com",
+        "address": "789 Oak St, Anycity, USA",
+        "aidCategory": "food",
+        "severity": "high",
+        "status": "pending",
+        "messages": [
+            {
+                "sender": "AliceS",
+                "message": "I need food assistance urgently.",
+                "timestamp": "2024-06-01T10:00:00Z"
+            },
+            {
+                "sender": "shelter1",
+                "message": "We have received your request and will get back to you shortly.",
+                "timestamp": "2024-06-01T10:05:00Z"
+            }
+        ]
+    },
+    {
+        "id": "r2",
+        "contactInfo": "bobjohnson5@yahoo.com",
+        "address": "321 Pine St, Othertown, USA",
+        "aidCategory": "medical care",
+        "severity": "medium",
+        "status": "in progress",
+        "messages": [
+            {
+                "sender": "BobJ",
+                "message": "I need medical assistance for my family.",
+                "timestamp": "2024-06-02T11:00:00Z"
+            },
+            {
+                "sender": "shelter2",
+                "message": "We are coordinating with local medical services to assist you.",
+                "timestamp": "2024-06-02T11:10:00Z"
+            }
+        ]
+    }
+]

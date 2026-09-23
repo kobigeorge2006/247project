@@ -1,0 +1,16 @@
+[
+    {
+    "id": "hurricane1",
+    "status": "close",  
+    "location": "Florida, USA",
+    "maxWindSpeed": 150,
+    "forcastPath": "North"   
+    },
+    {
+        "id": "hurricane2",
+        "status": "open",
+        "location": "Texas, USA",
+        "maxWindSpeed": 120,
+        "forcastPath": "West"
+    }
+]
