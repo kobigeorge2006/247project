@@ -1,14 +1,14 @@
 [
     {
-    "id": "hurricane1",
-    "status": "close",  
+    "id": "9c858901-8a57-4791-81fe-4c455b099bc9",
+    "status": "active",  
     "location": "Florida, USA",
     "maxWindSpeed": 150,
     "forcastPath": "North"   
     },
     {
-        "id": "hurricane2",
-        "status": "open",
+        "id": "2d7f3b6a-4c96-4f1d-a592-7e652d4da6ab",
+        "status": "not-active",
         "location": "Texas, USA",
         "maxWindSpeed": 120,
         "forcastPath": "West"

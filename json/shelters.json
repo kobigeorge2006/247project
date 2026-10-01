@@ -1,10 +1,10 @@
 [
     {
-        "id": "shelter1",
+        "id": "6b90d5ea-11a4-49f3-bc8f-2e717a6d8490",
         "name": "Safe Haven Shelter",
         "address": "123 Main St, Anytown, USA",
         "capacity": 50,
-        "status": "empty",
+        "status": "closed",
         "accomodations": ["food", "clothing", "medical care"],
         "inventory":{
             "Canned foods": 100,
@@ -13,7 +13,7 @@
         }
     },
     {
-        "id": "shelter2",
+        "id": "c1a3e4d8-72b9-4df2-8a6d-35f8790b2c14",
         "name": "Hope House",
         "address": "456 Elm St, Othertown, USA",
         "capacity": 30,

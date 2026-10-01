@@ -1,6 +1,6 @@
 [
     {
-        "id": "r1",
+        "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
         "contactInfo": "aliceS@gmail.com",
         "address": "789 Oak St, Anycity, USA",
         "aidCategory": "food",
@@ -20,7 +20,7 @@
         ]
     },
     {
-        "id": "r2",
+        "id": "550e8400-e29b-41d4-a716-446655440000",
         "contactInfo": "bobjohnson5@yahoo.com",
         "address": "321 Pine St, Othertown, USA",
         "aidCategory": "medical care",

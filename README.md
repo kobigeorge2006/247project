@@ -1,1 +1,2 @@
-# A Java hurricane-relief management system that helps organize shelters, volunteers, supplies, and people needing assistance during a disaster. It uses design patterns to keep the program organized and easy to update.
+# A Java hurricane-relief management system that helps organize shelters, volunteers, supplies, and people needing assistance during a disaster. It uses design patterns to keep the program organized and easy to update.UML on lucid: https://lucid.app/lucidchart/d5cb836e-f2fd-4ae9-8ecc-168ab5c2d863/edit?page=0_0#
+2 Sequence diagrams on lucid: https://lucid.app/lucidchart/972879c3-080f-4918-85de-d07d11450f0c/edit?page=0_0#
