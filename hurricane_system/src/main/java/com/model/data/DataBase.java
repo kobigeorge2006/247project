@@ -1,4 +1,6 @@
-package com.model;
+package com.model.data;
+
+import java.util.ArrayList;
 
 public class DataBase {
     private DataBase instance;
@@ -20,7 +22,12 @@ public class DataBase {
         
     }
 
-    public 
+    public ArrayList<Shelters> getShelters(){
 
+    }
+
+    public ArrayList<AssistanceRequest> getAssistanceRequests(){
+
+    }
 
 }
