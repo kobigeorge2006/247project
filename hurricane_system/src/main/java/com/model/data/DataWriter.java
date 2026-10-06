@@ -1,4 +1,4 @@
-package com.model;
+package com.model.data;
 
 public class DataWriter {
     
