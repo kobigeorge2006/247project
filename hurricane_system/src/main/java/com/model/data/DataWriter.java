@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.json.simple.JSONArray;
@@ -50,40 +51,35 @@ public class DataWriter {
     }
 
     public static void saveShelters(HashMap<UUID, Shelter> shelters) {
-        // Implement logic to save shelters to JSON file
-        JSONArray sheltersArray = new JSONArray();
+    JSONArray sheltersArray = new JSONArray();
 
-        for (User shelter : sheltersArray) {
-            JSONObject shelterObject = new JSONObject();
+    for (Shelter shelter : shelters.values()) {
+        JSONObject shelterObject = new JSONObject();
 
-            shelterObject.put("firstName", shelter.getFirstName());
-            shelterObject.put("lastName", shelter.getLastName());
-            shelterObject.put("username", shelter.getUsername());
-            shelterObject.put("password", shelter.getPassword());
-            shelterObject.put("email", shelter.getEmail());
-            shelterObject.put("phoneNumber", shelter.getPhoneNumber());
-            shelterObject.put("id", shelter.getId().toString());
+        shelterObject.put("id", shelter.getId().toString());
+        shelterObject.put("name", shelter.getName());
+        shelterObject.put("address", shelter.getLocation().getAddress());
+        shelterObject.put("capacity", shelter.getCapacity());
+        shelterObject.put("status", shelter.getStatus().toString());
 
-            // This becomes the "requests": [ ... ] part
-            JSONArray requestsArray = new JSONArray();
+        // Makes: "inventory": { "Canned foods": 100, ... }
+        JSONObject inventoryObject = new JSONObject();
 
-            for (String request : shelter.getRequests()) {
-                requestsArray.add(request);
-            }
-
-            shelterObject.put("requests", requestsArray);
-
-            // Add this completed user to the main JSON array
-            sheltersArray.add(userObject);
+        for (Map.Entry<String, Integer> item : shelter.getInventory().entrySet()) {
+            inventoryObject.put(item.getKey(), item.getValue());
         }
 
-        // Write the completed array into users.json
-        try (FileWriter file = new FileWriter(DataConstants.SHELTERS_FILE)) {
-            file.write(usersArray.toJSONString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        shelterObject.put("inventory", inventoryObject);
+
+        sheltersArray.add(shelterObject);
     }
+
+    try (FileWriter file = new FileWriter(DataConstants.SHELTERS_FILE)) {
+        file.write(sheltersArray.toJSONString());
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
 
     public static void saveRequests(ArrayList<AssistanceRequest> requests) {
         // Implement logic to save assistance requests to JSON file
