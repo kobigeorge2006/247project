@@ -47,17 +47,50 @@ public class DataLoader {
         
     public static HashMap<UUID, Shelter> loadShelters() {
             // Implement logic to load shelters from JSON file
+            HashMap<UUID, Shelter> shelters = new HashMap<UUID, Shelter>();
+            JSONArray jsonShelters = loadData(DataConstants.SHELTER_FILE);
+
+            for(int i = 0; i < jsonShelters.size(); i++){
+                JSONObject jsonShelter = (JSONObject) jsonShelters.get(i);
+                Shelter shelter = new Shelter(jsonShelter);
+                shelters.put(shelter.getId(), shelter);
+            }
+            return shelters;
         }
 
     public static ArrayList<AssistanceRequest> loadRequests() {
             // Implement logic to load assistance requests from JSON file
+            ArrayList<AssistanceRequest> requests = new ArrayList<AssistanceRequest>();
+            JSONArray jsonRequests = loadData(DataConstants.REQUESTS_FILE);
+
+            for(int i = 0; i < jsonRequests.size(); i++){
+                JSONObject jsonRequest = (JSONObject) jsonRequests.get(i);
+                requests.add(new AssistanceRequest(jsonRequest));
+            }
+            return requests;
         }
 
     public static ArrayList<HurricaneEvent> loadHurricanes() {
             // Implement logic to load hurricane events from JSON file
+            ArrayList<HurricaneEvent> hurricanes = new ArrayList<HurricaneEvent>();
+            JSONArray jsonHurricanes = loadData(DataConstants.HURRICANES_FILE);
+
+            for(int i = 0; i < jsonHurricanes.size(); i++){
+                JSONObject jsonHurricane = (JSONObject) jsonHurricanes.get(i);
+                hurricanes.add(new HurricaneEvent(jsonHurricane));
+            }
+            return hurricanes;
         }
 
     public static ArrayList<VolunteerAccountRequest> loadVolunteerRequests() {
         // Implement logic to load assistance requests for a specific user from JSON file
+        ArrayList<VolunteerAccountRequest> volunteerRequests = new ArrayList<VolunteerAccountRequest>();
+        JSONArray jsonVolunteerRequests = loadData(DataConstants.VOLUNTEER_REQUESTS_FILE);
+
+        for(int i = 0; i < jsonVolunteerRequests.size(); i++){
+            JSONObject jsonVolunteerRequest = (JSONObject) jsonVolunteerRequests.get(i);
+            volunteerRequests.add(new VolunteerAccountRequest(jsonVolunteerRequest));
+        }
+        return volunteerRequests;
     }
 }
