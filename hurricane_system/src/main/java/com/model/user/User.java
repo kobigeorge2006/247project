@@ -2,7 +2,7 @@ package com.model.user;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class user {
+public class User {
     private String firstName;
     private String lastName;
     private String username;
@@ -13,7 +13,7 @@ public class user {
     private UUID id;
     private user Instance;
 
-    public user(String firstName, String lastName, String username, String password, String email, String phoneNumber, ArrayList<String> requests) {
+    public User(String firstName, String lastName, String username, String password, String email, String phoneNumber, ArrayList<String> requests) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -54,7 +54,4 @@ public class user {
     public User getInstance(){
         //Singleton logic
     }
-
-
-    
 }
