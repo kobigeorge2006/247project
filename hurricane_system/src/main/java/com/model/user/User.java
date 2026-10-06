@@ -11,7 +11,7 @@ public class User {
     private String phoneNumber;
     private ArrayList<String> requests;
     private UUID id;
-    private user Instance;
+    private User Instance;
 
     public User(String firstName, String lastName, String username, String password, String email, String phoneNumber, ArrayList<String> requests) {
         this.firstName = firstName;
