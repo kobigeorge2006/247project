@@ -1,12 +1,15 @@
 package com.model.data;
-
-<<<<<<< HEAD
-public class DataLoader {
     
-=======
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import com.model.user.User;
 
 public class DataLoader {
     public static ArrayList<User> loadUsers() {
@@ -28,5 +31,4 @@ public class DataLoader {
     public static ArrayList<VolunteerAccountRequest> loadVolunteerRequests() {
         // Implement logic to load assistance requests for a specific user from JSON file
     }
->>>>>>> 39fa23efed77584552c927b082dc1ffae3130f1a
 }
