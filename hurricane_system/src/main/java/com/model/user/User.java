@@ -1,6 +1,7 @@
 package com.model.user;
 import java.util.ArrayList;
 import java.util.UUID;
+import org.json.simple.JSONObject;
 
 public class User {
     private String firstName;
@@ -22,6 +23,16 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.requests = requests;
         this.id = UUID.randomUUID();
+    }
+    public User(JSONObject jsonUser) {
+        this.firstName = (String) jsonUser.get("firstName");
+        this.lastName = (String) jsonUser.get("lastName");
+        this.username = (String) jsonUser.get("username");
+        this.password = (String) jsonUser.get("password");
+        this.email = (String) jsonUser.get("email");
+        this.phoneNumber = (String) jsonUser.get("phoneNumber");
+        this.requests = (ArrayList<String>) jsonUser.get("requests");
+        this.id = UUID.fromString((String) jsonUser.get("id"));
     }
 
     public void signIn(String userName, String password) {

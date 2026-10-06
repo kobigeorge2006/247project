@@ -1,9 +1,7 @@
 package com.model.data;
 
 public class DataWriter {
-<<<<<<< HEAD
     
-=======
     public static void saveUsers(users: ArrayList<User>) {
         // Implement logic to save users to JSON file
     }
@@ -23,5 +21,4 @@ public class DataWriter {
     public static void saveVolunteerRequests(volunteerRequests: ArrayList<VolunteerAccountRequest>) {
         // Implement logic to save assistance requests for a specific user to JSON file
     }
->>>>>>> 39fa23efed77584552c927b082dc1ffae3130f1a
 }
