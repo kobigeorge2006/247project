@@ -47,6 +47,49 @@ public class AssistanceRequest
         {
            return true;
         }
+        public UUID getId() {
+            return id;
+        }
+        public void setId(UUID id) {
+            this.id = id;
+        }
+        public String getContactInfo() {
+            return contactInfo;
+        }
+        public void setContactInfo(String contactInfo) {
+            this.contactInfo = contactInfo;
+        }
+        public String getAddress() {
+            return address;
+        }
+        public void setAddress(String address) {
+            this.address = address;
+        }
+        public AidCategory getAidCategory() {
+            return AidCategory;
+        }
+        public void setAidCategory(AidCategory aidCategory) {
+            AidCategory = aidCategory;
+        }
+        public Severity getSeverity() {
+            return severity;
+        }
+        public void setSeverity(Severity severity) {
+            this.severity = severity;
+        }
+        public RequestStatus getStatus() {
+            return status;
+        }
+        public void setStatus(RequestStatus status) {
+            this.status = status;
+        }
+        public ArrayList<Message> getMessages() {
+            return messages;
+        }
+        public void setMessages(ArrayList<Message> messages) {
+            this.messages = messages;
+        }
+        
 
     }
 

@@ -43,4 +43,41 @@ public class Administrator {
     public void setRequestSeverity(Severity severity){
         // Implement logic to set request severity
     }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public Shelter getShelter() {
+        return shelter;
+    }
+    public void setShelter(Shelter shelter) {
+        this.shelter = shelter;
+    }
+    public Severity getSeverity() {
+        return severity;
+    }
+    public void setSeverity(Severity severity) {
+        this.severity = severity;
+    }
+    public HashMap<String, ValidatedVolunteer> getRequests() {
+        return requests;
+    }
+    public void setRequests(HashMap<String, ValidatedVolunteer> requests) {
+        this.requests = requests;
+    }
+    
 }

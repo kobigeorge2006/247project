@@ -11,4 +11,6 @@ public class Message {
         this.body = body;
         this.timestamp = LocalDateTime.now();
     }
+
+
 }

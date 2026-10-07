@@ -1,6 +1,8 @@
 package com.model.user;
 
 import java.util.ArrayList;
+import java.util.UUID;
+import com.model.requests.AssistanceRequest;
 
 public class ValidatedVictim {
     private MedicalProfile medicalprofile;
@@ -30,5 +32,38 @@ public class ValidatedVictim {
     public void updateMedicalProfile(MedicalProfile profile){
             // Implement medical profile update logic here
     }
+
+    public MedicalProfile getMedicalprofile() {
+        return medicalprofile;
+    }
+
+    public void setMedicalprofile(MedicalProfile medicalprofile) {
+        this.medicalprofile = medicalprofile;
+    }
+
+    public ArrayList<AssistanceRequest> getAssistanceRequests() {
+        return assistanceRequests;
+    }
+
+    public void setAssistanceRequests(ArrayList<AssistanceRequest> assistanceRequests) {
+        this.assistanceRequests = assistanceRequests;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getEmergencyContact() {
+        return emergencyContact;
+    }
+
+    public void setEmergencyContact(String emergencyContact) {
+        this.emergencyContact = emergencyContact;
+    }
+    
     
 }

@@ -52,4 +52,61 @@ public class Shelter {
     public boolean reserveCapacity(AssistanceRequest request) {
         return false;
     }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public ShelterStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ShelterStatus status) {
+        this.status = status;
+    }
+
+    public ArrayList<Accommodation> getAccommodations() {
+        return accommodations;
+    }
+
+    public void setAccommodations(ArrayList<Accommodation> accommodations) {
+        this.accommodations = accommodations;
+    }
+
+    public HashMap<String, Integer> getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(HashMap<String, Integer> inventory) {
+        this.inventory = inventory;
+    }
+    
 }

@@ -31,4 +31,33 @@ public class HurricaneEvent {
     public HurricaneStatus getStatus() {
         return status;
     }
+    public UUID getId() {
+        return id;
+    }
+    public Location getLocation() {
+        return location;
+    }
+    public double getMaxWindSpeed() {
+        return maxWindSpeed;
+    }
+    public String getForcastPath() {
+        return forcastPath;
+    }
+    public void setId(UUID id) {
+        this.id = id;
+    }
+    public void setStatus(HurricaneStatus status) {
+        this.status = status;
+    }
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+    public void setMaxWindSpeed(double maxWindSpeed) {
+        this.maxWindSpeed = maxWindSpeed;
+    }
+    public void setForcastPath(String forcastPath) {
+        this.forcastPath = forcastPath;
+    }
+    
+    
 }
