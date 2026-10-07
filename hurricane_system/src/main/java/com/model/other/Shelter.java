@@ -1,6 +1,8 @@
+package com.model.other;
 import com.model.requests.AssistanceRequest;
 
-import com.model.AssistanceRequest;
+
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
