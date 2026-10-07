@@ -6,7 +6,7 @@ import java.util.HashMap;
 import com.model.user.*;
 import com.model.data.*;
 import com.model.other.*;
-
+import java.util.Scanner;
 
 public class Driver {
     public static void main(String[] args) {
@@ -30,7 +30,10 @@ public class Driver {
         System.out.println("Number of hurricanes loaded: " + hurricanes.size());
         System.out.println("Number of shelters loaded: " + shelters.size());
         System.out.println("Number of assistance requests loaded: " + assistanceRequests.size());
-        System.out.println("What is your user name?");
+        System.out.println("=======Hurricane System Application=======");
+        System.out.println("Would you like to log in or sign up?");
+        Scanner scanner = new Scanner(System.in);
+        String choice = scanner.nextLine();
 
     }      
     

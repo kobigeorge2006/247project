@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.json.simple.JSONObject;
+
 // Stores information about a shelter.
 public class Shelter {
 
@@ -27,6 +29,16 @@ public class Shelter {
         this.status = status;
         this.accommodations = accommodations;
         this.inventory = new HashMap<>();
+    }
+
+    public Shelter(JSONObject jsonShelter) {
+        this.id = UUID.fromString((String) jsonShelter.get("id"));
+        this.name = (String) jsonShelter.get("name");
+        this.location = (Location) jsonShelter.get("location");
+        this.capacity = (int) jsonShelter.get("capacity");
+        this.status = (ShelterStatus) jsonShelter.get("status");
+        this.accommodations = (ArrayList<Accommodation>) jsonShelter.get("accommodations");
+        this.inventory = (HashMap<String, Integer>) jsonShelter.get("inventory");
     }
 
     public boolean updateInventory(String item, int quantity) {
