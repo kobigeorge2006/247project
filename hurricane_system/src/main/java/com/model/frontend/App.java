@@ -1,4 +1,4 @@
-package com.relief;
+package com.model.frontend;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

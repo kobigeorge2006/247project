@@ -48,7 +48,7 @@ public class DataLoader {
     public static HashMap<UUID, Shelter> loadShelters() {
             // Implement logic to load shelters from JSON file
             HashMap<UUID, Shelter> shelters = new HashMap<UUID, Shelter>();
-            JSONArray jsonShelters = loadData(DataConstants.SHELTER_FILE);
+            JSONArray jsonShelters = loadData(DataConstants.SHELTERS_FILE);
 
             for(int i = 0; i < jsonShelters.size(); i++){
                 JSONObject jsonShelter = (JSONObject) jsonShelters.get(i);
@@ -82,14 +82,14 @@ public class DataLoader {
             return hurricanes;
         }
 
-    public static ArrayList<VolunteerAccountRequest> loadVolunteerRequests() {
+    public static ArrayList<AssistanceRequest> loadVolunteerRequests() {
         // Implement logic to load assistance requests for a specific user from JSON file
-        ArrayList<VolunteerAccountRequest> volunteerRequests = new ArrayList<VolunteerAccountRequest>();
-        JSONArray jsonVolunteerRequests = loadData(DataConstants.VOLUNTEER_REQUESTS_FILE);
+        ArrayList<AssistanceRequest> volunteerRequests = new ArrayList<AssistanceRequest>();
+        JSONArray jsonVolunteerRequests = loadData(DataConstants.REQUESTS_FILE);
 
         for(int i = 0; i < jsonVolunteerRequests.size(); i++){
             JSONObject jsonVolunteerRequest = (JSONObject) jsonVolunteerRequests.get(i);
-            volunteerRequests.add(new VolunteerAccountRequest(jsonVolunteerRequest));
+            volunteerRequests.add(new AssistanceRequest(jsonVolunteerRequest));
         }
         return volunteerRequests;
     }
