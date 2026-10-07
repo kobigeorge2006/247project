@@ -89,15 +89,4 @@ public class DataLoader {
             return hurricanes;
         }
 
-    public static ArrayList<AssistanceRequest> loadVolunteerRequests() {
-        // Implement logic to load assistance requests for a specific user from JSON file
-        ArrayList<AssistanceRequest> volunteerRequests = new ArrayList<AssistanceRequest>();
-        JSONArray jsonVolunteerRequests = loadData(DataConstants.REQUESTS_FILE);
-
-        for(int i = 0; i < jsonVolunteerRequests.size(); i++){
-            JSONObject jsonVolunteerRequest = (JSONObject) jsonVolunteerRequests.get(i);
-            volunteerRequests.add(new AssistanceRequest(jsonVolunteerRequest));
-        }
-        return volunteerRequests;
-    }
 }

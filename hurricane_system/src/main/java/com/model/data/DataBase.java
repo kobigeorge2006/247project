@@ -46,5 +46,8 @@ public class DataBase {
     public ArrayList<AssistanceRequest> getAssistanceRequests(){
         return assistanceRequests;
     }
+    public void addUser(User user) {
+        users.add(user);
+    }
 
 }

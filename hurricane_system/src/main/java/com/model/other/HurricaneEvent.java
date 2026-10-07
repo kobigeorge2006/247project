@@ -1,6 +1,7 @@
 package com.model.other;
 
 import java.util.UUID;
+import org.json.simple.JSONObject;
 
 //Stores information about a hurricane event.
 public class HurricaneEvent {
@@ -18,6 +19,13 @@ public class HurricaneEvent {
         this.location = location;
         this.maxWindSpeed = maxWindSpeed;
         this.forcastPath = forcastPath;
+    }
+    public HurricaneEvent(JSONObject jsonHurricane) {
+        this.id = UUID.fromString((String) jsonHurricane.get("id"));
+        this.status = (HurricaneStatus) jsonHurricane.get("status");
+        this.location = (Location) jsonHurricane.get("location");
+        this.maxWindSpeed = (double) jsonHurricane.get("maxWindSpeed");
+        this.forcastPath = (String) jsonHurricane.get("forcastPath");
     }
 
     public HurricaneStatus getStatus() {
