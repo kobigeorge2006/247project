@@ -1,16 +1,22 @@
 package com.model.data;
 
 import java.util.ArrayList;
-import com.model.user.User;
-import com.model.shelter.Shelters;
-import com.model.requests.AssistanceRequest;
+import java.util.HashMap;
+import java.util.UUID;
+import com.model.user.*;
+import com.model.other.*;
+import com.model.requests.*;
 
+/**
+ * 
+ * @author Kobi George
+ */
 
 public class DataBase {
     private static DataBase instance;
 
     private ArrayList<User> users;
-    private HashMap<UUID, Shelters> shelters;
+    private HashMap<UUID, Shelter> shelters;
     private ArrayList<AssistanceRequest> assistanceRequests;
     private ArrayList<HurricaneEvent> hurricaneEvents;
 
@@ -33,7 +39,7 @@ public class DataBase {
 
     }
 
-    public HashMap<UUID, Shelters> getShelters(){
+    public HashMap<UUID, Shelter> getShelters(){
         return shelters;
     }
 

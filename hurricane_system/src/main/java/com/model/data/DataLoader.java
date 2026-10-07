@@ -9,7 +9,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.JSONObject;
 
-import com.model.user.User;
+import com.model.user.*;
+import com.model.other.*;
+import com.model.requests.*;
+
+/**
+ * 
+ * @author Kobi George
+ */
 
 public class DataLoader {
         
