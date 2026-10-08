@@ -10,6 +10,7 @@ public class RegisteredUser {
 
     public RequestStatus trackRequest(UUID id){
         // Implement request tracking logic here
+        return id;
     }
 
     public MedicalProfile getMedicalprofile() {
