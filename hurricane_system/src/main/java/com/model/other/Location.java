@@ -17,11 +17,14 @@ public class Location {
         this.city = city;
         this.zipCode = zipCode;
     }
-
+    public Location(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+    //TODO
     public double calculateDistance(Location targetLocation) {
         return 0.0;
     }
-
+    // TODO
     public String formateFullAddress() {
         return "";
     }

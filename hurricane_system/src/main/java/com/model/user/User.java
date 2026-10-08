@@ -114,4 +114,16 @@ public class User {
         this.id = id;
     }
     
+    @Override 
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", requests=" + requests +
+                ", id=" + id +
+                '}';
+    }
 }

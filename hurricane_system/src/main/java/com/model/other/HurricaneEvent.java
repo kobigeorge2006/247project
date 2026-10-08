@@ -58,6 +58,7 @@ public class HurricaneEvent {
     public void setForcastPath(String forcastPath) {
         this.forcastPath = forcastPath;
     }
-    
-    
+    public String getAddress() {
+        return location.formateFullAddress();
+    }
 }
