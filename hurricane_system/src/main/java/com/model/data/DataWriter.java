@@ -11,6 +11,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.model.user.User;
+import com.model.other.Shelter;
+import com.model.requests.AssistanceRequest;
 
 public class DataWriter {
     /** 
@@ -45,7 +47,7 @@ public class DataWriter {
         }
 
         // Write the completed array into users.json
-        try (FileWriter file = new FileWriter(DataConstants.USERS_FILE)) {
+        try (FileWriter file = new FileWriter(DataConstants.USER_FILE)) {
             file.write(usersArray.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,7 +65,7 @@ public class DataWriter {
 
         shelterObject.put("id", shelter.getId().toString());
         shelterObject.put("name", shelter.getName());
-        shelterObject.put("address", shelter.getLocation().getAddress());
+        shelterObject.put("address", shelter.getLocation());
         shelterObject.put("capacity", shelter.getCapacity());
         shelterObject.put("status", shelter.getStatus().toString());
 
@@ -104,7 +106,7 @@ public class DataWriter {
 
             JSONArray messagesArray = new JSONArray();
 
-            for (Message message : request.getMessages()) {
+            for (Message message : AssistanceRequest.getMessages()) {
                 JSONObject messageObject = new JSONObject();
 
                 messageObject.put("sender", message.getSender().getUsername());
@@ -119,7 +121,7 @@ public class DataWriter {
         }
 
         try (FileWriter file =
-                new FileWriter(DataConstants.ASSISTANCE_REQUESTS_FILE)) {
+                new FileWriter(DataConstants.REQUESTS_FILE)) {
             file.write(requestsArray.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
