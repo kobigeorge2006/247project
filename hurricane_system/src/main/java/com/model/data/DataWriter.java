@@ -10,7 +10,11 @@ import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.model.user.User;
+import com.model.user.*;
+import com.model.other.*;
+import com.model.requests.*;
+
+
 
 public class DataWriter {
     /** 
@@ -151,33 +155,4 @@ public class DataWriter {
             e.printStackTrace();
         }
     }
-
-    public static void saveVolunteers(ArrayList<VolunteerRequest> volunteers) {
-        JSONArray volunteersArray = new JSONArray();
-    
-        for (VolunteerRequest volunteer : volunteers) {
-            JSONObject volunteerObject = new JSONObject();
-    
-            volunteerObject.put("id", volunteer.getId().toString());
-            volunteerObject.put("firstName", volunteer.getFirstName());
-            volunteerObject.put("lastName", volunteer.getLastName());
-            volunteerObject.put("status", volunteer.getStatus().toString());
-    
-            JSONArray skillsArray = new JSONArray();
-    
-            for (Skill skill : volunteer.getSkills()) {
-                skillsArray.add(skill.toString());
-            }
-    
-            volunteerObject.put("skills", skillsArray);
-            volunteersArray.add(volunteerObject);
-        }
-    
-        try (FileWriter file = new FileWriter(DataConstants.VOLUNTEERS_FILE)) {
-            file.write(volunteersArray.toJSONString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
 }
