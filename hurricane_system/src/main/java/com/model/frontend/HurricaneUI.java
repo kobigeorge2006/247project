@@ -8,7 +8,7 @@ import com.model.data.*;
 import com.model.other.*;
 import java.util.Scanner;
 
-public class Driver {
+public class HurricaneUI {
     public static void main(String[] args) {
         
  
