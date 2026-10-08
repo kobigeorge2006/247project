@@ -34,8 +34,15 @@ public class DataBase {
         return instance;
     }
 
-    public ArrayList<User> getUser(){
-        return users;
+    public ArrayList<User> getUser(String username, String password){
+        for(User user : users){
+            if(user.getUsername().equalsIgnoreCase(username) && user.getPassword().equals(password)){
+                return users;
+            }
+        }
+        
+        return null;
+
 
     }
 

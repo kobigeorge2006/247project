@@ -10,6 +10,9 @@ import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.model.user.User;
+import com.model.other.Shelter;
+import com.model.requests.AssistanceRequest;
 import com.model.user.*;
 import com.model.other.*;
 import com.model.requests.*;
@@ -67,6 +70,7 @@ public class DataWriter {
 
         shelterObject.put("id", shelter.getId().toString());
         shelterObject.put("name", shelter.getName());
+        shelterObject.put("address", shelter.getLocation());
         shelterObject.put("address", shelter.getAddress());
         shelterObject.put("capacity", shelter.getCapacity());
         shelterObject.put("status", shelter.getStatus().toString());
@@ -108,7 +112,7 @@ public class DataWriter {
 
             JSONArray messagesArray = new JSONArray();
 
-            for (Message message : request.getMessages()) {
+            for (Message message : AssistanceRequest.getMessages()) {
                 JSONObject messageObject = new JSONObject();
 
                 messageObject.put("sender", message.getSender().getUsername());

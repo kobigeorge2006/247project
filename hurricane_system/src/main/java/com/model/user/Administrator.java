@@ -1,5 +1,10 @@
 package com.model.user;
 import java.util.HashMap;
+import com.model.requests.*;
+import com.model.other.*;
+import com.model.user.*;
+
+
 public class Administrator {
     private String name;
     private String username;
