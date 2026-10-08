@@ -49,7 +49,7 @@ public class DataWriter {
         }
 
         // Write the completed array into users.json
-        try (FileWriter file = new FileWriter(DataConstants.USERS_FILE)) {
+        try (FileWriter file = new FileWriter(DataConstants.USER_FILE)) {
             file.write(usersArray.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
@@ -67,7 +67,7 @@ public class DataWriter {
 
         shelterObject.put("id", shelter.getId().toString());
         shelterObject.put("name", shelter.getName());
-        shelterObject.put("address", shelter.getLocation().getAddress());
+        shelterObject.put("address", shelter.getAddress());
         shelterObject.put("capacity", shelter.getCapacity());
         shelterObject.put("status", shelter.getStatus().toString());
 
@@ -113,7 +113,7 @@ public class DataWriter {
 
                 messageObject.put("sender", message.getSender().getUsername());
                 messageObject.put("message", message.getBody());
-                messageObject.put("timestamp", message.getSentAt().toString());
+                messageObject.put("timestamp", message.getSender().toString());
 
                 messagesArray.add(messageObject);
             }
@@ -123,7 +123,7 @@ public class DataWriter {
         }
 
         try (FileWriter file =
-                new FileWriter(DataConstants.ASSISTANCE_REQUESTS_FILE)) {
+                new FileWriter(DataConstants.REQUESTS_FILE)) {
             file.write(requestsArray.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
@@ -142,9 +142,9 @@ public class DataWriter {
             hurricaneObject.put("id", hurricane.getId().toString());
             hurricaneObject.put("status", hurricane.getStatus().toString());
             hurricaneObject.put("location",
-                    hurricane.getLocation().getAddress());
+                    hurricane.getAddress());
             hurricaneObject.put("maxWindSpeed", hurricane.getMaxWindSpeed());
-            hurricaneObject.put("forecastPath", hurricane.getForecastPath());
+            hurricaneObject.put("forecastPath", hurricane.getForcastPath());
     
             hurricanesArray.add(hurricaneObject);
         }
