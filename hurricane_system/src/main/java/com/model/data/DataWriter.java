@@ -10,7 +10,11 @@ import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.model.user.User;
+import com.model.user.*;
+import com.model.other.*;
+import com.model.requests.*;
+
+
 
 public class DataWriter {
     /** 
@@ -45,7 +49,7 @@ public class DataWriter {
         }
 
         // Write the completed array into users.json
-        try (FileWriter file = new FileWriter(DataConstants.USERS_FILE)) {
+        try (FileWriter file = new FileWriter(DataConstants.USER_FILE)) {
             file.write(usersArray.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,7 +67,7 @@ public class DataWriter {
 
         shelterObject.put("id", shelter.getId().toString());
         shelterObject.put("name", shelter.getName());
-        shelterObject.put("address", shelter.getLocation().getAddress());
+        shelterObject.put("address", shelter.getAddress());
         shelterObject.put("capacity", shelter.getCapacity());
         shelterObject.put("status", shelter.getStatus().toString());
 
@@ -109,7 +113,7 @@ public class DataWriter {
 
                 messageObject.put("sender", message.getSender().getUsername());
                 messageObject.put("message", message.getBody());
-                messageObject.put("timestamp", message.getSentAt().toString());
+                messageObject.put("timestamp", message.getSender().toString());
 
                 messagesArray.add(messageObject);
             }
@@ -119,7 +123,7 @@ public class DataWriter {
         }
 
         try (FileWriter file =
-                new FileWriter(DataConstants.ASSISTANCE_REQUESTS_FILE)) {
+                new FileWriter(DataConstants.REQUESTS_FILE)) {
             file.write(requestsArray.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
@@ -138,9 +142,9 @@ public class DataWriter {
             hurricaneObject.put("id", hurricane.getId().toString());
             hurricaneObject.put("status", hurricane.getStatus().toString());
             hurricaneObject.put("location",
-                    hurricane.getLocation().getAddress());
+                    hurricane.getAddress());
             hurricaneObject.put("maxWindSpeed", hurricane.getMaxWindSpeed());
-            hurricaneObject.put("forecastPath", hurricane.getForecastPath());
+            hurricaneObject.put("forecastPath", hurricane.getForcastPath());
     
             hurricanesArray.add(hurricaneObject);
         }
@@ -151,33 +155,4 @@ public class DataWriter {
             e.printStackTrace();
         }
     }
-
-    public static void saveVolunteers(ArrayList<VolunteerRequest> volunteers) {
-        JSONArray volunteersArray = new JSONArray();
-    
-        for (VolunteerRequest volunteer : volunteers) {
-            JSONObject volunteerObject = new JSONObject();
-    
-            volunteerObject.put("id", volunteer.getId().toString());
-            volunteerObject.put("firstName", volunteer.getFirstName());
-            volunteerObject.put("lastName", volunteer.getLastName());
-            volunteerObject.put("status", volunteer.getStatus().toString());
-    
-            JSONArray skillsArray = new JSONArray();
-    
-            for (Skill skill : volunteer.getSkills()) {
-                skillsArray.add(skill.toString());
-            }
-    
-            volunteerObject.put("skills", skillsArray);
-            volunteersArray.add(volunteerObject);
-        }
-    
-        try (FileWriter file = new FileWriter(DataConstants.VOLUNTEERS_FILE)) {
-            file.write(volunteersArray.toJSONString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
 }
