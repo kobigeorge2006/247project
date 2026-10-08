@@ -9,8 +9,14 @@ import com.model.other.*;
 import java.util.Scanner;
 
 public class HurricaneUI {
+<<<<<<< HEAD
+=======
+    
+} 
+>>>>>>> d4c237f54c1e51ce434175c978c916cc0177726f
     public static void main(String[] args) {
         
  
+    }      
     
 }

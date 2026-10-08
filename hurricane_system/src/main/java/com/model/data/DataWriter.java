@@ -11,16 +11,25 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import com.model.user.User;
 import com.model.other.Shelter;
 import com.model.requests.AssistanceRequest;
 =======
+=======
+import com.model.user.User;
+import com.model.other.Shelter;
+import com.model.requests.AssistanceRequest;
+>>>>>>> d4c237f54c1e51ce434175c978c916cc0177726f
 import com.model.user.*;
 import com.model.other.*;
 import com.model.requests.*;
 
 
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> d4c237f54c1e51ce434175c978c916cc0177726f
 
 public class DataWriter {
     /** 
@@ -74,10 +83,15 @@ public class DataWriter {
         shelterObject.put("id", shelter.getId().toString());
         shelterObject.put("name", shelter.getName());
 <<<<<<< HEAD
+<<<<<<< HEAD
         shelterObject.put("address", shelter.getLocation());
 =======
         shelterObject.put("address", shelter.getAddress());
 >>>>>>> origin/main
+=======
+        shelterObject.put("address", shelter.getLocation());
+        shelterObject.put("address", shelter.getAddress());
+>>>>>>> d4c237f54c1e51ce434175c978c916cc0177726f
         shelterObject.put("capacity", shelter.getCapacity());
         shelterObject.put("status", shelter.getStatus().toString());
 
