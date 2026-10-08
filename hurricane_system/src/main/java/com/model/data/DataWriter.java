@@ -13,8 +13,6 @@ import org.json.simple.JSONObject;
 import com.model.user.User;
 
 public class DataWriter {
-    
-    public static void saveUsers(users: ArrayList<User>) {
     public static void saveUsers(ArrayList<User> users) {
         // Implement logic to save users to JSON file
         JSONArray usersArray = new JSONArray();
