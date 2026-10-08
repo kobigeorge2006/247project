@@ -10,4 +10,5 @@ import java.util.Scanner;
 
 public class HurricaneUI {
  
+    
 }

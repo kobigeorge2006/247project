@@ -11,6 +11,7 @@ public class ValidatedVolunteer {
 
     public boolean updateRequestStatus() {
         // Implement request status update logic here
+        
     }
 
     public ArrayList<Skill> getSkills() {
