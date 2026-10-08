@@ -12,7 +12,7 @@ public class Driver {
     public static void main(String[] args) {
         // Load data from JSON files
         ArrayList<User> users = DataLoader.loadUsers();
-        ArrayList<hurricaneEvent> hurricanes = DataLoader.loadHurricanes();
+        ArrayList<HurricaneEvent> hurricanes = DataLoader.loadHurricanes();
         HashMap<UUID, Shelter> shelters = DataLoader.loadShelters();
         ArrayList<AssistanceRequest> assistanceRequests = DataLoader.loadAssistanceRequests();
 

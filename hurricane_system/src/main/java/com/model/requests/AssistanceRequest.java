@@ -36,9 +36,9 @@ public class AssistanceRequest
         this.status = (RequestStatus) jsonAssistanceRequest.get("status");
         this.messages = (ArrayList<Message>) jsonAssistanceRequest.get("messages");
     }
-        public boolean AssistanceRequest(UUID id, String contactInfo, String address, AidCategory aidCategory, ArrayList<Message> messages)
 
-        public void updateStatus(Status staus)
+
+        public void updateStatus(RequestStatus status)
         {
             this.status = status;
         }

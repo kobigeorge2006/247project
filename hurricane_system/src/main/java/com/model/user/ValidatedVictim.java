@@ -19,14 +19,17 @@ public class ValidatedVictim {
 
     public boolean submitRequest(AssistanceRequest request) {
         // Implement request submission logic here
+        return true;
     }
 
     public boolean cancelRequest(UUID requestId) {
         // Implement request cancellation logic here
+        return true;
     }
 
     public ArrayList<AssistanceRequest> viewRequests() {
         // Implement request viewing logic here
+        return assistanceRequests;
     }
 
     public void updateMedicalProfile(MedicalProfile profile){
