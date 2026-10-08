@@ -9,6 +9,5 @@ import com.model.other.*;
 import java.util.Scanner;
 
 public class HurricaneUI {
- 
     
-}
+} 

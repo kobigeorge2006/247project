@@ -12,7 +12,6 @@ public class User {
     private String phoneNumber;
     private ArrayList<String> requests;
     private UUID id;
-    private User Instance;
 
     public User(String firstName, String lastName, String username, String password, String email, String phoneNumber, ArrayList<String> requests) {
         this.firstName = firstName;
@@ -61,9 +60,6 @@ public class User {
     }
     public boolean updateContactInfo(String email, String phoneNumber) {
         // Implement contact information update logic here
-    }
-    public User getInstance(){
-        //Singleton logic
     }
     public String getFirstName() {
         return firstName;
