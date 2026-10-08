@@ -15,8 +15,9 @@ import com.model.other.Shelter;
 import com.model.requests.AssistanceRequest;
 
 public class DataWriter {
-    
-    public static void saveUsers(users: ArrayList<User>) {
+    /** 
+     * @param users
+     */
     public static void saveUsers(ArrayList<User> users) {
         // Implement logic to save users to JSON file
         JSONArray usersArray = new JSONArray();
@@ -53,6 +54,9 @@ public class DataWriter {
         }
     }
 
+    /** 
+     * @param shelters
+     */
     public static void saveShelters(HashMap<UUID, Shelter> shelters) {
     JSONArray sheltersArray = new JSONArray();
 
@@ -84,6 +88,9 @@ public class DataWriter {
     }
 }
 
+    /** 
+     * @param requests
+     */
     public static void saveRequests(ArrayList<AssistanceRequest> requests) {
         JSONArray requestsArray = new JSONArray();
 
@@ -121,6 +128,9 @@ public class DataWriter {
         }
     }
 
+    /** 
+     * @param hurricanes
+     */
     public static void saveHurricanes(ArrayList<HurricaneEvent> hurricanes) {
         JSONArray hurricanesArray = new JSONArray();
     
@@ -144,26 +154,32 @@ public class DataWriter {
         }
     }
 
-    public static void saveHurricanes(ArrayList<HurricaneEvent> hurricanes) {
-        JSONArray hurricanesArray = new JSONArray();
+    public static void saveVolunteers(ArrayList<VolunteerRequest> volunteers) {
+        JSONArray volunteersArray = new JSONArray();
     
-        for (HurricaneEvent hurricane : hurricanes) {
-            JSONObject hurricaneObject = new JSONObject();
+        for (VolunteerRequest volunteer : volunteers) {
+            JSONObject volunteerObject = new JSONObject();
     
-            hurricaneObject.put("id", hurricane.getId().toString());
-            hurricaneObject.put("status", hurricane.getStatus().toString());
-            hurricaneObject.put("location",
-                    hurricane.getLocation().getAddress());
-            hurricaneObject.put("maxWindSpeed", hurricane.getMaxWindSpeed());
-            hurricaneObject.put("forecastPath", hurricane.getForecastPath());
+            volunteerObject.put("id", volunteer.getId().toString());
+            volunteerObject.put("firstName", volunteer.getFirstName());
+            volunteerObject.put("lastName", volunteer.getLastName());
+            volunteerObject.put("status", volunteer.getStatus().toString());
     
-            hurricanesArray.add(hurricaneObject);
+            JSONArray skillsArray = new JSONArray();
+    
+            for (Skill skill : volunteer.getSkills()) {
+                skillsArray.add(skill.toString());
+            }
+    
+            volunteerObject.put("skills", skillsArray);
+            volunteersArray.add(volunteerObject);
         }
     
-        try (FileWriter file = new FileWriter(DataConstants.HURRICANES_FILE)) {
-            file.write(hurricanesArray.toJSONString());
+        try (FileWriter file = new FileWriter(DataConstants.VOLUNTEERS_FILE)) {
+            file.write(volunteersArray.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    
 }
