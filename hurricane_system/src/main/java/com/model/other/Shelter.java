@@ -28,6 +28,7 @@ public class Shelter {
         this.capacity = capacity;
         this.status = status;
         this.accommodations = accommodations;
+        this.location = new Location(address);
         this.inventory = new HashMap<>();
     }
 
@@ -55,6 +56,10 @@ public class Shelter {
 
     public UUID getId() {
         return id;
+    }
+    
+    public String getAddress() {
+        return location.getStreetAddress();
     }
 
     public void setId(UUID id) {

@@ -11,3 +11,9 @@ import java.util.Scanner;
 public class HurricaneUI {
     
 } 
+    public static void main(String[] args) {
+        
+ 
+    }      
+    
+}
