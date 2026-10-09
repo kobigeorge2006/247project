@@ -49,9 +49,9 @@ public class HurricaneReliefSystem {
         // Make sure the username is not already taken
         for (User user : database.getUser(username, password)) {
             if (user.getUsername().equalsIgnoreCase(username)) {
-                return false;
-            }
-        }
+                return false; // Username already exists
+            }    
+        }       
 
         User newUser = new User(
             firstName,
@@ -71,6 +71,7 @@ public class HurricaneReliefSystem {
         return true;
     }
 
+
     public void logOut() {
         currentUser = null;
     }
@@ -83,6 +84,8 @@ public class HurricaneReliefSystem {
         return currentUser != null;
     }
 }
+
+
   
 
 

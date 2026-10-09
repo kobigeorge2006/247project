@@ -35,16 +35,17 @@ public class DataBase {
     }
 
     public ArrayList<User> getUser(String username, String password){
-        for(User user : users){
-            if(user.getUsername().equalsIgnoreCase(username) && user.getPassword().equals(password)){
-                return users;
-            }
+    ArrayList<User> matchingUsers = new ArrayList<>();
+
+    for (User user : users) {
+        if (user.getUsername().equals(username)
+                && user.getPassword().equals(password)) {
+            matchingUsers.add(user);
         }
-        
-        return null;
-
-
     }
+
+    return matchingUsers;
+} 
 
     public HashMap<UUID, Shelter> getShelters(){
         return shelters;

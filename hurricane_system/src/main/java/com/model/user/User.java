@@ -3,6 +3,10 @@ import java.util.ArrayList;
 import java.util.UUID;
 import org.json.simple.JSONObject;
 
+import com.model.requests.AidCategory;
+import com.model.requests.AssistanceRequest;
+import com.model.requests.RequestStatus;
+
 public class User {
     private String firstName;
     private String lastName;
