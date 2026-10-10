@@ -74,6 +74,7 @@ public class HurricaneReliefSystem {
 
     public void logOut() {
         currentUser = null;
+        System.out.println("User logged out successfully.");
     }
 
     public User getCurrentUser() {

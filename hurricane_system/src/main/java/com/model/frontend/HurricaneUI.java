@@ -23,9 +23,26 @@ public void scenario1() {
         System.out.println("Sign up failed. Username may already be taken.");
     }
 }
+public void scenario2() {
+    HurricaneReliefSystem system = new HurricaneReliefSystem();
+
+    boolean loginSuccess = system.logIn("johndoe", "password123");
+    if(loginSuccess) {
+        System.out.println("User logged in successfully.");
+    } else {
+        System.out.println("Login failed. Please check your username and password.");
+    }
+}
+
+public void scenario3(){
+    HurricaneReliefSystem system = new HurricaneReliefSystem();
+    system.logOut();
+}
 public static void main(String[] args) {
     HurricaneUI ui = new HurricaneUI();
     ui.scenario1();
+    ui.scenario2();
+    ui.scenario3();
 }
 }
 
