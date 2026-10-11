@@ -1,3 +1,4 @@
+
 package com.model.frontend;
 
 import com.model.HurricaneReliefSystem;
@@ -39,8 +40,8 @@ public class HurricaneUI {
     public void scenario2() {
         System.out.println("\nScenario 2: Signup");
 
-        if (system.signUp("John", "Davis", "jdavis", "12345",
-                "john@email.com", "8035555678")) {
+        if (system.signUp("Amy", "Smith", "asmith", "12345",
+                "amy@email.com", "8035551234")) {
             System.out.println("Account created successfully.");
         } else {
             System.out.println("Signup failed.");
@@ -76,6 +77,8 @@ public class HurricaneUI {
             System.out.println("Shelter: " + shelter.getName());
             System.out.println("Capacity: " + shelter.getCapacity());
             System.out.println("Status: " + shelter.getStatus());
+            System.out.println("Water: "
+                    + shelter.getInventory().getOrDefault("Water", 0));
         }
     }
 

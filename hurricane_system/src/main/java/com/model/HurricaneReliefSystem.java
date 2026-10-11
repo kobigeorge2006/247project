@@ -131,7 +131,6 @@ public class HurricaneReliefSystem {
 
     /**
      * Creates a shelter with 30 units of water.
-     * Only the test administrator account can create shelters.
      *
      * @param name the shelter's name
      * @param address the shelter's street address
@@ -142,8 +141,7 @@ public class HurricaneReliefSystem {
     public boolean createShelter(String name, String address,
                                  String zipCode, int capacity) {
 
-        if (!isLoggedIn() ||
-                !currentUser.getUsername().equalsIgnoreCase("admin")) {
+        if (!isLoggedIn()) {
             return false;
         }
 
