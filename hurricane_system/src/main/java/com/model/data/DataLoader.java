@@ -1,92 +1,88 @@
 package com.model.data;
 
-    
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
+import java.io.FileReader;
 
 import org.json.simple.JSONArray;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import com.model.user.*;
 import com.model.other.*;
 import com.model.requests.*;
 
 /**
- * 
+ * Loads information from the JSON files.
+ *
  * @author Kobi George
  */
-
 public class DataLoader {
-        
+
     private static JSONArray loadData(String fileName) {
-            JSONArray jsonArray = new JSONArray();
+        JSONArray jsonArray = new JSONArray();
 
-        try {
-            java.io.FileReader reader =
-                new java.io.FileReader(DataConstants.JSON_FOLDER + fileName);
-
+        try (FileReader reader = new FileReader(DataConstants.JSON_FOLDER + fileName)) {
             JSONParser parser = new JSONParser();
             jsonArray = (JSONArray) parser.parse(reader);
-
-            reader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return jsonArray;
     }
-        
+
     public static ArrayList<User> loadUsers() {
-            // Implement logic to load users from JSON file
-            ArrayList<User> users = new ArrayList<User>();
-            JSONArray jsonUsers = loadData(DataConstants.USER_FILE);
+        ArrayList<User> users = new ArrayList<>();
 
-            for(int i = 0; i < jsonUsers.size(); i++){
-                JSONObject jsonUser = (JSONObject) jsonUsers.get(i);
-                users.add(new User(jsonUser));
-            }
-            return users;
+        JSONArray jsonUsers = loadData(DataConstants.USER_FILE);
 
-
+        for (int i = 0; i < jsonUsers.size(); i++) {
+            JSONObject jsonUser = (JSONObject) jsonUsers.get(i);
+            users.add(new User(jsonUser));
         }
-        
+
+        return users;
+    }
+
     public static HashMap<UUID, Shelter> loadShelters() {
-            // Implement logic to load shelters from JSON file
-            HashMap<UUID, Shelter> shelters = new HashMap<UUID, Shelter>();
-            JSONArray jsonShelters = loadData(DataConstants.SHELTERS_FILE);
+        HashMap<UUID, Shelter> shelters = new HashMap<>();
 
-            for(int i = 0; i < jsonShelters.size(); i++){
-                JSONObject jsonShelter = (JSONObject) jsonShelters.get(i);
-                Shelter shelter = new Shelter(jsonShelter);
-                shelters.put(shelter.getId(), shelter);
-            }
-            return shelters;
+        JSONArray jsonShelters = loadData(DataConstants.SHELTERS_FILE);
+
+        for (int i = 0; i < jsonShelters.size(); i++) {
+            JSONObject jsonShelter = (JSONObject) jsonShelters.get(i);
+            Shelter shelter = new Shelter(jsonShelter);
+            shelters.put(shelter.getId(), shelter);
         }
+
+        return shelters;
+    }
 
     public static ArrayList<AssistanceRequest> loadRequests() {
-            // Implement logic to load assistance requests from JSON file
-            ArrayList<AssistanceRequest> requests = new ArrayList<AssistanceRequest>();
-            JSONArray jsonRequests = loadData(DataConstants.REQUESTS_FILE);
+        ArrayList<AssistanceRequest> requests = new ArrayList<>();
 
-            for(int i = 0; i < jsonRequests.size(); i++){
-                JSONObject jsonRequest = (JSONObject) jsonRequests.get(i);
-                requests.add(new AssistanceRequest(jsonRequest));
-            }
-            return requests;
+        JSONArray jsonRequests = loadData(DataConstants.REQUESTS_FILE);
+
+        for (int i = 0; i < jsonRequests.size(); i++) {
+            JSONObject jsonRequest = (JSONObject) jsonRequests.get(i);
+            requests.add(new AssistanceRequest(jsonRequest));
         }
+
+        return requests;
+    }
 
     public static ArrayList<HurricaneEvent> loadHurricanes() {
-            // Implement logic to load hurricane events from JSON file
-            ArrayList<HurricaneEvent> hurricanes = new ArrayList<HurricaneEvent>();
-            JSONArray jsonHurricanes = loadData(DataConstants.HURRICANES_FILE);
+        ArrayList<HurricaneEvent> hurricanes = new ArrayList<>();
 
-            for(int i = 0; i < jsonHurricanes.size(); i++){
-                JSONObject jsonHurricane = (JSONObject) jsonHurricanes.get(i);
-                hurricanes.add(new HurricaneEvent(jsonHurricane));
-            }
-            return hurricanes;
+        JSONArray jsonHurricanes = loadData(DataConstants.HURRICANES_FILE);
+
+        for (int i = 0; i < jsonHurricanes.size(); i++) {
+            JSONObject jsonHurricane = (JSONObject) jsonHurricanes.get(i);
+            hurricanes.add(new HurricaneEvent(jsonHurricane));
         }
 
+        return hurricanes;
+    }
 }
