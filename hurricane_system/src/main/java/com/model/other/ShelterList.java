@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 import com.model.data.DataBase;
+import com.model.data.DataWriter;
 
-//Manages shelters in the Hurricane Relief System
- 
+/**
+ * Manages shelters in the Hurricane Relief System.
+ */
 public class ShelterList {
 
     private HashMap<UUID, Shelter> shelters;
@@ -43,5 +45,10 @@ public class ShelterList {
     // Finds a shelter using its ID
     public Shelter getShelter(UUID id) {
         return shelters.get(id);
+    }
+
+    // Saves shelters to the JSON file
+    public void saveShelters() {
+        DataWriter.saveShelters(shelters);
     }
 }

@@ -2,12 +2,12 @@ package com.model;
 
 import com.model.data.DataBase;
 import com.model.data.DataLoader;
-import com.model.data.DataWriter;
 import com.model.other.Accommodation;
 import com.model.other.Shelter;
 import com.model.other.ShelterList;
 import com.model.other.ShelterStatus;
 import com.model.user.User;
+import com.model.user.UserList;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -18,16 +18,17 @@ import java.util.UUID;
 public class HurricaneReliefSystem {
 
     private DataBase database;
-    private User currentUser;
+    private UserList userList;
     private ShelterList shelterList;
+    private User currentUser;
 
     /**
-     * Creates the system and loads saved users and shelters.
+     * Creates the system and loads saved data.
      */
     public HurricaneReliefSystem() {
         database = DataBase.getInstance();
 
-        database.setUsers(DataLoader.loadUsers());
+        userList = new UserList();
         database.setShelters(DataLoader.loadShelters());
 
         shelterList = new ShelterList();
@@ -42,15 +43,14 @@ public class HurricaneReliefSystem {
      * @return true if login is successful
      */
     public boolean logIn(String username, String password) {
-        for (User user : database.getUsers()) {
-            if (user.getUsername().equalsIgnoreCase(username)
-                    && user.getPassword().equals(password)) {
-                currentUser = user;
-                return true;
-            }
+        User user = userList.logIn(username, password);
+
+        if (user == null) {
+            return false;
         }
 
-        return false;
+        currentUser = user;
+        return true;
     }
 
     /**
@@ -64,28 +64,20 @@ public class HurricaneReliefSystem {
      * @param phoneNumber the user's phone number
      * @return true if the account is created
      */
-    public boolean signUp(String firstName, String lastName, String username,
-                          String password, String email, String phoneNumber) {
+    public boolean signUp(String firstName, String lastName,
+                          String username, String password,
+                          String email, String phoneNumber) {
 
-        for (User user : database.getUsers()) {
-            if (user.getUsername().equalsIgnoreCase(username)) {
-                return false;
-            }
-        }
-
-        User newUser = new User(
-                firstName,
-                lastName,
-                username,
-                password,
-                email,
-                phoneNumber,
-                new ArrayList<String>()
+        User newUser = userList.signUp(
+                firstName, lastName, username,
+                password, email, phoneNumber
         );
 
-        database.addUser(newUser);
-        currentUser = newUser;
+        if (newUser == null) {
+            return false;
+        }
 
+        currentUser = newUser;
         return true;
     }
 
@@ -94,8 +86,8 @@ public class HurricaneReliefSystem {
      */
     public void logOut() {
         if (currentUser != null) {
-            DataWriter.saveUsers(database.getUsers());
-            DataWriter.saveShelters(database.getShelters());
+            userList.saveUsers();
+            shelterList.saveShelters();
             currentUser = null;
         }
     }
@@ -119,10 +111,20 @@ public class HurricaneReliefSystem {
     }
 
     /**
+     * Checks whether the current user is an administrator.
+     *
+     * @return true if the administrator is logged in
+     */
+    public boolean isAdmin() {
+        return currentUser != null
+                && currentUser.getUsername().equalsIgnoreCase("admin");
+    }
+
+    /**
      * Finds shelters in a given ZIP code.
      *
      * @param zipCode the ZIP code to search
-     * @return the shelters matching the ZIP code
+     * @return shelters matching the ZIP code
      */
     public ArrayList<Shelter> findShelters(String zipCode) {
         return shelterList.findShelters(zipCode);
@@ -130,19 +132,24 @@ public class HurricaneReliefSystem {
 
     /**
      * Creates a shelter with 30 units of water.
-     * Prevents creating another shelter with the same name,
-     * address, and ZIP code.
      *
      * @param name the shelter's name
-     * @param address the shelter's street address
+     * @param address the shelter's address
      * @param zipCode the shelter's ZIP code
      * @param capacity the shelter's capacity
-     * @return true if the shelter is created
+     * @return true if the shelter was created
      */
     public boolean createShelter(String name, String address,
                                  String zipCode, int capacity) {
 
-        if (!isLoggedIn()) {
+        if (!isAdmin()) {
+            return false;
+        }
+
+        if (name == null || name.isEmpty()
+                || address == null || address.isEmpty()
+                || zipCode == null || zipCode.isEmpty()
+                || capacity <= 0) {
             return false;
         }
 

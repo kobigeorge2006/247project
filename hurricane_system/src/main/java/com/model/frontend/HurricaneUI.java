@@ -1,12 +1,12 @@
-
 package com.model.frontend;
 
 import com.model.HurricaneReliefSystem;
 import com.model.other.Shelter;
 import java.util.ArrayList;
 
-// Runs scenarios for the Hurricane Relief System
-
+/**
+ * Runs scenarios for the Hurricane Relief System.
+ */
 public class HurricaneUI {
 
     private HurricaneReliefSystem system;
@@ -21,10 +21,10 @@ public class HurricaneUI {
         scenario3();
         scenario4();
         scenario5();
+        scenario6();
     }
 
     // Scenario 1: User login
-
     public void scenario1() {
         System.out.println("\nScenario 1: Login");
 
@@ -36,7 +36,6 @@ public class HurricaneUI {
     }
 
     // Scenario 2: User signup
-
     public void scenario2() {
         System.out.println("\nScenario 2: Signup");
 
@@ -44,12 +43,11 @@ public class HurricaneUI {
                 "amy@email.com", "8035551234")) {
             System.out.println("Account created successfully.");
         } else {
-            System.out.println("Signup failed.");
+            System.out.println("Account already exists.");
         }
     }
 
     // Scenario 3: User logout
-
     public void scenario3() {
         System.out.println("\nScenario 3: Logout");
 
@@ -61,20 +59,21 @@ public class HurricaneUI {
         }
     }
 
-    // Scenario 4: Find shelters by ZIP code
-
+    // Scenario 4: Find shelters in a given ZIP code
     public void scenario4() {
+        String zipCode = "29203";
+
         System.out.println("\nScenario 4: Find Shelters");
+        System.out.println("Searching ZIP code: " + zipCode);
 
-        ArrayList<Shelter> shelters = system.findShelters("29730");
+        ArrayList<Shelter> shelters = system.findShelters(zipCode);
 
-        if (shelters.isEmpty()) {
-            System.out.println("No shelters found in this ZIP code.");
-            return;
-        }
+        System.out.println("Shelters found: " + shelters.size());
 
         for (Shelter shelter : shelters) {
+            System.out.println("------------------------");
             System.out.println("Shelter: " + shelter.getName());
+            System.out.println("Address: " + shelter.getAddress());
             System.out.println("Capacity: " + shelter.getCapacity());
             System.out.println("Status: " + shelter.getStatus());
             System.out.println("Water: "
@@ -82,8 +81,7 @@ public class HurricaneUI {
         }
     }
 
-    // Scenario 5: Admin creates a shelter
-
+    // Scenario 5: Administrator creates a shelter
     public void scenario5() {
         System.out.println("\nScenario 5: Create Shelter");
 
@@ -95,18 +93,43 @@ public class HurricaneUI {
         boolean created = system.createShelter(
                 "Emergency Relief Shelter",
                 "123 Main Street",
-                "29730",
+                "29201",
                 100
         );
 
         if (created) {
             System.out.println("Shelter created successfully.");
         } else {
-            System.out.println("Shelter could not be created.");
+            System.out.println("Shelter already exists or could not be created.");
         }
 
         system.logOut();
         System.out.println("Admin logged out.");
+    }
+
+    // Scenario 6: Regular user cannot create a shelter
+    public void scenario6() {
+        System.out.println("\nScenario 6: Admin Permissions");
+
+        if (!system.logIn("asmith", "12345")) {
+            System.out.println("Regular user login failed.");
+            return;
+        }
+
+        boolean created = system.createShelter(
+                "Unauthorized Test Shelter",
+                "100 Test Street",
+                "29201",
+                50
+        );
+
+        if (!created) {
+            System.out.println("Regular user correctly denied permission.");
+        } else {
+            System.out.println("ERROR: Regular user created a shelter.");
+        }
+
+        system.logOut();
     }
 
     public static void main(String[] args) {
