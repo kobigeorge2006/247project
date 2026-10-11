@@ -1,4 +1,5 @@
 package com.model;
+
 import com.model.user.*;
 import com.model.data.*;
 import com.model.other.*;
@@ -15,6 +16,7 @@ public class HurricaneReliefSystem {
     private ArrayList<HurricaneEvent> hurricanes;
     private DataBase database;
     private User currentUser;
+    private ShelterList shelterList;
 
     public HurricaneReliefSystem() {
         this.users = new ArrayList<>();
@@ -23,6 +25,7 @@ public class HurricaneReliefSystem {
         this.hurricanes = new ArrayList<>();
         database = DataBase.getInstance();
         currentUser = null;
+        shelterList = new ShelterList();
     }
 
     public HurricaneReliefSystem getInstance() {
@@ -33,23 +36,32 @@ public class HurricaneReliefSystem {
     }
 
     public boolean logIn(String username, String password) {
-        for (User user : database.getUser(username, password)) {
+        ArrayList<User> matchingUsers = database.getUser(username, password);
+
+        if (matchingUsers == null) {
+            return false;
+        }
+
+        for (User user : matchingUsers) {
             if (user.getUsername().equalsIgnoreCase(username)
                     && user.getPassword().equals(password)) {
-
                 currentUser = user;
                 return true;
             }
         }
         return false;
     }
+
     public boolean signUp(String firstName, String lastName, String username,
                           String password, String email, String phoneNumber) {
 
-        // Make sure the username is not already taken
-        for (User user : database.getUser(username, password)) {
-            if (user.getUsername().equalsIgnoreCase(username)) {
-                return false;
+        ArrayList<User> matchingUsers = database.getUser(username, password);
+
+        if (matchingUsers != null) {
+            for (User user : matchingUsers) {
+                if (user.getUsername().equalsIgnoreCase(username)) {
+                    return false;
+                }
             }
         }
 
@@ -64,8 +76,6 @@ public class HurricaneReliefSystem {
         );
 
         database.addUser(newUser);
-
-        // Automatically sign in the new account
         currentUser = newUser;
 
         return true;
@@ -82,9 +92,32 @@ public class HurricaneReliefSystem {
     public boolean isLoggedIn() {
         return currentUser != null;
     }
+
+    // Finds shelters in a given ZIP code
+     
+    public ArrayList<Shelter> findShelters(String zipCode) {
+        return shelterList.findShelters(zipCode);
+    }
+
+    //Creates a new shelter in the system
+     
+    public boolean createShelter(String name, String address,
+                                 String zipCode, int capacity) {
+        if (!isLoggedIn()) {
+            return false;
+        }
+
+        Shelter shelter = new Shelter(
+            UUID.randomUUID(),
+            name,
+            address,
+            capacity,
+            ShelterStatus.OPEN,
+            new ArrayList<Accommodation>()
+        );
+
+        shelter.getLocation().setZipCode(zipCode);
+
+        return shelterList.addShelter(shelter);
+    }
 }
-  
-
-
-    
-
