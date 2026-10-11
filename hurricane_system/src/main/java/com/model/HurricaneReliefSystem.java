@@ -96,7 +96,6 @@ public class HurricaneReliefSystem {
         if (currentUser != null) {
             DataWriter.saveUsers(database.getUsers());
             DataWriter.saveShelters(database.getShelters());
-
             currentUser = null;
         }
     }
@@ -131,6 +130,8 @@ public class HurricaneReliefSystem {
 
     /**
      * Creates a shelter with 30 units of water.
+     * Prevents creating another shelter with the same name,
+     * address, and ZIP code.
      *
      * @param name the shelter's name
      * @param address the shelter's street address
@@ -143,6 +144,13 @@ public class HurricaneReliefSystem {
 
         if (!isLoggedIn()) {
             return false;
+        }
+
+        for (Shelter existing : shelterList.findShelters(zipCode)) {
+            if (existing.getName().equalsIgnoreCase(name)
+                    && existing.getAddress().equalsIgnoreCase(address)) {
+                return false;
+            }
         }
 
         Shelter shelter = new Shelter(
