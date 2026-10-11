@@ -1,10 +1,11 @@
-
 package com.model.frontend;
 
 import com.model.HurricaneReliefSystem;
+import com.model.other.Shelter;
+import java.util.ArrayList;
 
 //Runs scenarios for the Hurricane Relief System
- 
+
 public class HurricaneUI {
 
     private HurricaneReliefSystem system;
@@ -17,9 +18,11 @@ public class HurricaneUI {
         scenario1();
         scenario2();
         scenario3();
+        scenario4();
+        scenario5();
     }
 
-    //Scenario 1: A user logs into the system
+    //Scenario 1: User login
 
     public void scenario1() {
         System.out.println("\nScenario 1: Login");
@@ -31,7 +34,7 @@ public class HurricaneUI {
         }
     }
 
-    //Scenario 2: A new user creates an account
+    //Scenario 2: User signup
 
     public void scenario2() {
         System.out.println("\nScenario 2: Signup");
@@ -44,8 +47,8 @@ public class HurricaneUI {
         }
     }
 
-    //Scenario 3: The current user logs out 
-    
+    //Scenario 3: User logout
+
     public void scenario3() {
         System.out.println("\nScenario 3: Logout");
 
@@ -55,6 +58,52 @@ public class HurricaneUI {
         } else {
             System.out.println("No user is logged in.");
         }
+    }
+
+    //Scenario 4: Find shelters by ZIP code
+
+    public void scenario4() {
+        System.out.println("\nScenario 4: Find Shelters");
+
+        ArrayList<Shelter> shelters = system.findShelters("29730");
+
+        if (shelters.isEmpty()) {
+            System.out.println("No shelters found in this ZIP code.");
+            return;
+        }
+
+        for (Shelter shelter : shelters) {
+            System.out.println("Shelter: " + shelter.getName());
+            System.out.println("Capacity: " + shelter.getCapacity());
+            System.out.println("Status: " + shelter.getStatus());
+        }
+    }
+
+    // Scenario 5: Create a shelter
+    
+    public void scenario5() {
+        System.out.println("\nScenario 5: Create Shelter");
+
+        if (!system.logIn("admin", "12345")) {
+            System.out.println("Admin login failed.");
+            return;
+        }
+
+        boolean created = system.createShelter(
+                "Emergency Relief Shelter",
+                "123 Main Street",
+                "29730",
+                100
+        );
+
+        if (created) {
+            System.out.println("Shelter created successfully.");
+        } else {
+            System.out.println("Shelter could not be created.");
+        }
+
+        system.logOut();
+        System.out.println("Admin logged out.");
     }
 
     public static void main(String[] args) {
