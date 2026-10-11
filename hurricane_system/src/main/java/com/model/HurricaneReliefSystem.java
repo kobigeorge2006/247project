@@ -1,11 +1,12 @@
+
 package com.model;
 
 import com.model.user.*;
 import com.model.data.*;
 import com.model.other.*;
+import com.model.requests.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import com.model.requests.*;
 import java.util.UUID;
 
 public class HurricaneReliefSystem {
@@ -94,13 +95,11 @@ public class HurricaneReliefSystem {
     }
 
     // Finds shelters in a given ZIP code
-     
     public ArrayList<Shelter> findShelters(String zipCode) {
         return shelterList.findShelters(zipCode);
     }
 
-    //Creates a new shelter in the system
-     
+    // Creates a shelter and adds 30 units of water
     public boolean createShelter(String name, String address,
                                  String zipCode, int capacity) {
         if (!isLoggedIn()) {
@@ -117,6 +116,7 @@ public class HurricaneReliefSystem {
         );
 
         shelter.getLocation().setZipCode(zipCode);
+        shelter.getInventory().put("Water", 30);
 
         return shelterList.addShelter(shelter);
     }
