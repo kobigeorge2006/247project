@@ -4,7 +4,7 @@ import com.model.HurricaneReliefSystem;
 import com.model.other.Shelter;
 import java.util.ArrayList;
 
-//Runs scenarios for the Hurricane Relief System
+// Runs scenarios for the Hurricane Relief System
 
 public class HurricaneUI {
 
@@ -22,32 +22,32 @@ public class HurricaneUI {
         scenario5();
     }
 
-    //Scenario 1: User login
+    // Scenario 1: User login
 
     public void scenario1() {
         System.out.println("\nScenario 1: Login");
 
-        if (system.logIn("testuser", "12345")) {
+        if (system.logIn("asmith", "12345")) {
             System.out.println("Login successful.");
         } else {
             System.out.println("Login failed.");
         }
     }
 
-    //Scenario 2: User signup
+    // Scenario 2: User signup
 
     public void scenario2() {
         System.out.println("\nScenario 2: Signup");
 
-        if (system.signUp("Amy", "Smith", "asmith", "12345",
-                "amy@email.com", "8035551234")) {
+        if (system.signUp("John", "Davis", "jdavis", "12345",
+                "john@email.com", "8035555678")) {
             System.out.println("Account created successfully.");
         } else {
             System.out.println("Signup failed.");
         }
     }
 
-    //Scenario 3: User logout
+    // Scenario 3: User logout
 
     public void scenario3() {
         System.out.println("\nScenario 3: Logout");
@@ -60,7 +60,7 @@ public class HurricaneUI {
         }
     }
 
-    //Scenario 4: Find shelters by ZIP code
+    // Scenario 4: Find shelters by ZIP code
 
     public void scenario4() {
         System.out.println("\nScenario 4: Find Shelters");
@@ -79,8 +79,8 @@ public class HurricaneUI {
         }
     }
 
-    // Scenario 5: Create a shelter
-    
+    // Scenario 5: Admin creates a shelter
+
     public void scenario5() {
         System.out.println("\nScenario 5: Create Shelter");
 
