@@ -10,33 +10,23 @@ import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 import com.model.user.User;
 import com.model.other.Shelter;
+import com.model.other.HurricaneEvent;
 import com.model.requests.AssistanceRequest;
-=======
-=======
-import com.model.user.User;
-import com.model.other.Shelter;
-import com.model.requests.AssistanceRequest;
->>>>>>> d4c237f54c1e51ce434175c978c916cc0177726f
-import com.model.user.*;
-import com.model.other.*;
-import com.model.requests.*;
+import com.model.requests.Message;
 
-
-<<<<<<< HEAD
->>>>>>> origin/main
-=======
->>>>>>> d4c237f54c1e51ce434175c978c916cc0177726f
-
+/**
+ * Saves hurricane relief system data to JSON files.
+ */
 public class DataWriter {
-    /** 
-     * @param users
+
+    /**
+     * Saves the users to the user JSON file.
+     *
+     * @param users the list of users to save
      */
     public static void saveUsers(ArrayList<User> users) {
-        // Implement logic to save users to JSON file
         JSONArray usersArray = new JSONArray();
 
         for (User user : users) {
@@ -50,72 +40,67 @@ public class DataWriter {
             userObject.put("phoneNumber", user.getPhoneNumber());
             userObject.put("id", user.getId().toString());
 
-            // This becomes the "requests": [ ... ] part
             JSONArray requestsArray = new JSONArray();
 
-            for (String request : user.getRequests()) {
-                requestsArray.add(request);
+            if (user.getRequests() != null) {
+                requestsArray.addAll(user.getRequests());
             }
 
             userObject.put("requests", requestsArray);
-
-            // Add this completed user to the main JSON array
             usersArray.add(userObject);
         }
 
-        // Write the completed array into users.json
-        try (FileWriter file = new FileWriter(DataConstants.USER_FILE)) {
+        try (FileWriter file = new FileWriter(
+                DataConstants.JSON_FOLDER + DataConstants.USER_FILE)) {
             file.write(usersArray.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    /** 
-     * @param shelters
+    /**
+     * Saves the shelters and their inventory to the shelter JSON file.
+     *
+     * @param shelters the shelters to save, organized by their IDs
      */
     public static void saveShelters(HashMap<UUID, Shelter> shelters) {
-    JSONArray sheltersArray = new JSONArray();
+        JSONArray sheltersArray = new JSONArray();
 
-    for (Shelter shelter : shelters.values()) {
-        JSONObject shelterObject = new JSONObject();
+        for (Shelter shelter : shelters.values()) {
+            JSONObject shelterObject = new JSONObject();
 
-        shelterObject.put("id", shelter.getId().toString());
-        shelterObject.put("name", shelter.getName());
-<<<<<<< HEAD
-<<<<<<< HEAD
-        shelterObject.put("address", shelter.getLocation());
-=======
-        shelterObject.put("address", shelter.getAddress());
->>>>>>> origin/main
-=======
-        shelterObject.put("address", shelter.getLocation());
-        shelterObject.put("address", shelter.getAddress());
->>>>>>> d4c237f54c1e51ce434175c978c916cc0177726f
-        shelterObject.put("capacity", shelter.getCapacity());
-        shelterObject.put("status", shelter.getStatus().toString());
+            shelterObject.put("id", shelter.getId().toString());
+            shelterObject.put("name", shelter.getName());
+            shelterObject.put("address", shelter.getAddress());
+            shelterObject.put("zipCode", shelter.getLocation().getZipCode());
+            shelterObject.put("capacity", shelter.getCapacity());
+            shelterObject.put("status", shelter.getStatus().toString());
 
-        // Makes: "inventory": { "Canned foods": 100, ... }
-        JSONObject inventoryObject = new JSONObject();
+            JSONObject inventoryObject = new JSONObject();
 
-        for (Map.Entry<String, Integer> item : shelter.getInventory().entrySet()) {
-            inventoryObject.put(item.getKey(), item.getValue());
+            if (shelter.getInventory() != null) {
+                for (Map.Entry<String, Integer> item :
+                        shelter.getInventory().entrySet()) {
+                    inventoryObject.put(item.getKey(), item.getValue());
+                }
+            }
+
+            shelterObject.put("inventory", inventoryObject);
+            sheltersArray.add(shelterObject);
         }
 
-        shelterObject.put("inventory", inventoryObject);
-
-        sheltersArray.add(shelterObject);
+        try (FileWriter file = new FileWriter(
+                DataConstants.JSON_FOLDER + DataConstants.SHELTERS_FILE)) {
+            file.write(sheltersArray.toJSONString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    try (FileWriter file = new FileWriter(DataConstants.SHELTERS_FILE)) {
-        file.write(sheltersArray.toJSONString());
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-}
-
-    /** 
-     * @param requests
+    /**
+     * Saves assistance requests and their messages to the request JSON file.
+     *
+     * @param requests the list of assistance requests to save
      */
     public static void saveRequests(ArrayList<AssistanceRequest> requests) {
         JSONArray requestsArray = new JSONArray();
@@ -132,48 +117,52 @@ public class DataWriter {
 
             JSONArray messagesArray = new JSONArray();
 
-            for (Message message : AssistanceRequest.getMessages()) {
-                JSONObject messageObject = new JSONObject();
+            if (request.getMessages() != null) {
+                for (Message message : request.getMessages()) {
+                    JSONObject messageObject = new JSONObject();
 
-                messageObject.put("sender", message.getSender().getUsername());
-                messageObject.put("message", message.getBody());
-                messageObject.put("timestamp", message.getSender().toString());
+                    messageObject.put("sender",
+                            message.getSender().getUsername());
+                    messageObject.put("message", message.getBody());
 
-                messagesArray.add(messageObject);
+                    messagesArray.add(messageObject);
+                }
             }
 
             requestObject.put("messages", messagesArray);
             requestsArray.add(requestObject);
         }
 
-        try (FileWriter file =
-                new FileWriter(DataConstants.REQUESTS_FILE)) {
+        try (FileWriter file = new FileWriter(
+                DataConstants.JSON_FOLDER + DataConstants.REQUESTS_FILE)) {
             file.write(requestsArray.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    /** 
-     * @param hurricanes
+    /**
+     * Saves hurricane events to the hurricane JSON file.
+     *
+     * @param hurricanes the list of hurricane events to save
      */
     public static void saveHurricanes(ArrayList<HurricaneEvent> hurricanes) {
         JSONArray hurricanesArray = new JSONArray();
-    
+
         for (HurricaneEvent hurricane : hurricanes) {
             JSONObject hurricaneObject = new JSONObject();
-    
+
             hurricaneObject.put("id", hurricane.getId().toString());
             hurricaneObject.put("status", hurricane.getStatus().toString());
-            hurricaneObject.put("location",
-                    hurricane.getAddress());
+            hurricaneObject.put("location", hurricane.getAddress());
             hurricaneObject.put("maxWindSpeed", hurricane.getMaxWindSpeed());
             hurricaneObject.put("forecastPath", hurricane.getForcastPath());
-    
+
             hurricanesArray.add(hurricaneObject);
         }
-    
-        try (FileWriter file = new FileWriter(DataConstants.HURRICANES_FILE)) {
+
+        try (FileWriter file = new FileWriter(
+                DataConstants.JSON_FOLDER + DataConstants.HURRICANES_FILE)) {
             file.write(hurricanesArray.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
