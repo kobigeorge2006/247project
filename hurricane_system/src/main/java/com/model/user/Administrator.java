@@ -1,88 +1,54 @@
 package com.model.user;
+import java.util.ArrayList;
 import java.util.HashMap;
 import com.model.requests.*;
+import com.model.data.DataBase;
 import com.model.other.*;
 import com.model.user.*;
 
+import javafx.scene.chart.PieChart.Data;
 
-public class Administrator {
-    private String name;
-    private String username;
-    private String password;
-    private Shelter shelter;
-    private Severity severity;
-    private HashMap<String, ValidatedVolunteer> requests;
 
-    public Administrator(String name, String username, String password, Shelter shelter, Severity severity) {
-        this.name = name;
-        this.username = username;
-        this.password = password;
+public class Administrator extends User {
+    private final Shelter shelter;
+
+    public Administrator(String firstName, String lastName, String username, String password, String email, String phoneNumber, Shelter shelter) {
+
+        super(firstName, lastName, username, password, email, phoneNumber, false);
+
         this.shelter = shelter;
-        this.severity = severity;
-        this.requests = new HashMap<>();
     }
     public void addVolunteer(ValidatedVolunteer volunteer) {
-        // Implement logic to add a volunteer
+        DataBase.getInstance().addUser(volunteer);
     }
-    public void removeVolunteer(String name){
-        // Implement logic to remove a volunteer
-    }
-    public ValidatedVolunteer getVolunteer(String name) {
+    
+    public ValidatedVolunteer getVolunteer(String username, String password) {
         // Implement logic to retrieve a volunteer
+        if(DataBase.getInstance().getUser(username, password) != null){
+            return (ValidatedVolunteer) DataBase.getInstance().getUser(username, password).get(0);
+        }
+        return null;
     }
     public void updateCapacity(int capacity){
         // Implement logic to update shelter capacity
+        shelter.setCapacity(capacity);
     }
     public void viewVolunteers(){
         // Implement logic to view all volunteers
+        // Need to add toString() to ValidatedVolunteer class to display volunteer information
+        for(User user : DataBase.getInstance().getUsers()){
+            if(user.isVolunteer()){
+                System.out.println(user);
+            }
     }
     public void addShelter(Shelter shelter) {
         // Implement logic to add a shelter
-    }
-    public void removeShelter(Shelter shelter) {
-        // Implement logic to remove a shelter
-    }
-    public void manageAdministrators() {
-        // Implement logic to manage administrators
-    }
-    public void setRequestSeverity(Severity severity){
-        // Implement logic to set request severity
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
+        DataBase.getInstance().addShelter(shelter);
     }
     public Shelter getShelter() {
         return shelter;
     }
-    public void setShelter(Shelter shelter) {
-        this.shelter = shelter;
+    public ArrayList<AssistanceRequest> getAllAssistanceRequests() {
+        return DataBase.getInstance().getAssistanceRequests();
     }
-    public Severity getSeverity() {
-        return severity;
-    }
-    public void setSeverity(Severity severity) {
-        this.severity = severity;
-    }
-    public HashMap<String, ValidatedVolunteer> getRequests() {
-        return requests;
-    }
-    public void setRequests(HashMap<String, ValidatedVolunteer> requests) {
-        this.requests = requests;
-    }
-    
 }

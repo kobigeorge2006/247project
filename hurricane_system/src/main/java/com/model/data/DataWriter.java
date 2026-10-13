@@ -38,7 +38,9 @@ public class DataWriter {
             userObject.put("password", user.getPassword());
             userObject.put("email", user.getEmail());
             userObject.put("phoneNumber", user.getPhoneNumber());
+            userObject.put("volunteer", user.isVolunteer());
             userObject.put("id", user.getId().toString());
+
 
             JSONArray requestsArray = new JSONArray();
 
@@ -122,7 +124,7 @@ public class DataWriter {
                     JSONObject messageObject = new JSONObject();
 
                     messageObject.put("sender",
-                            message.getSender().getUsername());
+                    message.getSender().getUsername());
                     messageObject.put("message", message.getBody());
 
                     messagesArray.add(messageObject);

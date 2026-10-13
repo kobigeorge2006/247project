@@ -89,8 +89,6 @@ public class AssistanceRequest
         public void setMessages(ArrayList<Message> messages) {
             this.messages = messages;
         }
-        
-
     }
 
 
