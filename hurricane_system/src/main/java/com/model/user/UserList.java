@@ -35,7 +35,7 @@ public class UserList {
 
     public User signUp(String firstName, String lastName,
                        String username, String password,
-                       String email, String phoneNumber) {
+                       String email, Boolean volunteer, String phoneNumber) {
 
         for (User user : users) {
             if (user.getUsername().equalsIgnoreCase(username)) {
@@ -43,10 +43,7 @@ public class UserList {
             }
         }
 
-        User newUser = new User(
-                firstName, lastName, username, password,
-                email, phoneNumber, new ArrayList<String>()
-        );
+        User newUser = new User(firstName, lastName, username, password, email, phoneNumber, volunteer, new ArrayList<String>());
 
         users.add(newUser);
         return newUser;
