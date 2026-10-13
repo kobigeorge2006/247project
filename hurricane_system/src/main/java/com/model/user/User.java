@@ -40,7 +40,7 @@ public class User {
     public void signOut() {
         // Implement sign-out logic here
     }
-    public boolean addRequest(UUID id, String contactInfo, user user, String address, AidCategory aidCategry){
+    public boolean addRequest(UUID id, String contactInfo, User user, String address, AidCategory aidCategry){
         // Implement request addition logic here
     }
     public boolean updateProfile(String firstName, String lastName, String email, String phoneNumber) {
