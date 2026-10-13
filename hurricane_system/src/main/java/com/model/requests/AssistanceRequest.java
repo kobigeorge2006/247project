@@ -93,6 +93,7 @@ public class AssistanceRequest
         public void setMessages(ArrayList<Message> messages) {
             this.messages = messages;
         }
+<<<<<<< HEAD
         public Location getLocation() {
             return location;
         }
@@ -100,6 +101,8 @@ public class AssistanceRequest
             this.location = location;
         }
 
+=======
+>>>>>>> 4f21c837896d491725811b02b919501db7c4f5f9
     }
 
 

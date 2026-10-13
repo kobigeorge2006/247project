@@ -20,11 +20,12 @@ public class User {
     private String password;
     private String email;
     private String phoneNumber;
+    private boolean volunteer;
     private ArrayList<String> requests;
     private UUID id;
     private DataBase database;
 
-    public User(String firstName, String lastName, String username, String password, String email, String phoneNumber, ArrayList<String> requests) {
+    public User(String firstName, String lastName, String username, String password, String email, String phoneNumber, boolean volunteer, ArrayList<String> requests) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -32,9 +33,22 @@ public class User {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.requests = requests;
+        this.volunteer = volunteer;
         this.id = UUID.randomUUID();
         this.database = DataBase.getInstance();
     }
+    public User(String firstName, String lastName, String username, String password, String email, String phoneNumber, boolean volunteer) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.requests = new ArrayList<>();
+        this.volunteer = volunteer;
+        this.id = UUID.randomUUID();
+    }
+    
     public User(JSONObject jsonUser) {
         this.firstName = (String) jsonUser.get("firstName");
         this.lastName = (String) jsonUser.get("lastName");
@@ -45,7 +59,18 @@ public class User {
         this.requests = (ArrayList<String>) jsonUser.get("requests");
         this.id = UUID.fromString((String) jsonUser.get("id"));
     }
+<<<<<<< HEAD
     public void addRequest(UUID id, String contactInfo, String address, AidCategory aidCategory, Severity severity, RequestStatus status, ArrayList<Message> messages, Location location){
+=======
+
+    public void signIn(String userName, String password) {
+        // Implement sign-in logic here
+    }
+    public void signOut() {
+        // Implement sign-out logic here
+    }
+    public boolean addRequest(UUID id, String contactInfo, User user, String address, AidCategory aidCategry){
+>>>>>>> 4f21c837896d491725811b02b919501db7c4f5f9
         // Implement request addition logic here
         DataBase database = DataBase.getInstance();
         AssistanceRequest request =  new AssistanceRequest(id,contactInfo, address, aidCategory, severity,status, messages, location);
@@ -98,6 +123,12 @@ public class User {
     }
     public void setId(UUID id) {
         this.id = id;
+    }
+    public void setVolunteer(boolean volunteer) {
+        this.volunteer = volunteer;
+    }
+    public boolean isVolunteer() {
+        return volunteer;
     }
     
     @Override 

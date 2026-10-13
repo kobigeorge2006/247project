@@ -7,8 +7,12 @@
         "id": "f8056b11-a458-498b-b348-5be5a6ff3aa6",
         "requests": [],
         "email": "amy@email.com",
+<<<<<<< HEAD
         "username": "asmith",
         "volunteer": false
+=======
+        "username": "asmith"
+>>>>>>> 4f21c837896d491725811b02b919501db7c4f5f9
     },
     {
         "firstName": "System",
@@ -18,8 +22,12 @@
         "id": "5a8a32bf-c4e7-48bd-a7e5-94c9bd63d1d2",
         "requests": [],
         "email": "admin@email.com",
+<<<<<<< HEAD
         "username": "admin",
         "volunteer": true
+=======
+        "username": "admin"
+>>>>>>> 4f21c837896d491725811b02b919501db7c4f5f9
     },
     {
         "firstName": "John",
@@ -29,9 +37,13 @@
         "id": "3e3505df-ffa5-4119-a02e-0324a6b60b09",
         "requests": [],
         "email": "john@email.com",
+<<<<<<< HEAD
         "username": "jdavis",
         "volunteer": true
 
+=======
+        "username": "jdavis"
+>>>>>>> 4f21c837896d491725811b02b919501db7c4f5f9
     },
     {
         "firstName": "Jordan",
@@ -41,8 +53,12 @@
         "id": "47ca8d3d-e7d2-489b-8f41-1555eef7f4c3",
         "requests": [],
         "email": "jordan@email.com",
+<<<<<<< HEAD
         "username": "jlee",
         "volunteer": false
         
+=======
+        "username": "jlee"
+>>>>>>> 4f21c837896d491725811b02b919501db7c4f5f9
     }
 ]
