@@ -14,10 +14,11 @@ public class User {
     private String password;
     private String email;
     private String phoneNumber;
+    private boolean volunteer;
     private ArrayList<String> requests;
     private UUID id;
 
-    public User(String firstName, String lastName, String username, String password, String email, String phoneNumber, ArrayList<String> requests) {
+    public User(String firstName, String lastName, String username, String password, String email, String phoneNumber, boolean volunteer, ArrayList<String> requests) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -25,8 +26,21 @@ public class User {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.requests = requests;
+        this.volunteer = volunteer;
         this.id = UUID.randomUUID();
     }
+    public User(String firstName, String lastName, String username, String password, String email, String phoneNumber, boolean volunteer) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.requests = new ArrayList<>();
+        this.volunteer = volunteer;
+        this.id = UUID.randomUUID();
+    }
+    
     public User(JSONObject jsonUser) {
         this.firstName = (String) jsonUser.get("firstName");
         this.lastName = (String) jsonUser.get("lastName");
@@ -112,6 +126,12 @@ public class User {
     }
     public void setId(UUID id) {
         this.id = id;
+    }
+    public void setVolunteer(boolean volunteer) {
+        this.volunteer = volunteer;
+    }
+    public boolean isVolunteer() {
+        return volunteer;
     }
     
     @Override 

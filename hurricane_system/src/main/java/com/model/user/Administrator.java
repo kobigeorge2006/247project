@@ -5,30 +5,25 @@ import com.model.other.*;
 import com.model.user.*;
 
 
-public class Administrator {
-    private String name;
-    private String username;
-    private String password;
-    private Shelter shelter;
-    private Severity severity;
-    private HashMap<String, ValidatedVolunteer> requests;
+public class Administrator extends User {
+    private final Shelter shelter;
 
-    public Administrator(String name, String username, String password, Shelter shelter, Severity severity) {
-        this.name = name;
-        this.username = username;
-        this.password = password;
+    public Administrator(String firstName, String lastName, String username, String password, String email, String phoneNumber, Shelter shelter) {
+
+        super(firstName, lastName, username, password, email, phoneNumber, false);
+
         this.shelter = shelter;
-        this.severity = severity;
-        this.requests = new HashMap<>();
     }
     public void addVolunteer(ValidatedVolunteer volunteer) {
         // Implement logic to add a volunteer
+        
     }
     public void removeVolunteer(String name){
         // Implement logic to remove a volunteer
     }
     public ValidatedVolunteer getVolunteer(String name) {
         // Implement logic to retrieve a volunteer
+
     }
     public void updateCapacity(int capacity){
         // Implement logic to update shelter capacity

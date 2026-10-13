@@ -21,12 +21,13 @@ public class Location {
         this.streetAddress = streetAddress;
     }
     //TODO
+    //No correct
     public double calculateDistance(Location targetLocation) {
-        return 0.0;
+        return latitude - targetLocation.getLatitude() + longitude - targetLocation.getLongitude();
     }
-    // TODO
+    
     public String formateFullAddress() {
-        return "";
+        return streetAddress + ", " + city + ", " + zipCode;
     }
 
     public double getLatitude() {
