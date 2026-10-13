@@ -60,7 +60,7 @@ public class User {
         this.id = UUID.fromString((String) jsonUser.get("id"));
     }
 
-    public boolean addRequest(UUID id, String contactInfo, User user, String address, AidCategory aidCategry){
+    public void addRequest(UUID id, String contactInfo, User user, String address, AidCategory aidCategory, Severity severity, RequestStatus status, ArrayList<Message> messages,Location location ){
         // Implement request addition logic here
         DataBase database = DataBase.getInstance();
         AssistanceRequest request =  new AssistanceRequest(id,contactInfo, address, aidCategory, severity,status, messages, location);
