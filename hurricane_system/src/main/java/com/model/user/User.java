@@ -59,18 +59,8 @@ public class User {
         this.requests = (ArrayList<String>) jsonUser.get("requests");
         this.id = UUID.fromString((String) jsonUser.get("id"));
     }
-<<<<<<< HEAD
-    public void addRequest(UUID id, String contactInfo, String address, AidCategory aidCategory, Severity severity, RequestStatus status, ArrayList<Message> messages, Location location){
-=======
 
-    public void signIn(String userName, String password) {
-        // Implement sign-in logic here
-    }
-    public void signOut() {
-        // Implement sign-out logic here
-    }
     public boolean addRequest(UUID id, String contactInfo, User user, String address, AidCategory aidCategry){
->>>>>>> 4f21c837896d491725811b02b919501db7c4f5f9
         // Implement request addition logic here
         DataBase database = DataBase.getInstance();
         AssistanceRequest request =  new AssistanceRequest(id,contactInfo, address, aidCategory, severity,status, messages, location);
