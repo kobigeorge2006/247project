@@ -122,7 +122,7 @@ public class DataWriter {
                     JSONObject messageObject = new JSONObject();
 
                     messageObject.put("sender",
-                            message.getSender().getUsername());
+                    message.getSender().getUsername());
                     messageObject.put("message", message.getBody());
 
                     messagesArray.add(messageObject);
