@@ -122,6 +122,10 @@ public class DataBase {
         }
     }
 
+    public void addShelter(Shelter shelter) {
+        shelters.put(shelter.getId(), shelter);
+    }
+
     /**
      * Returns all assistance requests.
      *

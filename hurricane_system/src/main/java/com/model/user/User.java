@@ -48,7 +48,7 @@ public class User {
         this.volunteer = volunteer;
         this.id = UUID.randomUUID();
     }
-    
+
     public User(JSONObject jsonUser) {
         this.firstName = (String) jsonUser.get("firstName");
         this.lastName = (String) jsonUser.get("lastName");
