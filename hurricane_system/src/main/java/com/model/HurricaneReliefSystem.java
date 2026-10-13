@@ -45,10 +45,12 @@ public class HurricaneReliefSystem {
     public boolean logIn(String username, String password) {
         User user = userList.logIn(username, password);
 
-                currentUser = user;
-                return true;
-            }
+        if(user == null){
             return false;
+        }
+
+            currentUser = user;
+            return true;
         }
     /**
      * Registers a new user.
