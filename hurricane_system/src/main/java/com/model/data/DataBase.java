@@ -45,38 +45,19 @@ public class DataBase {
         return instance;
     }
 
-    /**
-     * Finds a user with the given username and password.
-     *
-     * @param username the user's username
-     * @param password the user's password
-     * @return a list containing the matching user, or null if not found
-     */
-    public ArrayList<User> getUser(String username, String password) {
-        ArrayList<User> matchingUsers = new ArrayList<>();
+    public ArrayList<User> getUser(String username, String password){
+    ArrayList<User> matchingUsers = new ArrayList<>();
 
-        for (User user : users) {
-            if (user.getUsername().equalsIgnoreCase(username)
-                    && user.getPassword().equals(password)) {
-                matchingUsers.add(user);
-            }
+    for (User user : users) {
+        if (user.getUsername().equals(username)
+                && user.getPassword().equals(password)) {
+            matchingUsers.add(user);
         }
-
-        if (matchingUsers.isEmpty()) {
-            return null;
-        }
-
-        return matchingUsers;
     }
 
-    /**
-     * Returns all registered users.
-     *
-     * @return the list of users
-     */
-    public ArrayList<User> getUsers() {
-        return users;
-    }
+    return matchingUsers;
+} 
+
 
     /**
      * Loads users into the database.
@@ -122,10 +103,6 @@ public class DataBase {
         }
     }
 
-    public void addShelter(Shelter shelter) {
-        shelters.put(shelter.getId(), shelter);
-    }
-
     /**
      * Returns all assistance requests.
      *
@@ -146,5 +123,9 @@ public class DataBase {
     public void addAssistanceRequest(AssistanceRequest request){
         assistanceRequests.add(request);
     }
+    public void addHurricane(HurricaneEvent hurricane){
+        hurricaneEvents.add(hurricane);
+    }
     
+
 }
