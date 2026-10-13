@@ -48,29 +48,8 @@ public class HurricaneReliefSystem {
                 currentUser = user;
                 return true;
             }
-        }
-        return false;
-    }
-    public boolean signUp(String firstName, String lastName, String username, String password, String email, String phoneNumber) {
-
-        // Make sure the username is not already taken
-        for (User user : database.getUser(username, password)) {
-            if (user.getUsername().equalsIgnoreCase(username)) {
-                return false; // Username already exists
-            }    
-        }       
-        if (user == null) {
             return false;
         }
-
-        currentUser = user;
-        return true;
-    }
-
-
-    public void logOut() {
-        currentUser = null;
-        System.out.println("User logged out successfully.");
     /**
      * Registers a new user.
      *
@@ -127,7 +106,7 @@ public class HurricaneReliefSystem {
     public boolean isLoggedIn() {
         return currentUser != null;
     }
-}
+
 
 
   
@@ -196,4 +175,5 @@ public class HurricaneReliefSystem {
 
         return shelterList.addShelter(shelter);
     }
+
 }
