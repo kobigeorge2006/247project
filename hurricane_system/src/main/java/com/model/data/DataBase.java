@@ -142,4 +142,5 @@ public class DataBase {
     public void addAssistanceRequest(AssistanceRequest request){
         assistanceRequests.add(request);
     }
+    
 }
