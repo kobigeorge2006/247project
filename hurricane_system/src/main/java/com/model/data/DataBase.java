@@ -45,23 +45,6 @@ public class DataBase {
         return instance;
     }
 
-<<<<<<< HEAD
-    public ArrayList<User> getUser(String username, String password){
-    ArrayList<User> matchingUsers = new ArrayList<>();
-
-    for (User user : users) {
-        if (user.getUsername().equals(username)
-                && user.getPassword().equals(password)) {
-            matchingUsers.add(user);
-        }
-    }
-
-    return matchingUsers;
-} 
-
-    public HashMap<UUID, Shelter> getShelters(){
-        return shelters;
-=======
     /**
      * Finds a user with the given username and password.
      *
@@ -93,7 +76,6 @@ public class DataBase {
      */
     public ArrayList<User> getUsers() {
         return users;
->>>>>>> 01f7c747a2101cbba62b22154c2be06c89d607c1
     }
 
     /**
