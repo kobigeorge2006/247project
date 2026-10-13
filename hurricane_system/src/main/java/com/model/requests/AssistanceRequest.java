@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 import com.model.user.*;
 import org.json.simple.JSONObject;
+import com.model.other.Location;
 
 /**
  * @author Avery Jones
@@ -17,15 +18,17 @@ public class AssistanceRequest
     private Severity severity;
     private RequestStatus status;
     private ArrayList<Message> messages;
+    private Location location;
 
-    public AssistanceRequest(UUID id, String contactInfo, String address, AidCategory aidCategory, Severity severity, RequestStatus status, ArrayList<Message> messages)
+    public AssistanceRequest(UUID id, String contactInfo, String address, AidCategory aidCategory, Severity severity, RequestStatus status, ArrayList<Message> messages, Location location)
     {
         this.id = id;
         this.contactInfo = contactInfo;
         this.address = address;
-        this.AidCategory = AidCategory;
+        this.AidCategory = aidCategory;
         this.status = status;
         this.messages = messages;
+        this.location = location;
     }
     public AssistanceRequest(JSONObject jsonAssistanceRequest) {
         this.id = UUID.fromString((String) jsonAssistanceRequest.get("id"));
@@ -35,6 +38,7 @@ public class AssistanceRequest
         this.severity = (Severity) jsonAssistanceRequest.get("severity");
         this.status = (RequestStatus) jsonAssistanceRequest.get("status");
         this.messages = (ArrayList<Message>) jsonAssistanceRequest.get("messages");
+        this.location = (Location) jsonAssistanceRequest.get("location");
     }
 
 
@@ -89,7 +93,12 @@ public class AssistanceRequest
         public void setMessages(ArrayList<Message> messages) {
             this.messages = messages;
         }
-        
+        public Location getLocation() {
+            return location;
+        }
+        public void setLocation(Location location) {
+            this.location = location;
+        }
 
     }
 

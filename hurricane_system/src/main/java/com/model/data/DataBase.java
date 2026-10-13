@@ -139,4 +139,7 @@ public class DataBase {
     public ArrayList<HurricaneEvent> getHurricaneEvents() {
         return hurricaneEvents;
     }
+    public void addAssistanceRequest(AssistanceRequest request){
+        assistanceRequests.add(request);
+    }
 }

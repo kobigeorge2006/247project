@@ -6,6 +6,7 @@ import com.model.other.Accommodation;
 import com.model.other.Shelter;
 import com.model.other.ShelterList;
 import com.model.other.ShelterStatus;
+import com.model.requests.AssistanceRequest;
 import com.model.user.User;
 import com.model.user.UserList;
 
@@ -176,6 +177,9 @@ public class HurricaneReliefSystem {
         shelter.updateInventory("Water", 30);
 
         return shelterList.addShelter(shelter);
+    }
+    ArrayList<AssistanceRequest> getAllAssistanceRequests() {
+        return  DataBase.getInstance().getAssistanceRequests();
     }
 
 }

@@ -1,11 +1,17 @@
 package com.model.user;
 import java.util.ArrayList;
 import java.util.UUID;
+
+
 import org.json.simple.JSONObject;
 
 import com.model.requests.AidCategory;
 import com.model.requests.AssistanceRequest;
+import com.model.requests.Message;
 import com.model.requests.RequestStatus;
+import com.model.data.DataBase;
+import com.model.requests.Severity;
+import com.model.other.Location;
 
 public class User {
     private String firstName;
@@ -16,6 +22,7 @@ public class User {
     private String phoneNumber;
     private ArrayList<String> requests;
     private UUID id;
+    private DataBase database;
 
     public User(String firstName, String lastName, String username, String password, String email, String phoneNumber, ArrayList<String> requests) {
         this.firstName = firstName;
@@ -26,6 +33,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.requests = requests;
         this.id = UUID.randomUUID();
+        this.database = DataBase.getInstance();
     }
     public User(JSONObject jsonUser) {
         this.firstName = (String) jsonUser.get("firstName");
@@ -37,33 +45,11 @@ public class User {
         this.requests = (ArrayList<String>) jsonUser.get("requests");
         this.id = UUID.fromString((String) jsonUser.get("id"));
     }
-
-    public void signIn(String userName, String password) {
-        // Implement sign-in logic here
-    }
-    public void signOut() {
-        // Implement sign-out logic here
-    }
-    public boolean addRequest(UUID id, String contactInfo, user user, String address, AidCategory aidCategry){
+    public void addRequest(UUID id, String contactInfo, String address, AidCategory aidCategory, Severity severity, RequestStatus status, ArrayList<Message> messages, Location location){
         // Implement request addition logic here
-    }
-    public boolean updateProfile(String firstName, String lastName, String email, String phoneNumber) {
-        // Implement profile update logic here
-    }
-    public boolean submitRequest(String contactInfo, String address, AidCategory aidCategory) {
-        // Implement request submission logic here
-    }
-    public ArrayList<AssistanceRequest> viewRequests() {
-        // Implement request viewing logic here
-    }
-    public boolean cancelRequest(UUID requestId) {
-        // Implement request cancellation logic here
-    }
-    public RequestStatus getRequestStatus(UUID requestId) {
-        // Implement request status checking logic here
-    }
-    public boolean updateContactInfo(String email, String phoneNumber) {
-        // Implement contact information update logic here
+        DataBase database = DataBase.getInstance();
+        AssistanceRequest request =  new AssistanceRequest(id,contactInfo, address, aidCategory, severity,status, messages, location);
+        database.addAssistanceRequest(request);
     }
     public String getFirstName() {
         return firstName;
