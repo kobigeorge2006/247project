@@ -44,6 +44,9 @@ public class DataBase {
 
         return instance;
     }
+    public ArrayList<User> getUsers (){
+        return users;
+    }
 
     public ArrayList<User> getUser(String username, String password){
     ArrayList<User> matchingUsers = new ArrayList<>();
@@ -126,6 +129,7 @@ public class DataBase {
     public void addHurricane(HurricaneEvent hurricane){
         hurricaneEvents.add(hurricane);
     }
+
     
 
 }

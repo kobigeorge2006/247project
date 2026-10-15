@@ -11,9 +11,9 @@ public class RegisteredUser{
     }
 
     //TODO
-    public RequestStatus trackRequest(UUID id){
+    public RequestStatus trackRequest(AssistanceRequest request){
         // Implement request tracking logic here
-        return id;
+        return request.getStatus();
     }
 
     public MedicalProfile getMedicalprofile() {

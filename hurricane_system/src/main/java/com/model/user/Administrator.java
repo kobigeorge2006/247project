@@ -36,11 +36,13 @@ public class Administrator extends User {
     public void viewVolunteers(){
         // Implement logic to view all volunteers
         // Need to add toString() to ValidatedVolunteer class to display volunteer information
-        for(User user : DataBase.getInstance().getUsers()){
+        ArrayList<User> allUsers = DataBase.getInstance().getUsers();
+        for(User user : allUsers){
             if(user.isVolunteer()){
                 System.out.println(user);
             }
     }
+}
     public void addShelter(Shelter shelter) {
         // Implement logic to add a shelter
         DataBase.getInstance().addShelter(shelter);
