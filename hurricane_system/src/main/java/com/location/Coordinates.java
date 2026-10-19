@@ -1,4 +1,4 @@
-package location;
+package com.model.location;
 
 public class Coordinates {
     private double latitude;

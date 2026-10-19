@@ -1,4 +1,4 @@
-package location;
+package com.model.location;
 
 public class Address {
     private String street;
