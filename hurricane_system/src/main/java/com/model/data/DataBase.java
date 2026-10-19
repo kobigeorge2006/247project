@@ -129,6 +129,10 @@ public class DataBase {
     public void addHurricane(HurricaneEvent hurricane){
         hurricaneEvents.add(hurricane);
     }
+    public void addShelter(Shelter shelter){
+        shelters.put(shelter.getId(), shelter);
+    }
+
 
     
 

@@ -66,11 +66,11 @@ public class HurricaneReliefSystem {
      */
     public boolean signUp(String firstName, String lastName,
                           String username, String password,
-                          String email, String phoneNumber) {
+                          String email,boolean volunteer, String phoneNumber) {
 
         User newUser = userList.signUp(
                 firstName, lastName, username,
-                password, email, phoneNumber
+                password, email,volunteer, phoneNumber
         );
 
         if (newUser == null) {

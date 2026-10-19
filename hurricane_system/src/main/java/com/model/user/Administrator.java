@@ -43,9 +43,9 @@ public class Administrator extends User {
             }
     }
 }
-    public void addShelter(Shelter shelter) {
-        // Implement logic to add a shelter
-        DataBase.getInstance().addShelter(shelter);
+    public void addShelter(Shelter shelter){
+        DataBase database = DataBase.getInstance();
+        database.addShelter(shelter);
     }
     public Shelter getShelter() {
         return shelter;

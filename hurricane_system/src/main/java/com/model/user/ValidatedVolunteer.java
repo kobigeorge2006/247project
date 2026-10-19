@@ -2,6 +2,7 @@ package com.model.user;
 import java.util.ArrayList;
 import java.util.UUID;
 import com.model.requests.AssistanceRequest;
+import com.model.requests.RequestStatus;
 public class ValidatedVolunteer extends User{
 
     private ArrayList<Skill> skills;
@@ -12,11 +13,10 @@ public class ValidatedVolunteer extends User{
 
         this.skills = skills;
     }
-    //TODO
-    public boolean updateRequestStatus() {
+    //TODOs
+    public void updateRequestStatus(AssistanceRequest request, RequestStatus status) {
         // Implement request status update logic here
-               
-        
+        request.setStatus(status);
     }
 
     public ArrayList<Skill> getSkills() {
