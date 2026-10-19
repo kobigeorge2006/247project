@@ -40,7 +40,7 @@ public class HurricaneUI {
         System.out.println("\nScenario 2: Signup");
 
         if (system.signUp("Amy", "Smith", "asmith", "12345",
-                "amy@email.com", "8035551234")) {
+                "amy@email.com",true,"8035551234")) {
             System.out.println("Account created successfully.");
         } else {
             System.out.println("Account already exists.");
