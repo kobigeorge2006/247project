@@ -33,7 +33,6 @@ public class User {
     private UUID id;
     private DataBase database;
 
-    public User(String firstName, String lastName, String username, String password, String email, String phoneNumber, boolean volunteer, ArrayList<String> requests) {
     /**
      * Creates a new user.
      *
@@ -46,7 +45,7 @@ public class User {
      * @param requests the user's requests
      */
     public User(String firstName, String lastName, String username,
-                String password, String email, String phoneNumber,
+                String password, String email, String phoneNumber, boolean volunteer,
                 ArrayList<String> requests) {
 
         this.firstName = firstName;

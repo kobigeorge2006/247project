@@ -7,8 +7,6 @@ module com.relief {
     requires com.fasterxml.jackson.databind;
     requires javafx.web;
 
-<<<<<<< HEAD
-
     opens com.model to javafx.fxml;
     opens com.model.frontend to javafx.fxml;
 
@@ -19,9 +17,3 @@ module com.relief {
     exports com.model.requests;
     exports com.model.user;
 }
-=======
-    opens com.model.frontend to javafx.fxml;
-    exports com.model.frontend;
-    exports com.model;
-}
->>>>>>> 3b578d5e223b5b112ba2e059c26a7ddaaeee880d
