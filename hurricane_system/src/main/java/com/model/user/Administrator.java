@@ -4,19 +4,18 @@ import java.util.HashMap;
 import com.model.requests.*;
 import com.model.data.DataBase;
 import com.model.other.*;
-import com.model.user.*;
 
 import javafx.scene.chart.PieChart.Data;
 
 
 public class Administrator extends User {
     private final Shelter shelter;
-
     public Administrator(String firstName, String lastName, String username, String password, String email, String phoneNumber, Shelter shelter) {
 
         super(firstName, lastName, username, password, email, phoneNumber, false);
 
         this.shelter = shelter;
+    
     }
     public void addVolunteer(ValidatedVolunteer volunteer) {
         DataBase.getInstance().addUser(volunteer);
@@ -47,6 +46,7 @@ public class Administrator extends User {
         DataBase database = DataBase.getInstance();
         database.addShelter(shelter);
     }
+
     public Shelter getShelter() {
         return shelter;
     }

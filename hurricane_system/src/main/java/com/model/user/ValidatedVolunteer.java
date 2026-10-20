@@ -1,4 +1,5 @@
 package com.model.user;
+
 import java.util.ArrayList;
 import java.util.UUID;
 import com.model.requests.AssistanceRequest;
@@ -26,5 +27,4 @@ public class ValidatedVolunteer extends User{
     public void setSkills(ArrayList<Skill> skills) {
         this.skills = skills;
     }
-    
 }
