@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import com.location.Address;
+
 /**
  * JavaFX App
  */
@@ -17,9 +19,58 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        FXMLLoader loader = new FXMLLoader(
+                App.class.getResource("/com/model/frontend/map_view.fxml")
+        );
+
+        Parent root = loader.load();
+        MapController controller = loader.getController();
+
+        Address userAddress = new Address(
+                "1 Vendue Range",
+                "Charleston",
+                "SC",
+                "29401"
+        );
+
+        Address[] addresses = {
+                new Address(
+                        "1 Vendue Range",
+                        "Charleston",
+                        "SC",
+                        "29401"
+                ),
+
+                new Address(
+                        "2950 Carner Avenue",
+                        "North Charleston",
+                        "SC",
+                        "29405"
+                ),
+
+                new Address(
+                        "3841 Leeds Avenue",
+                        "North Charleston",
+                        "SC",
+                        "29405"
+                ),
+
+                new Address(
+                        "3625 Ashley Phosphate Road",
+                        "North Charleston",
+                        "SC",
+                        "29418"
+                )
+        };
+
+        scene = new Scene(root, 900, 650);
         stage.setScene(scene);
         stage.show();
+
+        //controller.showAddressOnMap(userAddress);
+        //controller.showAddressesOnMap(addresses);
+
+        controller.showRouteOnMap(userAddress,addresses[1]);
     }
 
     static void setRoot(String fxml) throws IOException {
@@ -27,7 +78,8 @@ public class App extends Application {
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(
+                App.class.getResource("/com/relief/" + fxml + ".fxml"));
         return fxmlLoader.load();
     }
 
