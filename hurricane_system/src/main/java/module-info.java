@@ -3,6 +3,7 @@ module com.relief {
     requires javafx.fxml;
     requires json.simple;
 
-    opens com.relief to javafx.fxml;
-    exports com.relief;
+    opens com.model.frontend to javafx.fxml;
+    exports com.model.frontend;
+    exports com.model;
 }

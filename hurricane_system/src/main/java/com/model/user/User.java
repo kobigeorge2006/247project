@@ -1,8 +1,9 @@
 package com.model.user;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
-
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.model.requests.AidCategory;
@@ -13,7 +14,14 @@ import com.model.data.DataBase;
 import com.model.requests.Severity;
 import com.model.other.Location;
 
+
+
+
+/**
+ * Stores information about a user in the Hurricane Relief System.
+ */
 public class User {
+
     private String firstName;
     private String lastName;
     private String username;
@@ -26,6 +34,21 @@ public class User {
     private DataBase database;
 
     public User(String firstName, String lastName, String username, String password, String email, String phoneNumber, boolean volunteer, ArrayList<String> requests) {
+    /**
+     * Creates a new user.
+     *
+     * @param firstName the user's first name
+     * @param lastName the user's last name
+     * @param username the user's username
+     * @param password the user's password
+     * @param email the user's email
+     * @param phoneNumber the user's phone number
+     * @param requests the user's requests
+     */
+    public User(String firstName, String lastName, String username,
+                String password, String email, String phoneNumber,
+                ArrayList<String> requests) {
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -56,8 +79,21 @@ public class User {
         this.password = (String) jsonUser.get("password");
         this.email = (String) jsonUser.get("email");
         this.phoneNumber = (String) jsonUser.get("phoneNumber");
-        this.requests = (ArrayList<String>) jsonUser.get("requests");
-        this.id = UUID.fromString((String) jsonUser.get("id"));
+
+        this.requests = new ArrayList<>();
+
+        JSONArray jsonRequests = (JSONArray) jsonUser.get("requests");
+
+        if (jsonRequests != null) {
+            for (Object request : jsonRequests) {
+                this.requests.add((String) request);
+            }
+        }
+
+        String savedId = (String) jsonUser.get("id");
+        this.id = savedId == null
+                ? UUID.randomUUID()
+                : UUID.fromString(savedId);
     }
 
     public void addRequest(UUID id, String contactInfo, User user, String address, AidCategory aidCategory, Severity severity, RequestStatus status, ArrayList<Message> messages,Location location ){
@@ -66,51 +102,67 @@ public class User {
         AssistanceRequest request =  new AssistanceRequest(id,contactInfo, address, aidCategory, severity,status, messages, location);
         database.addAssistanceRequest(request);
     }
+
     public String getFirstName() {
         return firstName;
     }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
     public String getLastName() {
         return lastName;
     }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
     public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
+
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
+
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
     public ArrayList<String> getRequests() {
         return requests;
     }
+
     public void setRequests(ArrayList<String> requests) {
         this.requests = requests;
     }
+
     public UUID getId() {
         return id;
     }
+
     public void setId(UUID id) {
         this.id = id;
     }
