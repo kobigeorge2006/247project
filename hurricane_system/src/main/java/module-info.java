@@ -4,6 +4,7 @@ module com.relief {
     requires json.simple;
     requires java.net.http;
     requires com.fasterxml.jackson.databind;
+    requires javafx.web;
 
 
     opens com.model to avafx.fxml;
