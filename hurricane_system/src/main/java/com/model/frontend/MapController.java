@@ -6,10 +6,14 @@ import javafx.animation.PauseTransition;
 import javafx.concurrent.Task;
 import javafx.concurrent.Worker;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
 
 public class MapController {
+
+    @FXML
+    private Label statusLabel;
 
     @FXML
     private WebView webView;
@@ -18,6 +22,7 @@ public class MapController {
 
     @FXML
     private void initialize() {
+        loadMapPage();
         webView.getEngine().getLoadWorker().stateProperty().addListener(
                 (observable, oldState, newState) -> {
                     if (newState == Worker.State.SUCCEEDED) {
@@ -79,9 +84,14 @@ public class MapController {
         });
 
         task.setOnFailed(event -> {
+            statusLabel.setText(
+                    "Could not load locations: "
+                            + task.getException().getMessage()
+            );
             task.getException().printStackTrace();
         });
 
+        statusLabel.setText("Looking up locations...");
         Thread backgroundThread = new Thread(task);
         backgroundThread.setDaemon(true);
         backgroundThread.start();
@@ -160,14 +170,20 @@ public class MapController {
             };
 
             routePointsToShow = route.getRoutePoints();
+            statusLabel.setText("Route loaded.");
 
             loadMapPage();
         });
 
         task.setOnFailed(event -> {
+            statusLabel.setText(
+                    "Could not calculate route: "
+                            + task.getException().getMessage()
+            );
             task.getException().printStackTrace();
         });
 
+        statusLabel.setText("Calculating route...");
         Thread backgroundThread = new Thread(task);
         backgroundThread.setDaemon(true);
         backgroundThread.start();
