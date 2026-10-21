@@ -136,4 +136,8 @@ public class HurricaneUI {
         HurricaneUI ui = new HurricaneUI();
         ui.run();
     }
+    //Relief request
+    public void scenerio7(){
+        
+    }
 }

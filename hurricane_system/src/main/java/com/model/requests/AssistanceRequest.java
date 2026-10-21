@@ -19,8 +19,9 @@ public class AssistanceRequest
     private RequestStatus status;
     private ArrayList<Message> messages;
     private Location location;
+    private Boolean hasPet;
 
-    public AssistanceRequest(UUID id, String contactInfo, String address, AidCategory aidCategory, Severity severity, RequestStatus status, ArrayList<Message> messages, Location location)
+    public AssistanceRequest(UUID id, String contactInfo, String address, AidCategory aidCategory, Severity severity, RequestStatus status, ArrayList<Message> messages, Location location, Boolean hasPet)
     {
         this.id = id;
         this.contactInfo = contactInfo;
@@ -29,6 +30,7 @@ public class AssistanceRequest
         this.status = status;
         this.messages = messages;
         this.location = location;
+        this.hasPet = hasPet;
     }
     public AssistanceRequest(JSONObject jsonAssistanceRequest) {
         this.id = UUID.fromString((String) jsonAssistanceRequest.get("id"));
@@ -39,6 +41,7 @@ public class AssistanceRequest
         this.status = (RequestStatus) jsonAssistanceRequest.get("status");
         this.messages = (ArrayList<Message>) jsonAssistanceRequest.get("messages");
         this.location = (Location) jsonAssistanceRequest.get("location");
+        this.hasPet = (Boolean) jsonAssistanceRequest.get("hasPet");
     }
 
 
