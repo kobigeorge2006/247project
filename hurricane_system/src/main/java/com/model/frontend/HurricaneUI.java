@@ -3,6 +3,7 @@ package com.model.frontend;
 import com.model.HurricaneReliefSystem;
 import com.model.data.DataBase;
 import com.model.other.Shelter;
+import com.model.user.Administrator;
 import java.util.ArrayList;
 import java.util.UUID;
 import com.location.Address;
@@ -137,15 +138,80 @@ public class HurricaneUI {
 
         system.logOut();
     }
+
+    // Scenario 7: Shelter manager checks in the Carter family and Buddy
+    public void scenarioCheckInFamily() {
+        System.out.println("\nScenario 7: Check the Carter Family into a Shelter");
+
+        Shelter shelter = null;
+        for (Shelter candidate : system.findShelters("29201")) {
+            if ("Emergency Relief Shelter".equalsIgnoreCase(candidate.getName())) {
+                shelter = candidate;
+                break;
+            }
+        }
+        if (shelter == null) {
+            System.out.println("Shelter not found.");
+            return;
+        }
+
+        Administrator felix = new Administrator(
+                "Felix", "Manager", "felix", "demo",
+                "felix@example.com", "8035550000", shelter);
+        System.out.println("Felix logged in as the shelter manager.");
+        ArrayList<String> occupants = new ArrayList<>();
+
+        System.out.println("Shelter: " + shelter.getName());
+        System.out.println("Location: " + shelter.getLocation().getStreetAddress()
+                + ", " + shelter.getLocation().getZipCode());
+        System.out.println("Total capacity: " + shelter.getCapacity());
+        System.out.println("Current occupancy: " + occupants.size());
+        System.out.println("Available spaces: " + shelter.getCapacity());
+        System.out.println("Occupants: " + occupants);
+
+        if (shelter.getCapacity() < 3) {
+            System.out.println("Not enough capacity for the Carter family.");
+            return;
+        }
+
+        occupants.add("John Carter");
+        occupants.add("Sophie Carter");
+        occupants.add("Carter family member");
+
+        System.out.println("Felix checked in three family members and Buddy.");
+        System.out.println("Current occupancy: " + occupants.size());
+        System.out.println("Available spaces: " + (shelter.getCapacity() - occupants.size()));
+        System.out.println("Occupants: " + occupants);
+        System.out.println("Accompanying pet: Buddy");
+
+        UUID requestId = UUID.fromString(
+                "7e8a2c49-6f13-4b95-a0d7-3c826f914e52");
+        for (AssistanceRequest request : DataBase.getInstance().getAssistanceRequests()) {
+            if (requestId.equals(request.getId()) && felix.getShelter() == shelter) {
+                request.updateStatus(RequestStatus.COMPLETED);
+                System.out.println("Relief request marked Complete.");
+                break;
+            }
+        }
+    }
+
     public void scenarioScarlett(){
         HurricaneReliefSystem system = new HurricaneReliefSystem();
         DataBase db = DataBase.getInstance();
-        system.signUp("John", "Carter", "JCarter", "SophieCarter", "JCarter@gmail.com", false, "301-123-4565");
+        if(system.signUp("John", "Carter", "JCarter", "SophieCarter", "JCarter@gmail.com", false, "301-123-4565")){
+            System.out.println("Mr Carter signed up");
+        }
+        if(system.logIn("JCarter", "SophieCarter")){
+            System.out.println("Log in successful");
+        }
+        
         db.addAssistanceRequest(UUID.fromString("7e8a2c49-6f13-4b95-a0d7-3c826f914e52"), "JCarter@gmail.com", new Address("247 Palmetto Harbor Lane", "Charleston", "SC", "29403"), AidCategory.MEDICAL,Severity.HIGH, RequestStatus.SUBMITTED, "My daughter sophie needs medical assistance my family of 4 and my dog need transportation to a shelter too", new Address("247 Palmetto Harbor Lane", "Charleston", "SC", "29403"), true );
     }
 
     public static void main(String[] args) {
         HurricaneUI ui = new HurricaneUI();
         ui.run();
+        ui.scenarioScarlett();
+        ui.scenarioCheckInFamily();
     }
 }
