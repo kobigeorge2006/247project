@@ -2,6 +2,7 @@ package com.model.frontend;
 
 import com.model.HurricaneReliefSystem;
 import com.model.data.DataBase;
+import com.model.data.DataWriter;
 import com.model.other.Shelter;
 import com.model.user.Administrator;
 import java.util.ArrayList;
@@ -189,6 +190,7 @@ public class HurricaneUI {
         for (AssistanceRequest request : DataBase.getInstance().getAssistanceRequests()) {
             if (requestId.equals(request.getId()) && felix.getShelter() == shelter) {
                 request.updateStatus(RequestStatus.COMPLETED);
+                DataWriter.saveRequests(DataBase.getInstance().getAssistanceRequests());
                 System.out.println("Relief request marked Complete.");
                 break;
             }

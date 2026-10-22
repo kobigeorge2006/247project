@@ -134,16 +134,30 @@ public class DataBase {
     }
 
     public void addAssistanceRequest(AssistanceRequest request) {
-        if (request != null) {
-            assistanceRequests.add(request);
+        if (request == null) {
+            return;
         }
+
+        for (int i = 0; i < assistanceRequests.size(); i++) {
+            AssistanceRequest existing = assistanceRequests.get(i);
+            if (existing != null
+                    && request.getId() != null
+                    && request.getId().equals(existing.getId())) {
+                assistanceRequests.set(i, request);
+                DataWriter.saveRequests(assistanceRequests);
+                return;
+            }
+        }
+
+        assistanceRequests.add(request);
+        DataWriter.saveRequests(assistanceRequests);
     }
 
     public void addAssistanceRequest(UUID id, String contactInfo, Address address,
                                    AidCategory aidCategory, Severity severity,
                                    RequestStatus status, String message,
                                    Address location, boolean hasPet) {
-        assistanceRequests.add(new AssistanceRequest(id, contactInfo, address,
+        addAssistanceRequest(new AssistanceRequest(id, contactInfo, address,
                 aidCategory, severity, status, message, location, hasPet));
     }
 
