@@ -170,7 +170,7 @@ public class HurricaneUI {
         System.out.println("Available spaces: " + shelter.getCapacity());
         System.out.println("Occupants: " + occupants);
 
-        if (shelter.getCapacity() < 3) {
+        if (shelter.getCapacity() < 4) {
             System.out.println("Not enough capacity for the Carter family.");
             return;
         }
