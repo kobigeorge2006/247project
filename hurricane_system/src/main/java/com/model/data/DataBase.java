@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-import com.model.user.*;
-import com.model.other.*;
-import com.model.requests.*;
+import com.location.Address;
+import com.model.other.HurricaneEvent;
+import com.model.other.Shelter;
+import com.model.requests.AidCategory;
+import com.model.requests.AssistanceRequest;
+import com.model.requests.RequestStatus;
+import com.model.requests.Severity;
+import com.model.user.User;
 
 /**
  * Stores the data used by the Hurricane Relief System.
@@ -44,22 +49,26 @@ public class DataBase {
 
         return instance;
     }
-    public ArrayList<User> getUsers (){
+
+    public ArrayList<User> getUsers() {
         return users;
     }
 
-    public ArrayList<User> getUser(String username, String password){
-    ArrayList<User> matchingUsers = new ArrayList<>();
+    public ArrayList<User> getUser(String username, String password) {
+        ArrayList<User> matchingUsers = new ArrayList<>();
 
-    for (User user : users) {
-        if (user.getUsername().equals(username)
-                && user.getPassword().equals(password)) {
-            matchingUsers.add(user);
+        for (User user : users) {
+            if (user != null
+                    && user.getUsername() != null
+                    && user.getPassword() != null
+                    && user.getUsername().equals(username)
+                    && user.getPassword().equals(password)) {
+                matchingUsers.add(user);
+            }
         }
-    }
 
-    return matchingUsers;
-} 
+        return matchingUsers;
+    }
 
 
     /**
@@ -123,17 +132,30 @@ public class DataBase {
     public ArrayList<HurricaneEvent> getHurricaneEvents() {
         return hurricaneEvents;
     }
-    public void addAssistanceRequest(AssistanceRequest request){
-        assistanceRequests.add(request);
-    }
-    public void addHurricane(HurricaneEvent hurricane){
-        hurricaneEvents.add(hurricane);
-    }
-    public void addShelter(Shelter shelter){
-        shelters.put(shelter.getId(), shelter);
+
+    public void addAssistanceRequest(AssistanceRequest request) {
+        if (request != null) {
+            assistanceRequests.add(request);
+        }
     }
 
+    public void addAssistanceRequest(UUID id, String contactInfo, Address address,
+                                   AidCategory aidCategory, Severity severity,
+                                   RequestStatus status, String message,
+                                   Address location, boolean hasPet) {
+        assistanceRequests.add(new AssistanceRequest(id, contactInfo, address,
+                aidCategory, severity, status, message, location, hasPet));
+    }
 
-    
+    public void addHurricane(HurricaneEvent hurricane) {
+        if (hurricane != null) {
+            hurricaneEvents.add(hurricane);
+        }
+    }
 
+    public void addShelter(Shelter shelter) {
+        if (shelter != null && shelter.getId() != null) {
+            shelters.put(shelter.getId(), shelter);
+        }
+    }
 }

@@ -107,26 +107,36 @@ public class DataWriter {
     public static void saveRequests(ArrayList<AssistanceRequest> requests) {
         JSONArray requestsArray = new JSONArray();
 
+        if (requests == null) {
+            return;
+        }
+
         for (AssistanceRequest request : requests) {
+            if (request == null) {
+                continue;
+            }
+
             JSONObject requestObject = new JSONObject();
 
-            requestObject.put("id", request.getId().toString());
+            requestObject.put("id", request.getId() == null ? "" : request.getId().toString());
             requestObject.put("contactInfo", request.getContactInfo());
             requestObject.put("address", request.getAddress());
-            requestObject.put("aidCategory", request.getAidCategory().toString());
-            requestObject.put("severity", request.getSeverity().toString());
-            requestObject.put("status", request.getStatus().toString());
+            requestObject.put("aidCategory", request.getAidCategory() == null ? "" : request.getAidCategory().toString());
+            requestObject.put("severity", request.getSeverity() == null ? "" : request.getSeverity().toString());
+            requestObject.put("status", request.getStatus() == null ? "" : request.getStatus().toString());
 
             JSONArray messagesArray = new JSONArray();
 
             if (request.getMessages() != null) {
                 for (Message message : request.getMessages()) {
+                    if (message == null) {
+                        continue;
+                    }
+
                     JSONObject messageObject = new JSONObject();
 
-                    messageObject.put("sender",
-                    message.getSender().getUsername());
+                    messageObject.put("sender", message.getSender() == null ? "" : message.getSender().getUsername());
                     messageObject.put("message", message.getBody());
-
                     messagesArray.add(messageObject);
                 }
             }

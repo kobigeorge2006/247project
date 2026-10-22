@@ -10,6 +10,7 @@ import com.model.requests.AidCategory;
 import com.model.requests.AssistanceRequest;
 import com.model.requests.Message;
 import com.model.requests.RequestStatus;
+import com.location.Address;
 import com.model.data.DataBase;
 import com.model.requests.Severity;
 import com.model.other.Location;
@@ -95,10 +96,10 @@ public class User {
                 : UUID.fromString(savedId);
     }
 
-    public void addRequest(UUID id, String contactInfo, User user, String address, AidCategory aidCategory, Severity severity, RequestStatus status, ArrayList<Message> messages,Location location ){
+    public void addRequest(UUID id, String contactInfo, User user, Address address, AidCategory aidCategory, Severity severity, RequestStatus status, String message,Address location, boolean hasPet ){
         // Implement request addition logic here
         DataBase database = DataBase.getInstance();
-        AssistanceRequest request =  new AssistanceRequest(id,contactInfo, address, aidCategory, severity,status, messages, location);
+        AssistanceRequest request =  new AssistanceRequest(id,contactInfo, address, aidCategory, severity,status, message, location, hasPet);
         database.addAssistanceRequest(request);
     }
 

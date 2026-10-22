@@ -1,8 +1,14 @@
 package com.model.frontend;
 
 import com.model.HurricaneReliefSystem;
+import com.model.data.DataBase;
 import com.model.other.Shelter;
 import java.util.ArrayList;
+import java.util.UUID;
+import com.location.Address;
+
+import com.model.requests.*;
+
 
 /**
  * Runs scenarios for the Hurricane Relief System.
@@ -131,13 +137,15 @@ public class HurricaneUI {
 
         system.logOut();
     }
+    public void scenarioScarlett(){
+        HurricaneReliefSystem system = new HurricaneReliefSystem();
+        DataBase db = DataBase.getInstance();
+        system.signUp("John", "Carter", "JCarter", "SophieCarter", "JCarter@gmail.com", false, "301-123-4565");
+        db.addAssistanceRequest(UUID.fromString("7e8a2c49-6f13-4b95-a0d7-3c826f914e52"), "JCarter@gmail.com", new Address("247 Palmetto Harbor Lane", "Charleston", "SC", "29403"), AidCategory.MEDICAL,Severity.HIGH, RequestStatus.SUBMITTED, "My daughter sophie needs medical assistance my family of 4 and my dog need transportation to a shelter too", new Address("247 Palmetto Harbor Lane", "Charleston", "SC", "29403"), true );
+    }
 
     public static void main(String[] args) {
         HurricaneUI ui = new HurricaneUI();
         ui.run();
-    }
-    //Relief request
-    public void scenerio7(){
-        
     }
 }
