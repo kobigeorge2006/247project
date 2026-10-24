@@ -142,7 +142,6 @@ public class HurricaneUI {
 
     // Scenario 7: Shelter manager checks in the Carter family and Buddy
     public void scenarioCheckInFamily() {
-        System.out.println("\nScenario 7: Check the Carter Family into a Shelter");
 
         Shelter shelter = null;
         for (Shelter candidate : system.findShelters("29201")) {
@@ -162,13 +161,6 @@ public class HurricaneUI {
         System.out.println("Felix logged in as the shelter manager.");
         ArrayList<String> occupants = new ArrayList<>();
 
-        System.out.println("Shelter: " + shelter.getName());
-        System.out.println("Location: " + shelter.getLocation().getStreetAddress()
-                + ", " + shelter.getLocation().getZipCode());
-        System.out.println("Total capacity: " + shelter.getCapacity());
-        System.out.println("Current occupancy: " + occupants.size());
-        System.out.println("Available spaces: " + shelter.getCapacity());
-        System.out.println("Occupants: " + occupants);
 
         if (shelter.getCapacity() < 4) {
             System.out.println("Not enough capacity for the Carter family.");
