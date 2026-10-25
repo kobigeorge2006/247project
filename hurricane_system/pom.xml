@@ -55,6 +55,12 @@
     </dependencies>
 
     <build>
+        <sourceDirectory>../src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>../src/main/resources</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -70,7 +76,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>com.relief/com.model.frontend.App</mainClass>
+                    <mainClass>com.relief/com.frontend.App</mainClass>
                 </configuration>
             </plugin>
         </plugins>
