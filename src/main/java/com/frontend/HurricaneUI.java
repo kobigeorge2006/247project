@@ -45,6 +45,36 @@ public class HurricaneUI {
 
 
 
+    public void scenarioScarlett(){
+        HurricaneReliefSystem system = new HurricaneReliefSystem();
+        DataBase db = DataBase.getInstance();
+        if(system.signUp("John", "Carter", "JCarter", "SophieCarter", "JCarter@gmail.com", false, "301-123-4565")){
+            System.out.println("Mr Carter signed up");
+        }
+        if(system.logIn("JCarter", "SophieCarter")){
+            System.out.println("Log in successful");
+        }
+
+        boolean requestExists = false;
+        for (AssistanceRequest request : db.getAssistanceRequests()) {
+            if (CARTER_REQUEST_ID.equals(request.getId())) {
+                requestExists = true;
+                break;
+            }
+        }
+        if (!requestExists) {
+            db.addAssistanceRequest(CARTER_REQUEST_ID, "JCarter@gmail.com",
+                    new Address("247 Palmetto Harbor Lane", "Charleston",
+                            "SC", "29403"),
+                    AidCategory.MEDICAL, Severity.HIGH,
+                    RequestStatus.SUBMITTED,
+                    "My daughter sophie needs medical assistance my family "
+                            + "of 4 and my dog need transportation to a shelter too",
+                    new Address("247 Palmetto Harbor Lane", "Charleston",
+                            "SC", "29403"),
+                    true);
+        }
+    }
 
     // Scenario 2: Rosa Delgado signs up as a volunteer and views her dashboard
     public void scenarioRosa() {
@@ -274,36 +304,6 @@ public class HurricaneUI {
         System.out.println("Check-in saved to " + CHECKIN_FILE);
     }
 
-    public void scenarioScarlett(){
-        HurricaneReliefSystem system = new HurricaneReliefSystem();
-        DataBase db = DataBase.getInstance();
-        if(system.signUp("John", "Carter", "JCarter", "SophieCarter", "JCarter@gmail.com", false, "301-123-4565")){
-            System.out.println("Mr Carter signed up");
-        }
-        if(system.logIn("JCarter", "SophieCarter")){
-            System.out.println("Log in successful");
-        }
-
-        boolean requestExists = false;
-        for (AssistanceRequest request : db.getAssistanceRequests()) {
-            if (CARTER_REQUEST_ID.equals(request.getId())) {
-                requestExists = true;
-                break;
-            }
-        }
-        if (!requestExists) {
-            db.addAssistanceRequest(CARTER_REQUEST_ID, "JCarter@gmail.com",
-                    new Address("247 Palmetto Harbor Lane", "Charleston",
-                            "SC", "29403"),
-                    AidCategory.MEDICAL, Severity.HIGH,
-                    RequestStatus.SUBMITTED,
-                    "My daughter sophie needs medical assistance my family "
-                            + "of 4 and my dog need transportation to a shelter too",
-                    new Address("247 Palmetto Harbor Lane", "Charleston",
-                            "SC", "29403"),
-                    true);
-        }
-    }
 
     private static Path jsonDirectory() {
         Path local = Paths.get("json");
