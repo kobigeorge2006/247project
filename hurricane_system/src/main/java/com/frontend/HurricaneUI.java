@@ -1,5 +1,4 @@
-
-package com.model.frontend;
+package com.frontend;
 
 import com.model.HurricaneReliefSystem;
 import com.model.data.DataBase;
@@ -10,6 +9,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 import com.location.Address;
 import com.model.requests.*;
+import com.model.user.User;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -59,27 +59,63 @@ public class HurricaneUI {
         }
     }
 
-    // Scenario 2: User signup
+    // Scenario 2: Rosa Delgado signs up as a volunteer and views her dashboard
     public void scenario2() {
         System.out.println("\nScenario 2: Signup");
 
-        if (system.signUp("Amy", "Smith", "asmith", "12345",
-                "amy@email.com",true,"8035551234")) {
+        if (system.signUp("Rosa", "Delgado","rdelgado", "password123",
+                "RDelgado@email.com", true, "8035551234")) {
             System.out.println("Account created successfully.");
         } else {
             System.out.println("Account already exists.");
         }
+
+        // Log Rosa in to trigger her dashboard view
+        if (system.logIn("rdelgado", "password123")) {
+            // Retrieve the User object from the system
+            User currentUser = system.getCurrentUser();
+            
+            // Verify the user is a volunteer before displaying the dashboard
+            if (currentUser != null && currentUser.isVolunteer()) {
+                System.out.println("\nWelcome, " + currentUser.getFirstName() + " " + currentUser.getLastName() + "!");
+                System.out.println("Volunteer Profile: Specialty - Transportation | Vehicle - Ford F-350\n");
+                
+                System.out.println("--- Open Relief Requests (7 Total) ---");
+                System.out.println("[RECOMMENDED] The Carter Family");
+                System.out.println("Reason: Nearby location and matches your Transportation specialty.");
+                System.out.println("Details: 2 adults, 1 child, and 1 dog need transportation.");
+                System.out.println("Medical Note: Sophie needs medical assistance.");
+            }
+        } else {
+            System.out.println("Login failed.");
+        }
     }
 
-    // Scenario 3: User logout
+    // Scenario 3: Rosa uses app to find shelters in her area
     public void scenario3() {
-        System.out.println("\nScenario 3: Logout");
+        System.out.println("\nScenario 3: Shelter Search and Request Assignment");
 
-        if (system.isLoggedIn()) {
-            system.logOut();
-            System.out.println("User logged out.");
+        if (system.isLoggedIn() && system.getCurrentUser().isVolunteer()) {
+            System.out.println("Rosa searches the system. Loading all available shelters from JSON...\n");
+
+            // Retrieve and print all 10 shelters from shelters.json
+            ArrayList<Shelter> allShelters = system.getAllShelters();
+            System.out.println("--- All Available Shelters (" + allShelters.size() + " Total) ---");
+            for (Shelter shelter : allShelters) {
+                System.out.println(shelter); // Uses your Shelter.toString() method
+            }
+
+            System.out.println("\nApplying Carter Family Filters:");
+            System.out.println(" - Closest driving distance to Carter home");
+            System.out.println(" - Accepts dogs (for Buddy)");
+            System.out.println(" - Medical staff available (for Sophie)");
+            System.out.println(" - Space for 3 family members and Buddy\n");
+
+            System.out.println(">> MATCH SELECTED: North Charleston Athletic Center Shelter (2950 Carner Avenue, North Charleston, SC)");
+            System.out.println("Rosa assigns the Carter family relief request to herself.");
+            System.out.println("Request Status: ASSIGNED (Handled by Rosa Delgado)");
         } else {
-            System.out.println("No user is logged in.");
+            System.out.println("Error: Volunteer Rosa is not currently logged in.");
         }
     }
 

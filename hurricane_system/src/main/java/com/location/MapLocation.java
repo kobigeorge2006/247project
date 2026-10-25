@@ -1,5 +1,9 @@
 package com.location;
 
+/*
+ * Represents one address after it has been converted
+ * into latitude and longitude coordinates.
+ */
 public class MapLocation {
 
     private final Address address;
@@ -21,5 +25,5 @@ public class MapLocation {
     @Override
     public String toString() {
         return address.toString();
-    }    
+    }
 }

@@ -182,4 +182,9 @@ public class HurricaneReliefSystem {
         return  DataBase.getInstance().getAssistanceRequests();
     }
 
+    public ArrayList<Shelter> getAllShelters() {
+        return shelterList.getAllShelters();
+    }
+
+
 }

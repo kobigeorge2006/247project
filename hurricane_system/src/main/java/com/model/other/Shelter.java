@@ -171,4 +171,15 @@ public class Shelter {
     public void setInventory(HashMap<String, Integer> inventory) {
         this.inventory = inventory;
     }
+
+    @Override 
+    public String toString(){
+        return "Shelter{" +
+                ", name='" + name + '\'' +
+                ", location=" + location +
+                ", capacity=" + capacity +
+                ", status=" + status +
+                ", accommodations=" + accommodations +
+                '}';
+    }
 }
