@@ -46,6 +46,7 @@ public class UserList {
         User newUser = new User(firstName, lastName, username, password, email, phoneNumber, volunteer, new ArrayList<String>());
 
         users.add(newUser);
+        DataWriter.saveUsers(users);
         return newUser;
     }
 
