@@ -150,6 +150,8 @@ public class DataWriter {
                         request.getLocation() == null
                         ? null : request.getLocation().toString());
                 putJsonValue(requestObject, "hasPet", request.getHasPet());
+                putJsonValue(requestObject, "assignedVolunteer",
+                        request.getAssignedVolunteerUsername());
 
                 JSONArray messagesArray = new JSONArray();
 
