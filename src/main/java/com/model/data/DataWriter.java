@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -46,24 +47,24 @@ public class DataWriter {
 
                 JSONObject userObject = new JSONObject();
 
-                userObject.put("firstName", user.getFirstName());
-                userObject.put("lastName", user.getLastName());
-                userObject.put("username", user.getUsername());
-                userObject.put("password", user.getPassword());
-                userObject.put("email", user.getEmail());
-                userObject.put("phoneNumber", user.getPhoneNumber());
-                userObject.put("volunteer", user.isVolunteer());
-                userObject.put("id", user.getId() == null
+                putJsonValue(userObject, "firstName", user.getFirstName());
+                putJsonValue(userObject, "lastName", user.getLastName());
+                putJsonValue(userObject, "username", user.getUsername());
+                putJsonValue(userObject, "password", user.getPassword());
+                putJsonValue(userObject, "email", user.getEmail());
+                putJsonValue(userObject, "phoneNumber", user.getPhoneNumber());
+                putJsonValue(userObject, "volunteer", user.isVolunteer());
+                putJsonValue(userObject, "id", user.getId() == null
                         ? "" : user.getId().toString());
 
                 JSONArray requestsArray = new JSONArray();
 
                 if (user.getRequests() != null) {
-                    requestsArray.addAll(user.getRequests());
+                    addJsonValues(requestsArray, user.getRequests());
                 }
 
-                userObject.put("requests", requestsArray);
-                usersArray.add(userObject);
+                putJsonValue(userObject, "requests", requestsArray);
+                addJsonValue(usersArray, userObject);
             }
         }
 
@@ -81,24 +82,27 @@ public class DataWriter {
         for (Shelter shelter : shelters.values()) {
             JSONObject shelterObject = new JSONObject();
 
-            shelterObject.put("id", shelter.getId().toString());
-            shelterObject.put("name", shelter.getName());
-            shelterObject.put("address", shelter.getAddress());
-            shelterObject.put("zipCode", shelter.getLocation().getZipCode());
-            shelterObject.put("capacity", shelter.getCapacity());
-            shelterObject.put("status", shelter.getStatus().toString());
+            putJsonValue(shelterObject, "id", shelter.getId().toString());
+            putJsonValue(shelterObject, "name", shelter.getName());
+            putJsonValue(shelterObject, "address", shelter.getAddress());
+            putJsonValue(shelterObject, "zipCode",
+                    shelter.getLocation().getZipCode());
+            putJsonValue(shelterObject, "capacity", shelter.getCapacity());
+            putJsonValue(shelterObject, "status",
+                    shelter.getStatus().toString());
 
             JSONObject inventoryObject = new JSONObject();
 
             if (shelter.getInventory() != null) {
                 for (Map.Entry<String, Integer> item :
                         shelter.getInventory().entrySet()) {
-                    inventoryObject.put(item.getKey(), item.getValue());
+                    putJsonValue(inventoryObject, item.getKey(),
+                            item.getValue());
                 }
             }
 
-            shelterObject.put("inventory", inventoryObject);
-            sheltersArray.add(shelterObject);
+            putJsonValue(shelterObject, "inventory", inventoryObject);
+            addJsonValue(sheltersArray, shelterObject);
         }
 
         try (FileWriter file = new FileWriter(
@@ -125,20 +129,27 @@ public class DataWriter {
 
                 JSONObject requestObject = new JSONObject();
 
-                requestObject.put("id", request.getId() == null ? "" : request.getId().toString());
-                requestObject.put("contactInfo", request.getContactInfo());
-                requestObject.put("address", request.getAddress() == null
+                putJsonValue(requestObject, "id", request.getId() == null
+                        ? "" : request.getId().toString());
+                putJsonValue(requestObject, "contactInfo",
+                        request.getContactInfo());
+                putJsonValue(requestObject, "address",
+                        request.getAddress() == null
                         ? null : request.getAddress().toString());
-                requestObject.put("aidCategory", request.getAidCategory() == null
+                putJsonValue(requestObject, "aidCategory",
+                        request.getAidCategory() == null
                         ? "" : request.getAidCategory().toString());
-                requestObject.put("severity", request.getSeverity() == null
+                putJsonValue(requestObject, "severity",
+                        request.getSeverity() == null
                         ? "" : request.getSeverity().toString());
-                requestObject.put("status", request.getStatus() == null
+                putJsonValue(requestObject, "status",
+                        request.getStatus() == null
                         ? "" : request.getStatus().toString());
-                requestObject.put("message", request.getMessage());
-                requestObject.put("location", request.getLocation() == null
+                putJsonValue(requestObject, "message", request.getMessage());
+                putJsonValue(requestObject, "location",
+                        request.getLocation() == null
                         ? null : request.getLocation().toString());
-                requestObject.put("hasPet", request.getHasPet());
+                putJsonValue(requestObject, "hasPet", request.getHasPet());
 
                 JSONArray messagesArray = new JSONArray();
 
@@ -150,17 +161,20 @@ public class DataWriter {
 
                         JSONObject messageObject = new JSONObject();
 
-                        messageObject.put("sender", message.getSender() == null
+                        putJsonValue(messageObject, "sender",
+                                message.getSender() == null
                                 ? "" : message.getSender().getUsername());
-                        messageObject.put("message", message.getBody());
-                        messageObject.put("timestamp", message.getTimestamp() == null
+                        putJsonValue(messageObject, "message",
+                                message.getBody());
+                        putJsonValue(messageObject, "timestamp",
+                                message.getTimestamp() == null
                                 ? null : message.getTimestamp().toString());
-                        messagesArray.add(messageObject);
+                        addJsonValue(messagesArray, messageObject);
                     }
                 }
 
-                requestObject.put("messages", messagesArray);
-                requestsArray.add(requestObject);
+                putJsonValue(requestObject, "messages", messagesArray);
+                addJsonValue(requestsArray, requestObject);
             }
         }
 
@@ -178,13 +192,16 @@ public class DataWriter {
         for (HurricaneEvent hurricane : hurricanes) {
             JSONObject hurricaneObject = new JSONObject();
 
-            hurricaneObject.put("id", hurricane.getId().toString());
-            hurricaneObject.put("status", hurricane.getStatus().toString());
-            hurricaneObject.put("location", hurricane.getAddress());
-            hurricaneObject.put("maxWindSpeed", hurricane.getMaxWindSpeed());
-            hurricaneObject.put("forecastPath", hurricane.getForcastPath());
+            putJsonValue(hurricaneObject, "id", hurricane.getId().toString());
+            putJsonValue(hurricaneObject, "status",
+                    hurricane.getStatus().toString());
+            putJsonValue(hurricaneObject, "location", hurricane.getAddress());
+            putJsonValue(hurricaneObject, "maxWindSpeed",
+                    hurricane.getMaxWindSpeed());
+            putJsonValue(hurricaneObject, "forecastPath",
+                    hurricane.getForcastPath());
 
-            hurricanesArray.add(hurricaneObject);
+            addJsonValue(hurricanesArray, hurricaneObject);
         }
 
         try (FileWriter file = new FileWriter(
@@ -232,10 +249,10 @@ public class DataWriter {
                     if (updateExisting) {
                         JSONObject existingRecord =
                                 (JSONObject) allRecords.get(existingIndex);
-                        existingRecord.putAll(jsonRecord);
+                        putJsonValues(existingRecord, jsonRecord);
                     }
                 } else {
-                    allRecords.add(jsonRecord);
+                    addJsonValue(allRecords, jsonRecord);
                     if (!id.isEmpty()) {
                         recordIndexes.put(id, allRecords.size() - 1);
                     }
@@ -249,6 +266,29 @@ public class DataWriter {
         } catch (IOException | ParseException e) {
             throw new IllegalStateException("Unable to save " + fileName, e);
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void addJsonValue(JSONArray array, Object value) {
+        array.add(value);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void addJsonValues(JSONArray array,
+            Collection<?> values) {
+        array.addAll(values);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void putJsonValue(JSONObject object, String key,
+            Object value) {
+        object.put(key, value);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void putJsonValues(JSONObject destination,
+            JSONObject source) {
+        destination.putAll(source);
     }
 
     /**

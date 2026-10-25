@@ -158,7 +158,7 @@ public class HurricaneUI {
 
             if (people != null) {
                 occupancy += people.size();
-                shelterOccupants.addAll(people);
+                addJsonValues(shelterOccupants, people);
             }
         }
 
@@ -207,23 +207,23 @@ public class HurricaneUI {
         }
 
         JSONArray occupants = new JSONArray();
-        occupants.add("John Carter");
-        occupants.add("Sophie Carter");
-        occupants.add("Carter family member");
+        addJsonValue(occupants, "John Carter");
+        addJsonValue(occupants, "Sophie Carter");
+        addJsonValue(occupants, "Carter family member");
 
         JSONObject record = new JSONObject();
-        record.put("requestId", CARTER_REQUEST_ID.toString());
-        record.put("shelterId", shelter.getId().toString());
-        record.put("shelterName", shelter.getName());
-        record.put("shelterAddress", shelter.getAddress());
-        record.put("manager", "felix");
-        record.put("occupants", occupants);
-        record.put("humanCount", 3);
-        record.put("petName", "Buddy");
-        record.put("petCount", 1);
-        record.put("checkedIn", true);
+        putJsonValue(record, "requestId", CARTER_REQUEST_ID.toString());
+        putJsonValue(record, "shelterId", shelter.getId().toString());
+        putJsonValue(record, "shelterName", shelter.getName());
+        putJsonValue(record, "shelterAddress", shelter.getAddress());
+        putJsonValue(record, "manager", "felix");
+        putJsonValue(record, "occupants", occupants);
+        putJsonValue(record, "humanCount", 3);
+        putJsonValue(record, "petName", "Buddy");
+        putJsonValue(record, "petCount", 1);
+        putJsonValue(record, "checkedIn", true);
 
-        checkIns.add(record);
+        addJsonValue(checkIns, record);
         saveCheckIns(checkIns);
 
         System.out.println("\nFamily Check-In");
@@ -315,6 +315,23 @@ public class HurricaneUI {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    private static void addJsonValue(JSONArray array, Object value) {
+        array.add(value);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void addJsonValues(JSONArray destination,
+            JSONArray source) {
+        destination.addAll(source);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void putJsonValue(JSONObject object, String key,
+            Object value) {
+        object.put(key, value);
+    }
+
     private static JSONObject findCheckIn(
             JSONArray checkIns, UUID requestId) {
 
@@ -363,7 +380,7 @@ public class HurricaneUI {
                     found = true;
 
                     if (!"COMPLETED".equals(request.get("status"))) {
-                        request.put("status", "COMPLETED");
+                        putJsonValue(request, "status", "COMPLETED");
                         changed = true;
                     }
 
