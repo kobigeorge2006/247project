@@ -28,5 +28,5 @@ public class DrivingRoute {
 
     public ArrayList<Coordinates> getRoutePoints() {
         return routePoints;
-    }    
+    }
 }

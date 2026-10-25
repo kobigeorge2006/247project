@@ -42,6 +42,7 @@
         "requests": [],
         "email": "jordan@email.com",
         "username": "jlee"
+<<<<<<< HEAD
     },
     {
         "firstName": "John",
@@ -53,5 +54,7 @@
         "requests": [],
         "email": "JCarter@gmail.com",
         "username": "JCarter"
+=======
+>>>>>>> 37b0c4a4b1a11245a899274aad89e822088bf921
     }
 ]
