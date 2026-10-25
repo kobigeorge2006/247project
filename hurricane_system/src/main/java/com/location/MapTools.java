@@ -12,6 +12,10 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 
+/**
+ * 
+ * MapTools Provides map api tools
+ */
 public class MapTools {
     private static final String GEOCODING_URL =
         "https://api.heigit.org/pelias/v1/search";
@@ -356,4 +360,4 @@ public class MapTools {
             );
         }
     }
-}    
+}
