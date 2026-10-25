@@ -1,1 +1,18 @@
-[{"humanCount":3,"petName":"Buddy","shelterAddress":"123 Main Street","manager":"felix","checkedIn":true,"requestId":"7e8a2c49-6f13-4b95-a0d7-3c826f914e52","shelterName":"Emergency Relief Shelter","shelterId":"307bdf95-b463-43fc-aedf-d68ec0d2c493","occupants":["John Carter","Sophie Carter","Carter family member"],"petCount":1}]
+[
+    {
+        "humanCount": 3,
+        "petName": "Buddy",
+        "shelterAddress": "123 Main Street",
+        "manager": "felix",
+        "checkedIn": true,
+        "requestId": "7e8a2c49-6f13-4b95-a0d7-3c826f914e52",
+        "shelterName": "Emergency Relief Shelter",
+        "shelterId": "307bdf95-b463-43fc-aedf-d68ec0d2c493",
+        "occupants": [
+            "John Carter",
+            "Sophie Carter",
+            "Carter family member"
+        ],
+        "petCount": 1
+    }
+]

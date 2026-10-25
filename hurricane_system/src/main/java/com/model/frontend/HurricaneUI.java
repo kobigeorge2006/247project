@@ -377,8 +377,7 @@ public class HurricaneUI {
         return null;
     }
 
-    // Updates the existing Carter request directly in its saved JSON.
-    // This avoids depending on the request being reloaded into DataBase.
+ 
     private static void completeSavedCarterRequest() {
         Path file = jsonDirectory().resolve("assistanceRequests.json");
 
@@ -507,6 +506,7 @@ public class HurricaneUI {
         showSavedFiles();
 
         ui.scenarioCheckInFamily();
+
 
         System.out.println("\n===== JSON AFTER CHECK-IN =====");
         showSavedFiles();
