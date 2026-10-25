@@ -1,4 +1,4 @@
-package com.model.frontend;
+package com.frontend;
 
 import com.location.*;
 

@@ -40,27 +40,15 @@ public class HurricaneUI {
     }
 
     public void run() {
-        scenario1();
-        scenario2();
-        scenario3();
-        scenario4();
-        scenario5();
-        scenario6();
+        scenarioRosa();
+        scenarioExportandRole();
     }
 
-    // Scenario 1: User login
-    public void scenario1() {
-        System.out.println("\nScenario 1: Login");
 
-        if (system.logIn("asmith", "12345")) {
-            System.out.println("Login successful.");
-        } else {
-            System.out.println("Login failed.");
-        }
-    }
+
 
     // Scenario 2: Rosa Delgado signs up as a volunteer and views her dashboard
-    public void scenario2() {
+    public void scenarioRosa() {
         System.out.println("\nScenario 2: Signup");
 
         if (system.signUp("Rosa", "Delgado","rdelgado", "password123",
@@ -92,7 +80,7 @@ public class HurricaneUI {
     }
 
     // Scenario 3: Rosa uses app to find shelters in her area
-    public void scenario3() {
+    public void scenarioExportandRole() {
         System.out.println("\nScenario 3: Shelter Search and Request Assignment");
 
         if (system.isLoggedIn() && system.getCurrentUser().isVolunteer()) {
@@ -114,83 +102,14 @@ public class HurricaneUI {
             System.out.println(">> MATCH SELECTED: North Charleston Athletic Center Shelter (2950 Carner Avenue, North Charleston, SC)");
             System.out.println("Rosa assigns the Carter family relief request to herself.");
             System.out.println("Request Status: ASSIGNED (Handled by Rosa Delgado)");
+            System.out.println("After transporting the family, Rosa tries to mark it Complete.");
+            System.out.println("Denied: volunteers cannot complete relief requests.");
+            System.out.println("The request remains assigned to Rosa.");
         } else {
             System.out.println("Error: Volunteer Rosa is not currently logged in.");
         }
     }
 
-    // Scenario 4: Find shelters in a given ZIP code
-    public void scenario4() {
-        String zipCode = "29203";
-
-        System.out.println("\nScenario 4: Find Shelters");
-        System.out.println("Searching ZIP code: " + zipCode);
-
-        ArrayList<Shelter> shelters = system.findShelters(zipCode);
-
-        System.out.println("Shelters found: " + shelters.size());
-
-        for (Shelter shelter : shelters) {
-            System.out.println("------------------------");
-            System.out.println("Shelter: " + shelter.getName());
-            System.out.println("Address: " + shelter.getAddress());
-            System.out.println("Capacity: " + shelter.getCapacity());
-            System.out.println("Status: " + shelter.getStatus());
-            System.out.println("Water: "
-                    + shelter.getInventory().getOrDefault("Water", 0));
-        }
-    }
-
-    // Scenario 5: Administrator creates a shelter
-    public void scenario5() {
-        System.out.println("\nScenario 5: Create Shelter");
-
-        if (!system.logIn("admin", "12345")) {
-            System.out.println("Admin login failed.");
-            return;
-        }
-
-        boolean created = system.createShelter(
-                "Emergency Relief Shelter",
-                "123 Main Street",
-                "29201",
-                100
-        );
-
-        if (created) {
-            System.out.println("Shelter created successfully.");
-        } else {
-            System.out.println("Shelter already exists or could not be created.");
-        }
-
-        system.logOut();
-        System.out.println("Admin logged out.");
-    }
-
-    // Scenario 6: Regular user cannot create a shelter
-    public void scenario6() {
-        System.out.println("\nScenario 6: Admin Permissions");
-
-        if (!system.logIn("asmith", "12345")) {
-            System.out.println("Regular user login failed.");
-            return;
-        }
-
-        boolean created = system.createShelter(
-                "Unauthorized Test Shelter",
-                "100 Test Street",
-                "29201",
-                50
-        );
-
-        if (!created) {
-            System.out.println("Regular user correctly denied permission.");
-        } else {
-            System.out.println("ERROR: Regular user created a shelter.");
-        }
-
-        system.logOut();
-    }
 
     // Scenario 7: Shelter manager checks in the Carter family and Buddy
     public void scenarioCheckInFamily() {
