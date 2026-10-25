@@ -47,6 +47,12 @@ public class ShelterList {
         return shelters.get(id);
     }
 
+    // Returns all shelters in the system
+    public ArrayList<Shelter> getAllShelters() {
+        return new ArrayList<>(shelters.values());
+    }
+
+
     // Saves shelters to the JSON file
     public void saveShelters() {
         DataWriter.saveShelters(shelters);
