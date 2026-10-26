@@ -1,3 +1,6 @@
+/**
+ * Defines the Hurricane Relief application's module and its JavaFX dependencies.
+ */
 module com.relief {
     requires javafx.controls;
     requires javafx.fxml;
