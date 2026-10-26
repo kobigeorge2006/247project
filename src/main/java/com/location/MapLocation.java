@@ -37,7 +37,6 @@ public class MapLocation {
         return coordinates;
     }
 
-    @Override
     /**
      * Returns the postal address as a string.
      *

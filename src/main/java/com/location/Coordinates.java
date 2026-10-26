@@ -37,12 +37,6 @@ public class Coordinates {
     }
 
     @Override
-    /**
-     * Returns the coordinates as a comma-separated string.
-     *
-     * @return latitude and longitude
-     */
-    @Override
     public String toString() {
         return latitude + ", " + longitude;
     }
