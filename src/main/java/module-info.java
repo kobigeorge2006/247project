@@ -1,3 +1,6 @@
+/**
+ * Defines the Hurricane Relief application's module and its JavaFX dependencies.
+ */
 module com.relief {
     requires javafx.controls;
     requires javafx.fxml;
@@ -5,6 +8,7 @@ module com.relief {
     requires java.net.http;
     requires com.fasterxml.jackson.databind;
     requires javafx.web;
+    requires junit;
 
     opens com.frontend to javafx.fxml;
     exports com.frontend;

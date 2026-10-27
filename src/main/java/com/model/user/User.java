@@ -96,6 +96,7 @@ public class User {
         this.password = (String) jsonUser.get("password");
         this.email = (String) jsonUser.get("email");
         this.phoneNumber = (String) jsonUser.get("phoneNumber");
+        this.volunteer = Boolean.TRUE.equals(jsonUser.get("volunteer"));
 
         this.requests = new ArrayList<>();
 
