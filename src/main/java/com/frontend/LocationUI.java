@@ -2,8 +2,15 @@ package com.frontend;
 
 import com.location.*;
 
+/**
+ * Demonstrates finding the nearest shelter and displaying driving directions.
+ */
 public class LocationUI {
 
+    /**
+     * Finds and prints the nearest example shelter and driving directions
+     * from a sample Charleston address.
+     */
     public void run() {
         // A Charleston address near the waterfront
         Address userAddress = new Address(
@@ -69,6 +76,11 @@ public class LocationUI {
         }
     }
 
+    /**
+     * Runs the location demonstration.
+     *
+     * @param args command-line arguments, which are not used
+     */
     public static void main(String[] args) {
         new LocationUI().run();
     }    

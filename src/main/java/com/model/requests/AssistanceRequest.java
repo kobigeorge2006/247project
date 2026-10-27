@@ -22,6 +22,7 @@ public class AssistanceRequest {
     private ArrayList<Message> messages;
     private Address location;
     private Boolean hasPet;
+    private String assignedVolunteerUsername;
 
     /**
      * Creates an assistance request with the supplied details.
@@ -50,6 +51,7 @@ public class AssistanceRequest {
         this.messages = new ArrayList<>();
         this.location = location;
         this.hasPet = hasPet;
+        this.assignedVolunteerUsername = null;
     }
 
     /**
@@ -74,6 +76,8 @@ public class AssistanceRequest {
         this.messages = new ArrayList<>();
         this.location = (Address) jsonAssistanceRequest.get("location");
         this.hasPet = (Boolean) jsonAssistanceRequest.get("hasPet");
+        this.assignedVolunteerUsername =
+                (String) jsonAssistanceRequest.get("assignedVolunteer");
     }
 
     /**
@@ -279,5 +283,23 @@ public class AssistanceRequest {
      */
     public void setHasPet(Boolean hasPet) {
         this.hasPet = hasPet;
+    }
+
+    /**
+     * Returns the username of the volunteer assigned to this request.
+     *
+     * @return the assigned volunteer username, or {@code null} if unassigned
+     */
+    public String getAssignedVolunteerUsername() {
+        return assignedVolunteerUsername;
+    }
+
+    /**
+     * Assigns this request to a volunteer username.
+     *
+     * @param username the assigned volunteer username
+     */
+    public void setAssignedVolunteerUsername(String username) {
+        this.assignedVolunteerUsername = username;
     }
 }
