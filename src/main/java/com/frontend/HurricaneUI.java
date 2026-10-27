@@ -2,7 +2,6 @@ package com.frontend;
 
 import com.model.HurricaneReliefSystem;
 import com.model.data.DataBase;
-import com.model.data.DataWriter;
 import com.model.other.Shelter;
 import com.model.user.Administrator;
 import java.util.ArrayList;
@@ -46,6 +45,36 @@ public class HurricaneUI {
 
 
 
+    public void scenarioScarlett(){
+        HurricaneReliefSystem system = new HurricaneReliefSystem();
+        DataBase db = DataBase.getInstance();
+        if(system.signUp("John", "Carter", "JCarter", "SophieCarter", "JCarter@gmail.com", false, "301-123-4565")){
+            System.out.println("Mr Carter signed up");
+        }
+        if(system.logIn("JCarter", "SophieCarter")){
+            System.out.println("Log in successful");
+        }
+
+        boolean requestExists = false;
+        for (AssistanceRequest request : db.getAssistanceRequests()) {
+            if (CARTER_REQUEST_ID.equals(request.getId())) {
+                requestExists = true;
+                break;
+            }
+        }
+        if (!requestExists) {
+            db.addAssistanceRequest(CARTER_REQUEST_ID, "JCarter@gmail.com",
+                    new Address("247 Palmetto Harbor Lane", "Charleston",
+                            "SC", "29403"),
+                    AidCategory.MEDICAL, Severity.HIGH,
+                    RequestStatus.SUBMITTED,
+                    "My daughter sophie needs medical assistance my family "
+                            + "of 4 and my dog need transportation to a shelter too",
+                    new Address("247 Palmetto Harbor Lane", "Charleston",
+                            "SC", "29403"),
+                    true);
+        }
+    }
 
     // Scenario 2: Rosa Delgado signs up as a volunteer and views her dashboard
     public void scenarioRosa() {
@@ -55,15 +84,12 @@ public class HurricaneUI {
                 "RDelgado@email.com", true, "8035551234")) {
             System.out.println("Account created successfully.");
         } else {
-            System.out.println("Account already exists.");
+            System.out.println("Using Rosa's existing account.");
         }
 
-        // Log Rosa in to trigger her dashboard view
         if (system.logIn("rdelgado", "password123")) {
-            // Retrieve the User object from the system
             User currentUser = system.getCurrentUser();
-            
-            // Verify the user is a volunteer before displaying the dashboard
+
             if (currentUser != null && currentUser.isVolunteer()) {
                 System.out.println("\nWelcome, " + currentUser.getFirstName() + " " + currentUser.getLastName() + "!");
                 System.out.println("Volunteer Profile: Specialty - Transportation | Vehicle - Ford F-350\n");
@@ -79,32 +105,71 @@ public class HurricaneUI {
         }
     }
 
-    // Scenario 3: Rosa uses app to find shelters in her area
+    // Scenario 3: Rosa exports the Carter trip and attempts restricted actions
     public void scenarioExportandRole() {
-        System.out.println("\nScenario 3: Shelter Search and Request Assignment");
+        System.out.println("\nScenario 3: Carter Family Trip and Role Permissions");
 
         if (system.isLoggedIn() && system.getCurrentUser().isVolunteer()) {
-            System.out.println("Rosa searches the system. Loading all available shelters from JSON...\n");
-
-            // Retrieve and print all 10 shelters from shelters.json
-            ArrayList<Shelter> allShelters = system.getAllShelters();
-            System.out.println("--- All Available Shelters (" + allShelters.size() + " Total) ---");
-            for (Shelter shelter : allShelters) {
-                System.out.println(shelter); // Uses your Shelter.toString() method
+            Shelter shelter = null;
+            for (Shelter candidate : system.getAllShelters()) {
+                if ("Emergency Relief Shelter".equalsIgnoreCase(
+                        candidate.getName())) {
+                    shelter = candidate;
+                    break;
+                }
             }
 
-            System.out.println("\nApplying Carter Family Filters:");
-            System.out.println(" - Closest driving distance to Carter home");
-            System.out.println(" - Accepts dogs (for Buddy)");
-            System.out.println(" - Medical staff available (for Sophie)");
-            System.out.println(" - Space for 3 family members and Buddy\n");
+            if (shelter == null) {
+                System.out.println("No selected shelter is available.");
+                return;
+            }
 
-            System.out.println(">> MATCH SELECTED: North Charleston Athletic Center Shelter (2950 Carner Avenue, North Charleston, SC)");
-            System.out.println("Rosa assigns the Carter family relief request to herself.");
-            System.out.println("Request Status: ASSIGNED (Handled by Rosa Delgado)");
-            System.out.println("After transporting the family, Rosa tries to mark it Complete.");
-            System.out.println("Denied: volunteers cannot complete relief requests.");
-            System.out.println("The request remains assigned to Rosa.");
+            Address carterAddress = new Address(
+                    "247 Palmetto Harbor Lane", "Charleston", "SC", "29403");
+            AssistanceRequest request = system.createAssistanceRequest(
+                    CARTER_REQUEST_ID,
+                    "John Carter | 301-123-4565 | JCarter@gmail.com",
+                    carterAddress,
+                    AidCategory.MEDICAL,
+                    Severity.HIGH,
+                    "Sophie needs medical assistance.",
+                    carterAddress,
+                    true);
+
+            if (!system.assignRequestToCurrentVolunteer(request)) {
+                System.out.println("The Carter request could not be assigned.");
+                return;
+            }
+
+            System.out.println("Carter relief request assigned to "
+                    + request.getAssignedVolunteerUsername() + ".");
+
+            boolean shelterCreated = system.createShelter(
+                    "Rosa's Volunteer Shelter", "123 Relief Way",
+                    "29401", 25);
+            if (!shelterCreated) {
+                System.out.println(
+                        "Shelter creation denied: Rosa is not an administrator.");
+            }
+
+            Address rosaLocation = new Address(
+                    "1 Vendue Range", "Charleston", "SC", "29401");
+            try {
+                Path exportedTrip = system.exportTripInformation(
+                        Paths.get("Carter_Family_Trip.txt"),
+                        request, shelter, rosaLocation);
+                System.out.println("Printable trip exported to "
+                        + exportedTrip + ".");
+            } catch (IOException e) {
+                throw new IllegalStateException(
+                        "Could not export the Carter family trip.", e);
+            }
+
+            String completionResult = system.completeRequest(
+                    CARTER_REQUEST_ID);
+            System.out.println(completionResult + " Request status: "
+                    + request.getStatus() + ", assigned to "
+                    + request.getAssignedVolunteerUsername() + ".");
         } else {
             System.out.println("Error: Volunteer Rosa is not currently logged in.");
         }
@@ -179,9 +244,6 @@ public class HurricaneUI {
             System.out.println("Saved shelter assignment: "
                     + existing.get("shelterName"));
             System.out.println("No duplicate check-in created.");
-
-            // Repair a previously reset request status.
-            completeSavedCarterRequest();
             return;
         }
 
@@ -209,7 +271,7 @@ public class HurricaneUI {
         JSONArray occupants = new JSONArray();
         addJsonValue(occupants, "John Carter");
         addJsonValue(occupants, "Sophie Carter");
-        addJsonValue(occupants, "Carter family member");
+        addJsonValue(occupants, "Mary Carter");
 
         JSONObject record = new JSONObject();
         putJsonValue(record, "requestId", CARTER_REQUEST_ID.toString());
@@ -234,30 +296,14 @@ public class HurricaneUI {
         System.out.println("Accompanying pet: Buddy");
         System.out.println("Assignment: " + shelter.getName());
 
-        carterRequest.updateStatus(RequestStatus.COMPLETED);
-
-        DataWriter.saveRequests(
-                DataBase.getInstance().getAssistanceRequests());
-
         System.out.println("\nRelief Request");
         System.out.println("Request ID: " + carterRequest.getId());
         System.out.println("Status: " + carterRequest.getStatus());
+        System.out.println("Assigned to: "
+                + carterRequest.getAssignedVolunteerUsername());
         System.out.println("Check-in saved to " + CHECKIN_FILE);
-        System.out.println("Request status saved to assistanceRequests.json");
     }
 
-    public void scenarioScarlett(){
-        HurricaneReliefSystem system = new HurricaneReliefSystem();
-        DataBase db = DataBase.getInstance();
-        if(system.signUp("John", "Carter", "JCarter", "SophieCarter", "JCarter@gmail.com", false, "301-123-4565")){
-            System.out.println("Mr Carter signed up");
-        }
-        if(system.logIn("JCarter", "SophieCarter")){
-            System.out.println("Log in successful");
-        }
-
-        db.addAssistanceRequest(UUID.fromString("7e8a2c49-6f13-4b95-a0d7-3c826f914e52"), "JCarter@gmail.com", new Address("247 Palmetto Harbor Lane", "Charleston", "SC", "29403"), AidCategory.MEDICAL,Severity.HIGH, RequestStatus.SUBMITTED, "My daughter sophie needs medical assistance my family of 4 and my dog need transportation to a shelter too", new Address("247 Palmetto Harbor Lane", "Charleston", "SC", "29403"), true );
-    }
 
     private static Path jsonDirectory() {
         Path local = Paths.get("json");
@@ -347,68 +393,6 @@ public class HurricaneUI {
         }
 
         return null;
-    }
-
- 
-    private static void completeSavedCarterRequest() {
-        Path file = jsonDirectory().resolve("assistanceRequests.json");
-
-        try (Reader reader = Files.newBufferedReader(
-                file, StandardCharsets.UTF_8)) {
-
-            Object parsed = new JSONParser().parse(reader);
-
-            if (!(parsed instanceof JSONArray)) {
-                System.out.println("Invalid assistance request JSON.");
-                return;
-            }
-
-            JSONArray requests = (JSONArray) parsed;
-            boolean found = false;
-            boolean changed = false;
-
-            for (Object item : requests) {
-                if (!(item instanceof JSONObject)) {
-                    continue;
-                }
-
-                JSONObject request = (JSONObject) item;
-
-                if (CARTER_REQUEST_ID.toString().equals(
-                        request.get("id"))) {
-
-                    found = true;
-
-                    if (!"COMPLETED".equals(request.get("status"))) {
-                        putJsonValue(request, "status", "COMPLETED");
-                        changed = true;
-                    }
-
-                    break;
-                }
-            }
-
-            if (!found) {
-                System.out.println("Carter request not found in JSON.");
-                return;
-            }
-
-            if (changed) {
-                try (Writer writer = Files.newBufferedWriter(
-                        file, StandardCharsets.UTF_8)) {
-                    writer.write(requests.toJSONString());
-                }
-                System.out.println(
-                        "Carter request corrected to COMPLETED.");
-            } else {
-                System.out.println(
-                        "Carter request is already COMPLETED.");
-            }
-
-        } catch (Exception e) {
-            throw new IllegalStateException(
-                    "Could not update Carter request status.", e);
-        }
     }
 
     private static void showJson(String fileName) {
