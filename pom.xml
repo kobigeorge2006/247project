@@ -39,16 +39,12 @@
     <dependencies>
 
         <dependency>
-<<<<<<< HEAD
-
-=======
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
         </dependency>
 
         <dependency>
->>>>>>> 2ba519d6f624d46951c943c5fd80dde5ab823b0c
             <groupId>com.googlecode.json-simple</groupId>
 
             <artifactId>json-simple</artifactId>
@@ -100,23 +96,11 @@
 
 
     <build>
-<<<<<<< HEAD
-
         <sourceDirectory>src/main/java</sourceDirectory>
-
-=======
-        <sourceDirectory>src/main/java</sourceDirectory>
->>>>>>> 2ba519d6f624d46951c943c5fd80dde5ab823b0c
         <resources>
 
             <resource>
-<<<<<<< HEAD
-
                 <directory>src/main/resources</directory>
-
-=======
-                <directory>src/main/resources</directory>
->>>>>>> 2ba519d6f624d46951c943c5fd80dde5ab823b0c
             </resource>
 
         </resources>
