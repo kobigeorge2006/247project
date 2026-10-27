@@ -2,6 +2,8 @@ package com.frontend;
 
 import com.model.HurricaneReliefSystem;
 import com.model.data.DataBase;
+import com.model.data.DataConstants;
+import com.model.data.DataLoader;
 import com.model.other.Shelter;
 import com.model.user.Administrator;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import java.nio.charset.StandardCharsets;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.io.BufferedReader;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -400,18 +403,19 @@ public class HurricaneUI {
 
         System.out.println("\n--- " + fileName + " ---");
 
-        try {
-            if (!Files.exists(file)) {
-                System.out.println("No file yet.");
-                return;
+        try (BufferedReader reader = DataLoader.getReaderFromFile(
+                file.toString(), "/data/json/" + fileName)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
             }
-
-            System.out.println(new String(
-                    Files.readAllBytes(file),
-                    StandardCharsets.UTF_8));
-
         } catch (IOException e) {
-            System.out.println("Could not read " + file);
+            if (!Files.exists(file) && !DataConstants.isJUnitTest()) {
+                System.out.println("No file yet.");
+            } else {
+                System.out.println("Could not read " + file + ": "
+                        + e.getMessage());
+            }
         }
     }
 
