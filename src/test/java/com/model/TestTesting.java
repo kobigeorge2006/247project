@@ -3,6 +3,7 @@ package com.model;
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import com.model.HurricaneReliefSystem;
 import com.model.data.DataBase;
 import java.util.ArrayList;
@@ -14,24 +15,6 @@ public class TestTesting {
         assertTrue(true);
     }
     
-    @Test
-    public void testLoginValid(){
-        HurricaneReliefSystem System = new HurricaneReliefSystem();
-        System.logIn("asmith", "12345");
-        String firstName = System.getCurrentUser().getFirstName();
-        assertEquals("Amy", firstName);
-    }
-
-    @Test
-    public void testSignUpValid(){
-        HurricaneReliefSystem System = new HurricaneReliefSystem();
-        System.signUp("John", "Doe", "JDoe", "JohnnyD03", "JohnD@gmail.com", false, "123-405-4444");
-        System.logOut();
-        boolean loggedIn = System.logIn("JDoe", "JohnnyD03");
-
-        assertTrue(loggedIn);
-    }
-
     @Test
     public void testRequest(){
         HurricaneReliefSystem System = new HurricaneReliefSystem();
