@@ -8,5 +8,5 @@ Youtube link: https://youtu.be/A0Cmh34-FqM
 Compile the project from the repository root with:
 
 ```sh
-mvn -f hurricane_system/pom.xml compile
+mvn compile
 ```

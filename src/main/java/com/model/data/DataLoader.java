@@ -3,7 +3,13 @@ package com.model.data;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
+import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -35,7 +41,9 @@ public class DataLoader {
     private static JSONArray loadData(String fileName) {
         JSONArray jsonArray = new JSONArray();
 
-        try (FileReader reader = new FileReader(DataConstants.JSON_FOLDER + fileName)) {
+        try (BufferedReader reader = getReaderFromFile(
+                DataConstants.JSON_FOLDER + fileName,
+                "/data/json/" + fileName)) {
             JSONParser parser = new JSONParser();
             jsonArray = (JSONArray) parser.parse(reader);
         } catch (Exception e) {
@@ -116,5 +124,29 @@ public class DataLoader {
         }
 
         return hurricanes;
+    }
+
+    /**
+     * Opens a data file, using its classpath resource while running tests.
+     *
+     * @param fileName filesystem path to the data file
+     * @param jsonFileName absolute classpath path to its test resource
+     * @return a buffered reader for the data
+     * @throws IOException if the file or test resource cannot be opened
+     */
+    public static BufferedReader getReaderFromFile(
+            String fileName, String jsonFileName) throws IOException {
+        if (DataConstants.isJUnitTest()) {
+            InputStream inputStream =
+                    DataBase.class.getResourceAsStream(jsonFileName);
+            if (inputStream == null) {
+                throw new FileNotFoundException(
+                        "Missing classpath resource: " + jsonFileName);
+            }
+            return new BufferedReader(new InputStreamReader(inputStream,
+                    StandardCharsets.UTF_8));
+        }
+
+        return new BufferedReader(new FileReader(fileName));
     }
 }

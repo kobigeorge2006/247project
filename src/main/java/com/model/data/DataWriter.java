@@ -1,8 +1,10 @@
 package com.model.data;
 
-import java.io.FileReader;
+import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -303,8 +305,9 @@ public class DataWriter {
      */
     private static JSONArray readExistingRecords(String fileName)
             throws IOException, ParseException {
-        try (FileReader file = new FileReader(
-                DataConstants.JSON_FOLDER + fileName)) {
+        try (java.io.BufferedReader file = DataLoader.getReaderFromFile(
+                DataConstants.JSON_FOLDER + fileName,
+                "/data/json/" + fileName)) {
             Object records = new JSONParser().parse(file);
             if (records instanceof JSONArray) {
                 return (JSONArray) records;
@@ -314,4 +317,5 @@ public class DataWriter {
             return new JSONArray();
         }
     }
+
 }
