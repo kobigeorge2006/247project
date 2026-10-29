@@ -7,8 +7,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class UsersTest {
-        @Test
-    public void testLoginValid(){
+    //Written by Kobi George
+    @Test
+    public void testLoginState(){
         HurricaneReliefSystem System = new HurricaneReliefSystem();
         System.logIn("asmith", "12345");
         String firstName = System.getCurrentUser().getFirstName();
@@ -21,9 +22,17 @@ public class UsersTest {
         boolean isLogInFalse = System.logIn("Kobig20", "ILoveCSCE247");
         assertFalse(isLogInFalse);
     }
+
+    @Test
     public void testLogInWrongPassword(){
         HurricaneReliefSystem System = new HurricaneReliefSystem();
         boolean isLogInFalse = System.logIn("asmith", "ILoveSWE");
+        assertFalse(isLogInFalse);
+    }
+
+    @Test void testPasswordUsernameCasing(){
+        HurricaneReliefSystem System = new HurricaneReliefSystem();
+        boolean isLogInFalse = System.logIn("ASMITH", "12345");
         assertFalse(isLogInFalse);
     }
 
