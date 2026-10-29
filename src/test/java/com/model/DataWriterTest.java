@@ -50,7 +50,7 @@ public class DataWriterTest {
         }
 
         assertNotNull("Saved user should be present", savedUser);
-        assertEquals("Test", savedUser.getFirstName());
+        assertEquals("Michael", savedUser.getFirstName());
         assertEquals("mj@gmail.com", savedUser.getEmail());
     }
 
@@ -75,13 +75,7 @@ public class DataWriterTest {
     public void testSaveUsersSkipNull(){
     String username = "test-" + UUID.randomUUID();
     User user = new User(
-            "Test",
-            "User",
-            username,
-            "test-password",
-            "test@example.com",
-            "555-0100",
-            false
+            "John","Cena","JCena","youcantseeme","JCENA@gmail.com","303-301-1236",false
     );
 
     ArrayList<User> users = new ArrayList<>();
@@ -100,7 +94,59 @@ public class DataWriterTest {
 
     assertNotNull("The valid user should be saved despite the null entry", savedUser);
     } 
-}       
+
+    @Test
+    public void testSaveUsersDoesNotDuplicateUser() {
+    String username = "test-" + UUID.randomUUID();
+    User user = new User(
+            "Walter",
+            "White",
+            "Heisenberg",
+            "saymyname",
+            "WHWhite@gmail.com",
+            "456-320-0092",
+            false
+    );
+
+    ArrayList<User> users = new ArrayList<>();
+    users.add(user);
+
+    DataWriter.saveUsers(users);
+    DataWriter.saveUsers(users);
+
+    int matchingUsers = 0;
+    for (User loadedUser : DataLoader.loadUsers()) {
+        if (user.getId().equals(loadedUser.getId())) {
+            matchingUsers++;
+        }
+    }
+
+    assertEquals(1, matchingUsers);
+}
+
+    @Test
+    public void testSaveUsersWithEmptyList() {
+    ArrayList<String> usernamesBefore = new ArrayList<>();
+    for (User user : DataLoader.loadUsers()) {
+        usernamesBefore.add(user.getUsername());
+    }
+
+    DataWriter.saveUsers(new ArrayList<>());
+
+    ArrayList<String> usernamesAfter = new ArrayList<>();
+    for (User user : DataLoader.loadUsers()) {
+        usernamesAfter.add(user.getUsername());
+    }
+
+    assertEquals(usernamesBefore, usernamesAfter);
+}
+
+
+    
+    
+        
+}
+      
         
     
 
