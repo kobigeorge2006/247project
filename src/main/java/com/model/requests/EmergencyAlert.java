@@ -7,11 +7,11 @@ import java.util.UUID;
  */
 public class EmergencyAlert {
     /** Unique identifier for this alert. */
-    UUID id;
+    public UUID id;
     /** Text of the emergency message. */
-    String message;
+    public String message;
     /** Area to which the alert applies. */
-    String targetArea;
+    public String targetArea;
 
     /**
      * Creates an empty emergency alert.
