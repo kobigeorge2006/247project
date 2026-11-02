@@ -16,11 +16,40 @@ import org.junit.jupiter.api.Test;
 /**
  * Unit tests for the Shelter class.
  *
- * AI assistance was used to create these tests.
+ * AI assistance was used to help create test table only. 
  *
- * Test reasoning table:
- * Add your own reasoning for the selected test cases here
- * before submitting, as required by the instructor.
+ * Suggested test reasoning table (review and personalize):
+ *
+ * Test                                      | Reasoning
+ * ------------------------------------------|-------------------------------------------
+ * New shelter inventory                     | A new shelter should not already have items.
+ * Adding water                              | Adding supplies should update the inventory.
+ * Adding more water                         | New supplies should add to the existing amount.
+ * Different inventory items                 | Water and food should have separate amounts.
+ * Negative inventory quantity               | Negative amounts should not be accepted.
+ * Empty item name                           | An inventory item needs a name.
+ * Null item name                            | A missing item name should be rejected.
+ * Zero inventory quantity                   | Check how the method handles adding zero.
+ * Open shelter                              | An open shelter with space should be available.
+ * Full shelter                              | A full shelter should not accept more people.
+ * Evacuated shelter                         | An evacuated shelter should not be available.
+ * Zero capacity                             | A shelter with no capacity has no room.
+ * Negative capacity                         | Negative capacity should not count as space.
+ * Near capacity                             | Check how this status affects availability.
+ * Reservation                               | The unfinished method currently returns false.
+ * JSON shelter name                         | The name should load correctly from JSON.
+ * JSON shelter address                      | The address should load correctly from JSON.
+ * JSON ZIP code                             | The ZIP code should not be lost when loading.
+ * JSON capacity                             | The saved capacity should load correctly.
+ * JSON status                               | The shelter status should load correctly.
+ * JSON inventory                            | Saved supplies should load correctly.
+ * JSON without inventory                    | Missing inventory should start as empty.
+ * JSON without ZIP code                     | A missing ZIP should not stop shelter creation.
+ * Invalid JSON ID                           | An invalid UUID should cause an error.
+ * Invalid JSON status                       | An unknown status should cause an error.
+ * Description contains name                 | The shelter name should appear in its text.
+ * Description contains capacity             | The capacity should appear in its text.
+ * Description contains status               | The current status should appear in its text.
  */
 public class ShelterTest {
 
