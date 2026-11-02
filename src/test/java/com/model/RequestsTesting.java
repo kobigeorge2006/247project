@@ -1,205 +1,464 @@
 package com.model;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
+
+import static org.junit.Assert.*;
 import org.junit.Test;
 
-import com.location.*;
-import com.model.requests.*;
-import com.model.user.*;
-import com.model.other.*;
-import com.model.data.*;
+import org.json.simple.JSONObject;
+import org.junit.Test;
+
+import com.location.Address;
+import com.model.requests.AidCategory;
+import com.model.requests.AssistanceRequest;
+import com.model.requests.EmergencyAlert;
+import com.model.requests.Message;
+import com.model.requests.RequestStatus;
+import com.model.requests.Severity;
+import com.model.requests.VolunteerRequest;
+import com.model.requests.VolunteerRequestStatus;
+import com.model.requests.AssistanceRequest;
+import com.model.requests.AssistanceRequest;
+import com.model.user.Skill;
+import com.model.user.User;
 
 import static org.junit.Assert.*;
 
+@SuppressWarnings("unchecked")
 public class RequestsTesting {
+    private static final UUID REQUEST_ID = UUID.fromString(
+            "11111111-1111-1111-1111-111111111111");
 
-    // =========================================================================
-    // AssistanceRequest Tests
-    // =========================================================================
+    private Address address() {
+        return new Address("123 Main St", "Charleston", "SC", "29401");
+    }
 
-    // Verifies that the standard AssistanceRequest constructor assigns all parameters, initializes messages as an empty list, and sets assignedVolunteerUsername to null.
+    private User user(String username) {
+        return new User("Test", "User", username, "password",
+                username + "@example.com", "555-0100", false);
+    }
+
+    private AssistanceRequest request() {
+        return new AssistanceRequest(REQUEST_ID, "555-0100", address(),
+                AidCategory.MEDICAL, Severity.HIGH, RequestStatus.SUBMITTED,
+                "Need assistance", address(), false);
+    }
+
+    private JSONObject jsonRequest(UUID id) {
+        JSONObject json = new JSONObject();
+        json.put("id", id.toString());
+        json.put("contactInfo", "555-0100");
+        json.put("address", address());
+        json.put("aidCategory", AidCategory.MEDICAL.name());
+        json.put("severity", Severity.HIGH.name());
+        json.put("status", RequestStatus.SUBMITTED.name());
+        json.put("message", "Need assistance");
+        json.put("location", address());
+        json.put("hasPet", Boolean.TRUE);
+        json.put("assignedVolunteer", "responder1");
+        return json;
+    }
+
+    // AssistanceRequest tests
     @Test
     public void testAssistanceRequestStandardConstructor() {
-        
+        UUID id = UUID.randomUUID();
+        Address requesterAddress = address();
+        Address location = address();
+        AssistanceRequest request = new AssistanceRequest(id, "contact",
+                requesterAddress, AidCategory.PHYSICAL, Severity.CRITICAL,
+                RequestStatus.ASSIGNED, "Please help", location, true);
+
+        assertEquals(id, request.getId());
+        assertEquals("contact", request.getContactInfo());
+        assertSame(requesterAddress, request.getAddress());
+        assertEquals(AidCategory.PHYSICAL, request.getAidCategory());
+        assertEquals(Severity.CRITICAL, request.getSeverity());
+        assertEquals(RequestStatus.ASSIGNED, request.getStatus());
+        assertEquals("Please help", request.getMessage());
+        assertSame(location, request.getLocation());
+        assertEquals(Boolean.TRUE, request.getHasPet());
+        assertNotNull(request.getMessages());
+        assertTrue(request.getMessages().isEmpty());
+        assertNull(request.getAssignedVolunteerUsername());
     }
 
-    // Verifies that the JSONObject constructor accurately parses all populated JSON fields and converts the enum strings into their corresponding enum values.
     @Test
     public void testAssistanceRequestJsonConstructorAllFieldsPopulated() {
-        UUID id = UUID.fromString(UUID.randomUUID().toString());
+        UUID id = UUID.randomUUID();
+        JSONObject json = jsonRequest(id);
 
+        AssistanceRequest request = new AssistanceRequest(json);
+
+        assertEquals(id, request.getId());
+        assertEquals("555-0100", request.getContactInfo());
+        assertSame(json.get("address"), request.getAddress());
+        assertEquals(AidCategory.MEDICAL, request.getAidCategory());
+        assertEquals(Severity.HIGH, request.getSeverity());
+        assertEquals(RequestStatus.SUBMITTED, request.getStatus());
+        assertEquals("Need assistance", request.getMessage());
+        assertSame(json.get("location"), request.getLocation());
+        assertEquals(Boolean.TRUE, request.getHasPet());
+        assertEquals("responder1", request.getAssignedVolunteerUsername());
+        assertNotNull(request.getMessages());
+        assertTrue(request.getMessages().isEmpty());
     }
 
-    // Verifies that the JSONObject constructor sets aidCategory, severity, and status to null without throwing an exception when those JSON keys are null.
     @Test
     public void testAssistanceRequestJsonConstructorNullEnums() {
-        UUID id = UUID.fromString(UUID.randomUUID().toString());
+        JSONObject json = jsonRequest(UUID.randomUUID());
+        json.put("aidCategory", null);
+        json.put("severity", null);
+        json.put("status", null);
 
+        AssistanceRequest request = new AssistanceRequest(json);
+
+        assertNull(request.getAidCategory());
+        assertNull(request.getSeverity());
+        assertNull(request.getStatus());
     }
 
-    // Verifies how the JSONObject constructor behaves when given a null or malformed UUID string for the "id" field.
     @Test
     public void testAssistanceRequestJsonConstructorInvalidId() {
-        String invalidUuidString = "not-a-valid-uuid";
+        JSONObject malformedId = jsonRequest(UUID.randomUUID());
+        malformedId.put("id", "not-a-valid-uuid");
+        assertThrows(IllegalArgumentException.class,
+                () -> new AssistanceRequest(malformedId));
 
+        JSONObject nullId = jsonRequest(UUID.randomUUID());
+        nullId.put("id", null);
+        assertThrows(NullPointerException.class,
+                () -> new AssistanceRequest(nullId));
     }
 
-    // Verifies how the JSONObject constructor behaves when "aidCategory", "severity", or "status" contains an unrecognized enum string.
     @Test
     public void testAssistanceRequestJsonConstructorInvalidEnumString() {
-        UUID id = UUID.fromString(UUID.randomUUID().toString());
+        JSONObject invalidCategory = jsonRequest(UUID.randomUUID());
+        invalidCategory.put("aidCategory", "UNKNOWN");
+        assertThrows(IllegalArgumentException.class,
+                () -> new AssistanceRequest(invalidCategory));
 
+        JSONObject invalidSeverity = jsonRequest(UUID.randomUUID());
+        invalidSeverity.put("severity", "UNKNOWN");
+        assertThrows(IllegalArgumentException.class,
+                () -> new AssistanceRequest(invalidSeverity));
+
+        JSONObject invalidStatus = jsonRequest(UUID.randomUUID());
+        invalidStatus.put("status", "UNKNOWN");
+        assertThrows(IllegalArgumentException.class,
+                () -> new AssistanceRequest(invalidStatus));
     }
 
-    // Verifies that addMessage() returns true, increases the messages list size to one, and stores the expected User and message text.
     @Test
     public void testAddMessageSingle() {
-        UUID id = UUID.fromString(UUID.randomUUID().toString());
+        AssistanceRequest request = request();
+        User sender = user("rosa");
 
+        assertTrue(request.addMessage(sender, "I need a ride."));
+        assertEquals(1, request.getMessages().size());
+        assertSame(sender, request.getMessages().get(0).getSender());
+        assertEquals("I need a ride.", request.getMessages().get(0).getBody());
     }
 
-    // Verifies that calling addMessage() multiple times appends each Message to the list in chronological order.
     @Test
     public void testAddMessageMultiplePreservesOrder() {
-        UUID id = UUID.fromString(UUID.randomUUID().toString());
+        AssistanceRequest request = request();
+        User firstSender = user("first");
+        User secondSender = user("second");
 
+        request.addMessage(firstSender, "First message");
+        request.addMessage(secondSender, "Second message");
+
+        assertEquals(2, request.getMessages().size());
+        assertEquals("First message", request.getMessages().get(0).getBody());
+        assertSame(firstSender, request.getMessages().get(0).getSender());
+        assertEquals("Second message", request.getMessages().get(1).getBody());
+        assertSame(secondSender, request.getMessages().get(1).getSender());
+        assertFalse(request.getMessages().get(0).getTimestamp()
+                .isAfter(request.getMessages().get(1).getTimestamp()));
     }
 
-    // Verifies how addMessage() behaves when passed a null User or a null or empty message string.
     @Test
     public void testAddMessageWithNullUserOrText() {
-        UUID id = UUID.fromString(UUID.randomUUID().toString());
+        AssistanceRequest request = request();
 
+        assertTrue(request.addMessage(null, "Anonymous message"));
+        assertTrue(request.addMessage(user("sender"), null));
+        assertTrue(request.addMessage(user("empty"), ""));
+
+        assertEquals(3, request.getMessages().size());
+        assertNull(request.getMessages().get(0).getSender());
+        assertEquals("Anonymous message", request.getMessages().get(0).getBody());
+        assertNull(request.getMessages().get(1).getBody());
+        assertEquals("", request.getMessages().get(2).getBody());
     }
 
-    // Verifies that setMessages() replaces the existing message list when passed a valid, non-null ArrayList of Message objects.
     @Test
     public void testSetMessagesWithValidList() {
-        UUID id = UUID.fromString(UUID.randomUUID().toString());
+        AssistanceRequest request = request();
+        ArrayList<Message> messages = new ArrayList<>();
+        Message message = new Message(user("sender"), "Saved message");
+        messages.add(message);
 
+        request.setMessages(messages);
+
+        assertSame(messages, request.getMessages());
+        assertSame(message, request.getMessages().get(0));
     }
 
-    // Verifies that passing null to setMessages() initializes an empty ArrayList rather than leaving the messages field null.
     @Test
     public void testSetMessagesWithNullCreatesEmptyList() {
-        UUID id = UUID.fromString(UUID.randomUUID().toString());
+        AssistanceRequest request = request();
+
+        request.setMessages(null);
+
+        assertNotNull(request.getMessages());
+        assertTrue(request.getMessages().isEmpty());
     }
 
-    // Verifies that calling addMessage() after setMessages(null) successfully adds a message without throwing a NullPointerException.
     @Test
     public void testAddMessageAfterSetMessagesNull() {
-        UUID id = UUID.fromString(UUID.randomUUID().toString());
+        AssistanceRequest request = request();
+        User sender = user("sender");
 
+        request.setMessages(null);
+
+        assertTrue(request.addMessage(sender, "Still works"));
+        assertEquals(1, request.getMessages().size());
+        assertSame(sender, request.getMessages().get(0).getSender());
     }
 
-    // Verifies that updateStatus() and setStatus() properly transition the request across all RequestStatus values.
     @Test
     public void testUpdateStatusTransitions() {
-        UUID id = UUID.fromString(UUID.randomUUID().toString());
+        AssistanceRequest request = request();
 
+        for (RequestStatus status : RequestStatus.values()) {
+            request.updateStatus(status);
+            assertEquals(status, request.getStatus());
+            request.setStatus(status);
+            assertEquals(status, request.getStatus());
+        }
     }
 
-    // Verifies that setHasPet() and getHasPet() accurately store and return true, false, and null.
     @Test
     public void testSetHasPetThreeStates() {
-        UUID id = UUID.fromString(UUID.randomUUID().toString());
+        AssistanceRequest request = request();
 
+        request.setHasPet(true);
+        assertEquals(Boolean.TRUE, request.getHasPet());
+        request.setHasPet(false);
+        assertEquals(Boolean.FALSE, request.getHasPet());
+        request.setHasPet(null);
+        assertNull(request.getHasPet());
     }
 
-    // Verifies that setAssignedVolunteerUsername() and getAssignedVolunteerUsername() properly assign a username string and reset it to null.
     @Test
     public void testSetAndGetAssignedVolunteerUsername() {
-        UUID id = UUID.fromString(UUID.randomUUID().toString());
+        AssistanceRequest request = request();
+
+        request.setAssignedVolunteerUsername("volunteer1");
+        assertEquals("volunteer1", request.getAssignedVolunteerUsername());
+        request.setAssignedVolunteerUsername(null);
+        assertNull(request.getAssignedVolunteerUsername());
     }
 
-    // Verifies that all remaining getters and setters on AssistanceRequest accurately update and return their respective fields.
     @Test
     public void testAssistanceRequestSettersAndGetters() {
-        UUID initialId = UUID.fromString("11111111-1111-1111-1111-111111111124");
-        UUID updatedId = UUID.fromString("11111111-1111-1111-1111-111111111125");
+        AssistanceRequest request = request();
+        UUID updatedId = UUID.fromString(
+                "11111111-1111-1111-1111-111111111125");
+        Address newAddress = new Address("45 Oak Ave", "Columbia", "SC", "29201");
+        Address newLocation = new Address("89 Pine St", "Columbia", "SC", "29201");
 
+        request.setId(updatedId);
+        request.setContactInfo("new contact");
+        request.setAddress(newAddress);
+        request.setAidCategory(AidCategory.TRANSPORTATION);
+        request.setSeverity(Severity.LOW);
+        request.setStatus(RequestStatus.COMPLETED);
+        request.setMessage("Updated request");
+        request.setLocation(newLocation);
+
+        assertEquals(updatedId, request.getId());
+        assertEquals("new contact", request.getContactInfo());
+        assertSame(newAddress, request.getAddress());
+        assertEquals(AidCategory.TRANSPORTATION, request.getAidCategory());
+        assertEquals(Severity.LOW, request.getSeverity());
+        assertEquals(RequestStatus.COMPLETED, request.getStatus());
+        assertEquals("Updated request", request.getMessage());
+        assertSame(newLocation, request.getLocation());
     }
 
-    // =========================================================================
-    // VolunteerRequest Tests
-    // =========================================================================
-
-    // Verifies that the VolunteerRequest constructor stores all passed arguments and automatically defaults the status to PENDING.
+    // VolunteerRequest tests
     @Test
     public void testVolunteerRequestConstructorDefaultsToPending() {
-        UUID id = UUID.fromString(UUID.randomUUID().toString());
+        UUID id = UUID.randomUUID();
+        ArrayList<Skill> skills = new ArrayList<>(
+                Arrays.asList(Skill.MEDICAL, Skill.GENERAL));
+        VolunteerRequest request = new VolunteerRequest(
+                id, "Rosa", "Carter", skills);
 
+        assertEquals(id, request.getId());
+        assertEquals("Rosa", request.getFirstName());
+        assertEquals("Carter", request.getLastName());
+        assertSame(skills, request.getSkills());
+        assertEquals(VolunteerRequestStatus.PENDING, request.getStatus());
     }
 
-    // Verifies that setStatus() updates a VolunteerRequest from PENDING to APPROVED and REJECTED.
     @Test
     public void testVolunteerRequestSetStatusApprovedAndRejected() {
-        UUID id = UUID.fromString(UUID.randomUUID().toString());
+        VolunteerRequest request = new VolunteerRequest(
+                UUID.randomUUID(), "Rosa", "Carter", new ArrayList<>());
+
+        request.setStatus(VolunteerRequestStatus.APPROVED);
+        assertEquals(VolunteerRequestStatus.APPROVED, request.getStatus());
+        request.setStatus(VolunteerRequestStatus.REJECTED);
+        assertEquals(VolunteerRequestStatus.REJECTED, request.getStatus());
     }
 
-    // Verifies how VolunteerRequest handles being initialized or updated with an empty or null skills list.
     @Test
     public void testVolunteerRequestWithNullOrEmptySkills() {
-        UUID id = UUID.fromString(UUID.randomUUID().toString());
+        VolunteerRequest nullSkills = new VolunteerRequest(
+                UUID.randomUUID(), "Rosa", "Carter", null);
+        assertNull(nullSkills.getSkills());
 
+        VolunteerRequest request = new VolunteerRequest(
+                UUID.randomUUID(), "Rosa", "Carter", new ArrayList<>());
+        assertNotNull(request.getSkills());
+        assertTrue(request.getSkills().isEmpty());
+
+        request.setSkills(null);
+        assertNull(request.getSkills());
+        request.setSkills(new ArrayList<>());
+        assertNotNull(request.getSkills());
+        assertTrue(request.getSkills().isEmpty());
     }
 
-    // Verifies that setId(), setFirstName(), setLastName(), and setSkills() properly update their respective fields on VolunteerRequest.
     @Test
     public void testVolunteerRequestSettersAndGetters() {
-        UUID initialId = UUID.fromString("22222222-2222-2222-2222-222222222224");
-        UUID updatedId = UUID.fromString("22222222-2222-2222-2222-222222222225");
+        VolunteerRequest request = new VolunteerRequest(
+                UUID.fromString("22222222-2222-2222-2222-222222222224"),
+                "Rosa", "Carter", new ArrayList<>());
+        UUID updatedId = UUID.fromString(
+                "22222222-2222-2222-2222-222222222225");
+        ArrayList<Skill> skills = new ArrayList<>(
+                Arrays.asList(Skill.ELECTRICAL, Skill.TRANSPORTATION));
 
+        request.setId(updatedId);
+        request.setFirstName("Updated");
+        request.setLastName("Applicant");
+        request.setSkills(skills);
+
+        assertEquals(updatedId, request.getId());
+        assertEquals("Updated", request.getFirstName());
+        assertEquals("Applicant", request.getLastName());
+        assertSame(skills, request.getSkills());
     }
 
-    // =========================================================================
-    // Message Tests
-    // =========================================================================
-
-    // Verifies that the Message constructor assigns the sender and body while automatically initializing a non-null timestamp.
+    // Message tests
     @Test
     public void testMessageConstructorSetsFieldsAndTimestamp() {
+        User sender = user("sender");
+        LocalDateTime beforeCreation = LocalDateTime.now();
 
+        Message message = new Message(sender, "Hello");
+        LocalDateTime afterCreation = LocalDateTime.now();
+
+        assertSame(sender, message.getSender());
+        assertEquals("Hello", message.getBody());
+        assertNotNull(message.getTimestamp());
+        assertFalse(message.getTimestamp().isBefore(beforeCreation));
+        assertFalse(message.getTimestamp().isAfter(afterCreation));
     }
 
-    // Verifies that getSender() and getSenderUser() both return the exact same User instance.
     @Test
     public void testMessageGetSenderAndGetSenderUserMatch() {
+        User sender = user("sender");
+        Message message = new Message(sender, "Hello");
 
+        assertSame(sender, message.getSender());
+        assertSame(message.getSender(), message.getSenderUser());
     }
 
-    // Verifies that Message.toString() returns a string containing the timestamp, message body, and sender's username.
     @Test
     public void testMessageToStringFormat() {
+        Message message = new Message(user("rosa"), "Need supplies");
 
+        String text = message.toString();
+
+        assertTrue(text.contains(message.getTimestamp().toString()));
+        assertTrue(text.contains("Need supplies"));
+        assertTrue(text.contains("rosa"));
     }
 
-    // Verifies what happens when Message.toString() is called on a Message whose sender is null.
     @Test
     public void testMessageToStringWithNullSender() {
+        Message message = new Message(null, "Anonymous");
 
+        assertThrows(NullPointerException.class, message::toString);
     }
 
-    // Verifies that setBody(), setSender(), and setTimestamp() accurately overwrite the fields of a Message.
     @Test
     public void testMessageSetters() {
+        Message message = new Message(user("first"), "Original");
+        User replacementSender = user("replacement");
+        LocalDateTime replacementTimestamp =
+                LocalDateTime.of(2026, 1, 2, 3, 4, 5);
 
+        message.setBody("Updated");
+        message.setSender(replacementSender);
+        message.setTimestamp(replacementTimestamp);
+
+        assertEquals("Updated", message.getBody());
+        assertSame(replacementSender, message.getSender());
+        assertEquals(replacementTimestamp, message.getTimestamp());
     }
 
-    // =========================================================================
-    // EmergencyAlert & Enum Tests
-    // =========================================================================
-
-    // Verifies that a new EmergencyAlert initializes its fields to null and allows them to be assigned within the package.
+    // EmergencyAlert and enum tests
     @Test
     public void testEmergencyAlertDefaultConstructorAndFields() {
-        UUID alertid = UUID.fromString(UUID.randomUUID().toString());
+        EmergencyAlert alert = new EmergencyAlert();
 
+        assertNotNull(alert);
+        assertNull(alert.id);
+        assertNull(alert.message);
+        assertNull(alert.targetArea);
+
+        UUID alertId = UUID.randomUUID();
+        alert.id = alertId;
+        alert.message = "Evacuate the area";
+        alert.targetarea = "Coastal zone";
+
+        assertEquals(alertId, alert.id);
+        assertEquals("Evacuate the area", alert.message);
+        assertEquals("Coastal zone", alert.targetArea);
     }
 
-    // Verifies that AidCategory, Severity, RequestStatus, and VolunteerRequestStatus resolve all expected enum constants.
     @Test
     public void testRequestEnumsValues() {
-
+        assertArrayEquals(new AidCategory[] {
+                AidCategory.MEDICAL,
+                AidCategory.PHYSICAL,
+                AidCategory.TRANSPORTATION
+        }, AidCategory.values());
+        assertArrayEquals(new Severity[] {
+                Severity.LOW,
+                Severity.HIGH,
+                Severity.CRITICAL
+        }, Severity.values());
+        assertArrayEquals(new RequestStatus[] {
+                RequestStatus.SUBMITTED,
+                RequestStatus.ASSIGNED,
+                RequestStatus.IN_PROGRESS,
+                RequestStatus.COMPLETED
+        }, RequestStatus.values());
+        assertArrayEquals(new VolunteerRequestStatus[] {
+                VolunteerRequestStatus.PENDING,
+                VolunteerRequestStatus.APPROVED,
+                VolunteerRequestStatus.REJECTED
+        }, VolunteerRequestStatus.values());
     }
 }
