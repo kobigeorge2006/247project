@@ -8,7 +8,6 @@ module com.relief {
     requires java.net.http;
     requires com.fasterxml.jackson.databind;
     requires javafx.web;
-    requires junit;
 
     opens com.frontend to javafx.fxml;
     exports com.frontend;
