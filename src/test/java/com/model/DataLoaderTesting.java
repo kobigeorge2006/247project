@@ -12,14 +12,16 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 /**
- * Tests for DataLoader methods.
+ * Tests the DataLoader class to ensure all core application data models 
+ * parse and load correctly from persistent JSON storage.
  */
 public class DataLoaderTesting {
 
     // Written by Jake Sheahan
 
     /**
-     * Tests loading users.
+     * Tests loading user profiles from JSON storage, verifying expected 
+     * user counts, usernames, and identifier attributes.
      */
     @Test
     public void testLoadUsers() {
@@ -35,7 +37,8 @@ public class DataLoaderTesting {
     }
 
     /**
-     * Tests loading shelters.
+     * Tests loading emergency shelters into the map structure, validating 
+     * specific target UUIDs, shelter names, and maximum capacities.
      */
     @Test
     public void testLoadShelters() {
@@ -55,7 +58,8 @@ public class DataLoaderTesting {
     }
 
     /**
-     * Tests loading assistance requests.
+     * Tests loading assistance requests from storage to verify proper 
+     * list population and unique identifier validity.
      */
     @Test
     public void testLoadRequests() {
@@ -71,7 +75,8 @@ public class DataLoaderTesting {
     }
 
     /**
-     * Tests loading messages for requests.
+     * Tests that message discussion threads tied to assistance requests 
+     * are successfully populated and hydrated from the source.
      */
     @Test
     public void testLoadRequestsMessages() {
@@ -87,7 +92,8 @@ public class DataLoaderTesting {
     }
 
     /**
-     * Tests loading hurricanes.
+     * Tests loading hurricane event tracking logs to verify proper parsing, 
+     * total event counts, and matching unique identifiers.
      */
     @Test
     public void testLoadHurricanes() {
