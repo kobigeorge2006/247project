@@ -1,15 +1,25 @@
-package com.model.requests;
+package com.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
+import static org.junit.Assert.*;
+import org.junit.Test;
+
 import org.json.simple.JSONObject;
 import org.junit.Test;
 
 import com.location.Address;
+import com.model.requests.AidCategory;
 import com.model.requests.AssistanceRequest;
+import com.model.requests.EmergencyAlert;
+import com.model.requests.Message;
+import com.model.requests.RequestStatus;
+import com.model.requests.Severity;
+import com.model.requests.VolunteerRequest;
+import com.model.requests.VolunteerRequestStatus;
 import com.model.requests.AssistanceRequest;
 import com.model.requests.AssistanceRequest;
 import com.model.user.Skill;
@@ -420,7 +430,7 @@ public class RequestsTesting {
         UUID alertId = UUID.randomUUID();
         alert.id = alertId;
         alert.message = "Evacuate the area";
-        alert.targetArea = "Coastal zone";
+        alert.targetarea = "Coastal zone";
 
         assertEquals(alertId, alert.id);
         assertEquals("Evacuate the area", alert.message);
