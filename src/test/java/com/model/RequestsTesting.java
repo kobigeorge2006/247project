@@ -1,5 +1,6 @@
 package com.model;
 
+import com.model.requests.EmergencyAlert;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -430,7 +431,7 @@ public class RequestsTesting {
         UUID alertId = UUID.randomUUID();
         alert.id = alertId;
         alert.message = "Evacuate the area";
-        alert.targetarea = "Coastal zone";
+        alert.targetArea = "Coastal zone";
 
         assertEquals(alertId, alert.id);
         assertEquals("Evacuate the area", alert.message);
