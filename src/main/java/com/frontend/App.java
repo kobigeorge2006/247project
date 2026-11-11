@@ -73,7 +73,7 @@ public class App extends Application {
         controller.showRouteOnMap(userAddress,addresses[1]);
     }
 
-    static void setRoot(String fxml) throws IOException {
+    public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 

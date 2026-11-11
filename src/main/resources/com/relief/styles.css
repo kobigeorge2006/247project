@@ -1,0 +1,20 @@
+
+.title {
+    -fx-text-fill: #142D43;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+
+.button {
+    -fx-background-color: #087F8C;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-padding: 12px;
+    -fx-cursor: hand;
+}
+
+.special {
+    -fx-text-fill: #087F8C;
+}

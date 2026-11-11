@@ -1,13 +1,16 @@
-package com.frontend;
+package com.controllers;
 
 import java.io.IOException;
 
+import com.frontend.App;
+
 import javafx.fxml.FXML;
+
 
 /**
  * Handles navigation actions from the primary view.
  */
-public class PrimaryController {
+public class HomeController {
 
     /**
      * Switches the displayed view to the secondary screen.
@@ -16,6 +19,6 @@ public class PrimaryController {
      */
     @FXML
     private void switchToSecondary() throws IOException {
-        App.setRoot("secondary");
+        App.setRoot("login");
     }
 }
