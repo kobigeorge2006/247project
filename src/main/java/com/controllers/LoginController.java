@@ -1,23 +1,28 @@
 package com.controllers;
 
-import java.io.IOException;
-
-import com.frontend.App;
-
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
-/**
- * Handles navigation actions from the secondary view.
- */
 public class LoginController {
 
-    /**
-     * Switches the displayed view to the primary screen.
-     *
-     * @throws IOException if the primary view cannot be loaded
-     */
     @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("home");
+    private TextField txt_username;
+
+    @FXML
+    private PasswordField txt_password;
+
+    @FXML
+    private Label statusLabel;
+
+    @FXML
+    private void login() {
+        if (txt_username.getText().isBlank() || txt_password.getText().isBlank()) {
+            statusLabel.setText("Enter both username and password.");
+            return;
+        }
+
+        statusLabel.setText("Authentication is not configured yet.");
     }
 }
