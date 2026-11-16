@@ -3,6 +3,11 @@
 
 Youtube link: https://youtu.be/A0Cmh34-FqM
 
+[Volunteer.pdf](https://github.com/user-attachments/files/34895741/Volunteer.pdf)
+[User.pdf](https://github.com/user-attachments/files/34895748/User.pdf)
+
+
+
 ## Build
 
 Compile the project from the repository root with:
