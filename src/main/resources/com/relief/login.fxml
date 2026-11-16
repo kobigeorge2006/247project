@@ -12,7 +12,7 @@
         <Label text="Login" />
         <TextField fx:id="txt_username" promptText="Username" />
         <PasswordField fx:id="txt_password" promptText="Password" />
-        <Button text="Login" onAction="#login" />
+        <Button text="Login" onAction="#handleLogin" />
         <Label fx:id="statusLabel" />
     </children>
     <padding>
