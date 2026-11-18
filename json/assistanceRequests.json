@@ -1,1 +1,15 @@
-[{"severity":"HIGH","hasPet":false,"address":"123 Main St, Columbia, SC 29201","assignedVolunteer":null,"contactInfo":"8035551234","aidCategory":"MEDICAL","messages":[],"location":"123 Main St, Columbia, SC 29201","id":"c87d3e12-6b94-4f0a-a528-91de73b406fc","message":"Need medical assistance","status":"SUBMITTED"}]
+[
+    {
+        "severity": "HIGH",
+        "hasPet": false,
+        "address": "123 Main St, Columbia, SC 29201",
+        "assignedVolunteer": null,
+        "contactInfo": "8035551234",
+        "aidCategory": "MEDICAL",
+        "messages": [],
+        "location": "123 Main St, Columbia, SC 29201",
+        "id": "c87d3e12-6b94-4f0a-a528-91de73b406fc",
+        "message": "Need medical assistance",
+        "status": "SUBMITTED"
+    }
+]
