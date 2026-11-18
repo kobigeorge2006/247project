@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.controllers.ReliefScreensController"
+            prefWidth="1100" prefHeight="800"
+            stylesheets="@relief-screens.css">
+
+    <left>
+        <fx:include source="sidebar.fxml"/>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true">
+            <content>
+                <VBox spacing="24" styleClass="page">
+
+                    <Label text="CAROLINA HURRICANE HELPER / WELCOME TO THE TEAM"
+                           styleClass="breadcrumb"/>
+
+                    <Label text="Welcome to the team"
+                           styleClass="page-title"/>
+
+                    <Label text="Volunteer record: Rosa Delgado."
+                           styleClass="body-copy"/>
+
+                    <VBox spacing="10" styleClass="notice">
+                        <Label text="Volunteer: Yes"
+                               styleClass="card-title"/>
+
+                        <Label text="Username: rdelgado • Email: RDelgado@email.com"
+                               wrapText="true"
+                               styleClass="body-copy"/>
+                    </VBox>
+
+                    <VBox spacing="14" styleClass="card">
+                        <Label text="Start with a nearby request"
+                               styleClass="card-title"/>
+
+                        <Label text="Assigned request: MEDICAL • HIGH • Sophie needs medical assistance."
+                               wrapText="true"
+                               styleClass="body-copy"/>
+                    </VBox>
+
+                    <Button text="Browse requests"
+                            userData="browse-requests"
+                            onAction="#navigate"
+                            styleClass="primary"/>
+
+                    <Button text="View assigned request"
+                            userData="requestdetails"
+                            onAction="#navigate"
+                            styleClass="text-link"/>
+
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

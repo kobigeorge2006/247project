@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.controllers.ReliefScreensController"
+      prefWidth="210" minWidth="210"
+      spacing="12" styleClass="sidebar">
+
+    <Label text="CHH" styleClass="brand"/>
+
+    <Label text="Carolina&#10;Hurricane Helper"
+           styleClass="brand-name"/>
+
+    <Label text="FIND SUPPORT" styleClass="nav-heading"/>
+
+    <Button text="Home" userData="home"
+            onAction="#navigate" styleClass="nav-button"/>
+
+    <Button text="Find shelter" userData="shelters"
+            onAction="#navigate" styleClass="nav-button"/>
+
+    <Button text="Storm updates" userData="stormupdates"
+            onAction="#navigate" styleClass="nav-button"/>
+
+    <Label text="VOLUNTEER" styleClass="nav-heading"/>
+
+    <Button text="Browse requests" userData="browse-requests"
+            onAction="#navigate" styleClass="nav-button"/>
+
+    <Button text="My requests" userData="my-requests"
+            onAction="#navigate" styleClass="nav-button"/>
+
+    <Button text="Volunteer program"
+            userData="volunteerapplication"
+            onAction="#navigate" styleClass="nav-button"/>
+
+    <Region VBox.vgrow="ALWAYS"/>
+
+    <VBox spacing="8" styleClass="account">
+        <Label text="YOUR ACCOUNT" styleClass="nav-heading"/>
+
+        <Button text="Sign in / Register" userData="login"
+                onAction="#navigate" styleClass="nav-button"/>
+    </VBox>
+
+    <Label text="Help starts with&#10;our community."
+           styleClass="footer-copy"/>
+
+</VBox>
