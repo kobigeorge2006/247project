@@ -1,1 +1,13 @@
-[]
+[
+    {
+      "zipCode": "29201",
+      "address": "123 Main Street, Columbia, SC",
+      "name": "Columbia Emergency Relief Shelter",
+      "id": "c6d1474e-5c9f-4c33-8e7a-2b1e740a1231",
+      "inventory": {
+        "Water": 30
+      },
+      "capacity": 100,
+      "status": "OPEN"
+    }
+  ]

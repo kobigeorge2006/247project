@@ -1,23 +1,37 @@
 package com.controllers;
 
-import java.io.IOException;
-
 import com.frontend.App;
-
+import com.model.HurricaneReliefSystem;
+import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
-/**
- * Handles navigation actions from the secondary view.
- */
 public class LoginController {
 
-    /**
-     * Switches the displayed view to the primary screen.
-     *
-     * @throws IOException if the primary view cannot be loaded
-     */
+    private final HurricaneReliefSystem system = new HurricaneReliefSystem();
+
     @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("home");
+    private TextField txt_username;
+
+    @FXML
+    private PasswordField txt_password;
+
+    @FXML
+    private Label statusLabel;
+
+    @FXML
+    private void handleLogin() throws IOException {
+        boolean success = system.logIn(
+            txt_username.getText(),
+            txt_password.getText()
+        );
+
+        if (success) {
+            App.setRoot("home");
+        } else {
+            statusLabel.setText("Incorrect username or password.");
+        }
     }
 }

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.controllers.SheltersController"
+            prefWidth="1280"
+            prefHeight="960"
+            style="-fx-background-color: #F4F6F9; -fx-font-family: 'System';">
+
+    <left>
+        <VBox minWidth="224"
+              prefWidth="224"
+              maxWidth="224"
+              spacing="20"
+              style="-fx-background-color: #10182C;">
+
+            <padding>
+                <Insets top="24" right="24" bottom="24" left="24"/>
+            </padding>
+
+            <Label text="CHH"
+                   style="-fx-text-fill: white; -fx-font-size: 30px; -fx-font-weight: bold;"/>
+
+            <Label text="Carolina&#10;Hurricane Helper"
+                   style="-fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold;"/>
+
+            <VBox spacing="6">
+                <Label text="FIND SUPPORT"
+                       style="-fx-text-fill: #99ACC8; -fx-font-size: 10px; -fx-font-weight: bold;"/>
+
+                <Button text="Home"
+                        onAction="#goHome"
+                        alignment="CENTER_LEFT"
+                        maxWidth="Infinity"
+                        prefHeight="46"
+                        style="-fx-background-color: transparent; -fx-text-fill: #D4DDEE; -fx-font-size: 14px; -fx-padding: 0 12; -fx-cursor: hand;"/>
+
+                <Button text="Find shelter"
+                        alignment="CENTER_LEFT"
+                        maxWidth="Infinity"
+                        prefHeight="46"
+                        style="-fx-background-color: #FFFBD9; -fx-background-radius: 8; -fx-text-fill: #10182C; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 0 12;"/>
+
+                <Button text="Storm updates"
+                        alignment="CENTER_LEFT"
+                        maxWidth="Infinity"
+                        prefHeight="46"
+                        style="-fx-background-color: transparent; -fx-text-fill: #D4DDEE; -fx-font-size: 14px; -fx-padding: 0 12;"/>
+
+                <Label text="VOLUNTEER"
+                       style="-fx-text-fill: #99ACC8; -fx-font-size: 10px; -fx-font-weight: bold;">
+                    <VBox.margin>
+                        <Insets top="12"/>
+                    </VBox.margin>
+                </Label>
+
+                <Button text="Browse requests"
+                        alignment="CENTER_LEFT"
+                        maxWidth="Infinity"
+                        prefHeight="46"
+                        style="-fx-background-color: transparent; -fx-text-fill: #D4DDEE; -fx-font-size: 14px; -fx-padding: 0 12;"/>
+
+                <Button text="My requests"
+                        alignment="CENTER_LEFT"
+                        maxWidth="Infinity"
+                        prefHeight="46"
+                        style="-fx-background-color: transparent; -fx-text-fill: #D4DDEE; -fx-font-size: 14px; -fx-padding: 0 12;"/>
+
+                <Button text="Volunteer program"
+                        alignment="CENTER_LEFT"
+                        maxWidth="Infinity"
+                        prefHeight="46"
+                        style="-fx-background-color: transparent; -fx-text-fill: #D4DDEE; -fx-font-size: 14px; -fx-padding: 0 12;"/>
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <VBox spacing="8"
+                  minHeight="95"
+                  style="-fx-background-color: #1C2943; -fx-background-radius: 8;">
+                <padding>
+                    <Insets top="12" right="12" bottom="12" left="12"/>
+                </padding>
+
+                <Label text="YOUR ACCOUNT"
+                       style="-fx-text-fill: #A6B4D0; -fx-font-size: 10px; -fx-font-weight: bold;"/>
+
+                <Label text="My account"
+                       style="-fx-text-fill: white; -fx-font-size: 13px;"/>
+            </VBox>
+
+            <Label text="Help starts with&#10;our community."
+                   style="-fx-text-fill: #A6B4D0; -fx-font-size: 13px;"/>
+        </VBox>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true"
+                    hbarPolicy="NEVER"
+                    style="-fx-background: #F4F6F9; -fx-background-color: #F4F6F9; -fx-padding: 0;">
+
+            <content>
+                <VBox spacing="24">
+                    <padding>
+                        <Insets top="40" right="40" bottom="40" left="40"/>
+                    </padding>
+
+                    <Label text="CAROLINA HURRICANE HELPER  /  NEARBY SHELTERS"
+                           style="-fx-text-fill: #637084; -fx-font-size: 11px; -fx-font-weight: bold;"/>
+
+                    <Label text="Nearby shelters"
+                           style="-fx-text-fill: #10182C; -fx-font-size: 32px; -fx-font-weight: bold;"/>
+
+                    <Label text="View shelters and recorded capacity."
+                           style="-fx-text-fill: #637084; -fx-font-size: 16px;"/>
+
+                    <VBox spacing="12">
+                        <Label text="Search by ZIP code"
+                               style="-fx-text-fill: #10182C; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+                        <TextField fx:id="zipField"
+                                   promptText="Enter a ZIP code, or leave blank for all shelters"
+                                   onAction="#searchShelters"
+                                   maxWidth="560"
+                                   prefHeight="48"
+                                   style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #DDE3EB; -fx-border-radius: 8; -fx-padding: 12 14; -fx-font-size: 14px;"/>
+
+                        <Button text="Search shelters"
+                                onAction="#searchShelters"
+                                style="-fx-background-color: #10182C; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 12 20; -fx-cursor: hand;"/>
+                    </VBox>
+
+                    <Label fx:id="resultsLabel"
+                           wrapText="true"
+                           style="-fx-text-fill: #637084; -fx-font-size: 14px;"/>
+
+                    <!-- Controller inserts JSON shelter information here. -->
+                    <VBox fx:id="shelterResults" spacing="28"/>
+
+                    <Label text="Capacity is the recorded total. Available spaces, distances and pet policies are not included in the supplied data."
+                           wrapText="true"
+                           style="-fx-text-fill: #637084; -fx-font-size: 14px;"/>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

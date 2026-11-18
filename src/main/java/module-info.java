@@ -10,6 +10,6 @@ module com.relief {
     requires javafx.web;
 
     opens com.frontend to javafx.fxml;
-    opens com.controllers to javafx.fmxl;
+    opens com.controllers to javafx.fxml;
     exports com.frontend;
 }
