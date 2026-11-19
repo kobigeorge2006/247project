@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            stylesheets="@styles.css"
+            prefWidth="1280"
+            prefHeight="960"
+            styleClass="app-root">
+    <left>
+        <VBox styleClass="sidebar"
+              spacing="20"
+              minWidth="224"
+              prefWidth="224"
+              maxWidth="224">
+            <Label text="CHH"
+                   styleClass="design-label, text-30-semibold-white"
+                   wrapText="true"
+                   alignment="TOP_LEFT"
+                   textOverrun="CLIP"
+                   minHeight="44"
+                   prefHeight="44"
+                   maxHeight="44"/>
+
+            <Label text="Carolina&#10;Hurricane Helper"
+                   styleClass="design-label, text-15-semibold-white"
+                   wrapText="true"
+                   alignment="TOP_LEFT"
+                   textOverrun="CLIP"
+                   minWidth="176"
+                   prefWidth="176"
+                   maxWidth="176"
+                   minHeight="44"
+                   prefHeight="44"
+                   maxHeight="44"/>
+
+            <VBox spacing="6"
+                  minWidth="176"
+                  prefWidth="176"
+                  maxWidth="176"
+                  minHeight="400"
+                  prefHeight="400"
+                  maxHeight="400">
+                <Label text="FIND SUPPORT"
+                       styleClass="design-label, text-10-semibold-99ACC8"
+                       wrapText="true"
+                       alignment="TOP_LEFT"
+                       textOverrun="CLIP"
+                       minHeight="15"
+                       prefHeight="15"
+                       maxHeight="15"/>
+
+                <Button text="Home"
+                        userData="Home"
+                        styleClass="nav-button, nav-button-selected"
+                        minWidth="176"
+                        prefWidth="176"
+                        maxWidth="176"
+                        minHeight="46"
+                        prefHeight="46"
+                        maxHeight="46"/>
+
+                <Button text="Find shelter"
+                        userData="Nearby shelters"
+                        styleClass="nav-button"
+                        minWidth="176"
+                        prefWidth="176"
+                        maxWidth="176"
+                        minHeight="46"
+                        prefHeight="46"
+                        maxHeight="46"/>
+
+                <Button text="Storm updates"
+                        userData="Storm updates"
+                        styleClass="nav-button"
+                        minWidth="176"
+                        prefWidth="176"
+                        maxWidth="176"
+                        minHeight="46"
+                        prefHeight="46"
+                        maxHeight="46"/>
+
+                <Label text="VOLUNTEER"
+                       styleClass="design-label, text-10-semibold-99ACC8"
+                       wrapText="true"
+                       alignment="TOP_LEFT"
+                       textOverrun="CLIP"
+                       minHeight="15"
+                       prefHeight="15"
+                       maxHeight="15"/>
+
+                <Button text="Browse requests"
+                        userData="Browse requests"
+                        styleClass="nav-button"
+                        minWidth="176"
+                        prefWidth="176"
+                        maxWidth="176"
+                        minHeight="46"
+                        prefHeight="46"
+                        maxHeight="46"/>
+
+                <Button text="My requests"
+                        userData="My requests"
+                        styleClass="nav-button"
+                        minWidth="176"
+                        prefWidth="176"
+                        maxWidth="176"
+                        minHeight="46"
+                        prefHeight="46"
+                        maxHeight="46"/>
+
+                <Button text="Volunteer program"
+                        userData="Volunteer application"
+                        styleClass="nav-button"
+                        minWidth="176"
+                        prefWidth="176"
+                        maxWidth="176"
+                        minHeight="46"
+                        prefHeight="46"
+                        maxHeight="46"/>
+            </VBox>
+
+            <Region minHeight="0"
+                    VBox.vgrow="ALWAYS"/>
+
+            <VBox spacing="8"
+                  styleClass="account-box, panel-1C2943-12-8-plain"
+                  minWidth="176"
+                  prefWidth="176"
+                  maxWidth="176"
+                  minHeight="95"
+                  prefHeight="95"
+                  maxHeight="95">
+                <Label text="YOUR ACCOUNT"
+                       styleClass="design-label, text-10-semibold-caption"
+                       wrapText="true"
+                       alignment="TOP_LEFT"
+                       textOverrun="CLIP"
+                       minHeight="15"
+                       prefHeight="15"
+                       maxHeight="15"/>
+
+                <Hyperlink text="Sign in / Register"
+                           userData="Sign in"
+                           styleClass="text-link"/>
+            </VBox>
+
+            <Label text="Help starts with&#10;our community."
+                   styleClass="design-label, text-13-regular-caption"
+                   wrapText="true"
+                   alignment="TOP_LEFT"
+                   textOverrun="CLIP"
+                   minWidth="176"
+                   prefWidth="176"
+                   maxWidth="176"
+                   minHeight="38"
+                   prefHeight="38"
+                   maxHeight="38"/>
+        </VBox>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true"
+                    hbarPolicy="AS_NEEDED"
+                    vbarPolicy="AS_NEEDED"
+                    styleClass="page-scroll">
+            <content>
+                <VBox spacing="24"
+                      minWidth="1056"
+                      prefWidth="1056"
+                      minHeight="960"
+                      styleClass="main-content">
+                    <Label text="CAROLINA HURRICANE HELPER  /  HOME"
+                           styleClass="design-label, text-11-semibold-muted"
+                           wrapText="true"
+                           alignment="TOP_LEFT"
+                           textOverrun="CLIP"
+                           minHeight="16"
+                           prefHeight="16"
+                           maxHeight="16"/>
+
+                    <Label text="How can we help today?"
+                           styleClass="design-label, text-32-semibold-navy"
+                           wrapText="true"
+                           alignment="TOP_LEFT"
+                           textOverrun="CLIP"
+                           minWidth="976"
+                           prefWidth="976"
+                           maxWidth="976"
+                           minHeight="46"
+                           prefHeight="46"
+                           maxHeight="46"/>
+
+                    <Label text="Find support, coordinate requests, and help your community recover."
+                           styleClass="design-label, text-16-regular-muted"
+                           wrapText="true"
+                           alignment="TOP_LEFT"
+                           textOverrun="CLIP"
+                           minWidth="976"
+                           prefWidth="976"
+                           maxWidth="976"
+                           minHeight="24"
+                           prefHeight="24"
+                           maxHeight="24"/>
+
+                    <VBox spacing="6"
+                          styleClass="panel-yellow-20-12-plain"
+                          minWidth="976"
+                          prefWidth="976"
+                          maxWidth="976"
+                          minHeight="100"
+                          prefHeight="100"
+                          maxHeight="100">
+                        <Label text="Storm information"
+                               styleClass="design-label, text-16-semibold-navy"
+                               wrapText="true"
+                               alignment="TOP_LEFT"
+                               textOverrun="CLIP"
+                               minHeight="24"
+                               prefHeight="24"
+                               maxHeight="24"/>
+
+                        <Label text="Check the latest official advisories before planning travel or assistance."
+                               styleClass="design-label, text-14-regular-muted"
+                               wrapText="true"
+                               alignment="TOP_LEFT"
+                               textOverrun="CLIP"
+                               minWidth="936"
+                               prefWidth="936"
+                               maxWidth="936"
+                               minHeight="24"
+                               prefHeight="24"
+                               maxHeight="24"/>
+                    </VBox>
+
+                    <HBox spacing="24"
+                          minWidth="976"
+                          prefWidth="976"
+                          maxWidth="976"
+                          minHeight="200"
+                          prefHeight="200"
+                          maxHeight="200">
+                        <VBox spacing="16"
+                              styleClass="panel-white-24-12-border"
+                              minWidth="470"
+                              prefWidth="470"
+                              maxWidth="470"
+                              minHeight="180"
+                              prefHeight="180"
+                              maxHeight="180">
+                            <Label text="Find a shelter"
+                                   styleClass="design-label, text-21-semibold-navy"
+                                   wrapText="true"
+                                   alignment="TOP_LEFT"
+                                   textOverrun="CLIP"
+                                   minWidth="422"
+                                   prefWidth="422"
+                                   maxWidth="422"
+                                   minHeight="30"
+                                   prefHeight="30"
+                                   maxHeight="30"/>
+
+                            <Label text="Browse shelter locations, status and capacity."
+                                   styleClass="design-label, text-15-regular-muted"
+                                   wrapText="true"
+                                   alignment="TOP_LEFT"
+                                   textOverrun="CLIP"
+                                   minWidth="422"
+                                   prefWidth="422"
+                                   maxWidth="422"
+                                   minHeight="24"
+                                   prefHeight="24"
+                                   maxHeight="24"/>
+
+                            <Button text="Find shelters"
+                                    userData="Nearby shelters"
+                                    styleClass="primary-button"
+                                    minHeight="46"
+                                    prefHeight="46"
+                                    maxHeight="46"/>
+                        </VBox>
+
+                        <VBox spacing="16"
+                              styleClass="panel-white-24-12-border"
+                              minWidth="470"
+                              prefWidth="470"
+                              maxWidth="470"
+                              minHeight="180"
+                              prefHeight="180"
+                              maxHeight="180">
+                            <Label text="Request help"
+                                   styleClass="design-label, text-21-semibold-navy"
+                                   wrapText="true"
+                                   alignment="TOP_LEFT"
+                                   textOverrun="CLIP"
+                                   minWidth="422"
+                                   prefWidth="422"
+                                   maxWidth="422"
+                                   minHeight="30"
+                                   prefHeight="30"
+                                   maxHeight="30"/>
+
+                            <Label text="Tell the team what your household needs."
+                                   styleClass="design-label, text-15-regular-muted"
+                                   wrapText="true"
+                                   alignment="TOP_LEFT"
+                                   textOverrun="CLIP"
+                                   minWidth="422"
+                                   prefWidth="422"
+                                   maxWidth="422"
+                                   minHeight="24"
+                                   prefHeight="24"
+                                   maxHeight="24"/>
+
+                            <Button text="Request assistance"
+                                    userData="Request volunteer help"
+                                    styleClass="primary-button"
+                                    minHeight="46"
+                                    prefHeight="46"
+                                    maxHeight="46"/>
+                        </VBox>
+                    </HBox>
+
+                    <HBox spacing="24"
+                          minWidth="976"
+                          prefWidth="976"
+                          maxWidth="976"
+                          minHeight="200"
+                          prefHeight="200"
+                          maxHeight="200">
+                        <VBox spacing="16"
+                              styleClass="panel-white-24-12-border"
+                              minWidth="470"
+                              prefWidth="470"
+                              maxWidth="470"
+                              minHeight="180"
+                              prefHeight="180"
+                              maxHeight="180">
+                            <Label text="Help your neighbors"
+                                   styleClass="design-label, text-21-semibold-navy"
+                                   wrapText="true"
+                                   alignment="TOP_LEFT"
+                                   textOverrun="CLIP"
+                                   minWidth="422"
+                                   prefWidth="422"
+                                   maxWidth="422"
+                                   minHeight="30"
+                                   prefHeight="30"
+                                   maxHeight="30"/>
+
+                            <Label text="Browse requests and coordinate your next visit."
+                                   styleClass="design-label, text-15-regular-muted"
+                                   wrapText="true"
+                                   alignment="TOP_LEFT"
+                                   textOverrun="CLIP"
+                                   minWidth="422"
+                                   prefWidth="422"
+                                   maxWidth="422"
+                                   minHeight="24"
+                                   prefHeight="24"
+                                   maxHeight="24"/>
+
+                            <Button text="Browse requests"
+                                    userData="Browse requests"
+                                    styleClass="primary-button"
+                                    minHeight="46"
+                                    prefHeight="46"
+                                    maxHeight="46"/>
+                        </VBox>
+
+                        <VBox spacing="16"
+                              styleClass="panel-white-24-12-border"
+                              minWidth="470"
+                              prefWidth="470"
+                              maxWidth="470"
+                              minHeight="180"
+                              prefHeight="180"
+                              maxHeight="180">
+                            <Label text="Become a volunteer"
+                                   styleClass="design-label, text-21-semibold-navy"
+                                   wrapText="true"
+                                   alignment="TOP_LEFT"
+                                   textOverrun="CLIP"
+                                   minWidth="422"
+                                   prefWidth="422"
+                                   maxWidth="422"
+                                   minHeight="30"
+                                   prefHeight="30"
+                                   maxHeight="30"/>
+
+                            <Label text="Create a profile and offer help."
+                                   styleClass="design-label, text-15-regular-muted"
+                                   wrapText="true"
+                                   alignment="TOP_LEFT"
+                                   textOverrun="CLIP"
+                                   minWidth="422"
+                                   prefWidth="422"
+                                   maxWidth="422"
+                                   minHeight="24"
+                                   prefHeight="24"
+                                   maxHeight="24"/>
+
+                            <Button text="Join the program"
+                                    userData="Volunteer application"
+                                    styleClass="primary-button"
+                                    minHeight="46"
+                                    prefHeight="46"
+                                    maxHeight="46"/>
+                        </VBox>
+                    </HBox>
+
+                    <VBox spacing="8"
+                          styleClass="panel-white-24-24-9-24-8-border"
+                          minWidth="976"
+                          prefWidth="976"
+                          maxWidth="976"
+                          minHeight="148"
+                          prefHeight="148"
+                          maxHeight="148">
+                        <Label text="Already asked for help?"
+                               styleClass="design-label, text-20-semibold-navy"
+                               wrapText="true"
+                               alignment="TOP_LEFT"
+                               textOverrun="CLIP"
+                               minHeight="29"
+                               prefHeight="29"
+                               maxHeight="29"/>
+
+                        <Label text="Sign in to check your request status and see the next steps."
+                               styleClass="design-label, text-15-regular-muted"
+                               wrapText="true"
+                               alignment="TOP_LEFT"
+                               textOverrun="CLIP"
+                               minHeight="22"
+                               prefHeight="22"
+                               maxHeight="22"/>
+
+                        <Button text="Sign in to track a request"
+                                userData="Sign in"
+                                styleClass="primary-button"
+                                minHeight="46"
+                                prefHeight="46"
+                                maxHeight="46"/>
+                    </VBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>
