@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.controllers.ReliefScreensController"
+            prefWidth="1100" prefHeight="800"
+            stylesheets="@relief-screens.css">
+
+    <left>
+        <fx:include source="sidebar.fxml"/>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true">
+            <content>
+                <VBox spacing="24" styleClass="page">
+
+                    <Label text="CAROLINA HURRICANE HELPER / VOLUNTEER APPLICATION"
+                           styleClass="breadcrumb"/>
+
+                    <Label text="Volunteer application"
+                           styleClass="page-title"/>
+
+                    <Label text="Optional application fields; values are not included in the supplied user data."
+                           wrapText="true" styleClass="body-copy"/>
+
+                    <VBox spacing="20" styleClass="card">
+
+                        <VBox spacing="8">
+                            <Label text="Skills and experience"
+                                   styleClass="field-label"/>
+                            <TextField fx:id="skillsField"
+                                       promptText="Not provided"/>
+                        </VBox>
+
+                        <VBox spacing="8">
+                            <Label text="Vehicle" styleClass="field-label"/>
+                            <TextField fx:id="vehicleField"
+                                       promptText="Not provided"/>
+                        </VBox>
+
+                        <VBox spacing="8">
+                            <Label text="Why would you like to volunteer?"
+                                   styleClass="field-label"/>
+                            <TextField fx:id="reasonField"
+                                       promptText="Not provided"/>
+                        </VBox>
+
+                        <VBox spacing="8">
+                            <Label text="Preferred service area"
+                                   styleClass="field-label"/>
+                            <TextField fx:id="areaField"
+                                       promptText="Not provided"/>
+                        </VBox>
+
+                        <VBox spacing="8">
+                            <Label text="Availability"
+                                   styleClass="field-label"/>
+                            <TextField fx:id="availabilityField"
+                                       promptText="Not provided"/>
+                        </VBox>
+
+                        <Label text="Application review and verification data have not been supplied."
+                               wrapText="true" styleClass="body-copy"/>
+
+                        <Button text="Submit application"
+                                onAction="#submitApplication"
+                                styleClass="primary"/>
+
+                    </VBox>
+
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

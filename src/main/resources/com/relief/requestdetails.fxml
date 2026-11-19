@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.controllers.ReliefScreensController"
+            prefWidth="1100" prefHeight="800"
+            stylesheets="@relief-screens.css">
+
+    <left>
+        <fx:include source="sidebar.fxml"/>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true">
+            <content>
+                <VBox spacing="24" styleClass="page">
+
+                    <Label text="CAROLINA HURRICANE HELPER / REQUEST DETAILS"
+                           styleClass="breadcrumb"/>
+
+                    <Label text="Request details" styleClass="page-title"/>
+
+                    <Label text="Request ID: 7e8a2c49-6f13-4b95-a0d7-3c826f914e52"
+                           wrapText="true" styleClass="body-copy"/>
+
+                    <HBox spacing="24">
+
+                        <VBox spacing="14" styleClass="card"
+                              HBox.hgrow="ALWAYS">
+                            <Label text="Linked shelter check-in"
+                                   styleClass="card-title"/>
+
+                            <Label text="People: 3 • Pet: Buddy (1)&#10;Shelter: Emergency Relief Shelter&#10;Checked in: Yes • Manager: felix"
+                                   wrapText="true"
+                                   styleClass="body-copy"/>
+                        </VBox>
+
+                        <VBox spacing="14" styleClass="card"
+                              HBox.hgrow="ALWAYS">
+                            <Label text="Request information"
+                                   styleClass="card-title"/>
+
+                            <Label text="Category: MEDICAL • Severity: HIGH&#10;Status: ASSIGNED&#10;Volunteer: rdelgado"
+                                   wrapText="true"
+                                   styleClass="body-copy"/>
+                        </VBox>
+
+                    </HBox>
+
+                    <VBox spacing="14" styleClass="card">
+                        <Label text="Request and contact"
+                               styleClass="card-title"/>
+
+                        <Label text="Sophie needs medical assistance.&#10;247 Palmetto Harbor Lane, Charleston, SC 29403&#10;John Carter | 301-123-4565 | JCarter@gmail.com"
+                               wrapText="true"
+                               styleClass="body-copy"/>
+                    </VBox>
+
+                    <Button text="View assignment"
+                            userData="requestclaimed"
+                            onAction="#navigate"
+                            styleClass="primary"/>
+
+                    <Button text="Back to requests"
+                            userData="browse-requests"
+                            onAction="#navigate"
+                            styleClass="text-link"/>
+
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

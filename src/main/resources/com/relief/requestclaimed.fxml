@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.controllers.ReliefScreensController"
+            prefWidth="1100" prefHeight="800"
+            stylesheets="@relief-screens.css">
+
+    <left>
+        <fx:include source="sidebar.fxml"/>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true">
+            <content>
+                <VBox spacing="24" styleClass="page">
+
+                    <Label text="CAROLINA HURRICANE HELPER / REQUEST CLAIMED"
+                           styleClass="breadcrumb"/>
+
+                    <Label text="Request assigned"
+                           styleClass="page-title"/>
+
+                    <Label text="Recorded assignment for medical assistance."
+                           wrapText="true" styleClass="body-copy"/>
+
+                    <VBox spacing="10" styleClass="notice">
+                        <Label text="Assigned to Rosa Delgado"
+                               styleClass="card-title"/>
+
+                        <Label text="Username: rdelgado • Status: ASSIGNED • Category: MEDICAL"
+                               wrapText="true"
+                               styleClass="body-copy"/>
+                    </VBox>
+
+                    <VBox spacing="14" styleClass="card">
+                        <Label text="Request summary"
+                               styleClass="card-title"/>
+
+                        <Label text="Sophie needs medical assistance.&#10;Contact: John Carter | 301-123-4565 | JCarter@gmail.com&#10;Linked check-in: Emergency Relief Shelter • 3 people • Buddy (1 pet)"
+                               wrapText="true"
+                               styleClass="body-copy"/>
+                    </VBox>
+
+                    <Button text="Go to my requests"
+                            userData="my-requests"
+                            onAction="#navigate"
+                            styleClass="primary"/>
+
+                    <Button text="Update this request"
+                            userData="updaterequest"
+                            onAction="#navigate"
+                            styleClass="text-link"/>
+
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

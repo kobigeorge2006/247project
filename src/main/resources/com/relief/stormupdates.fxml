@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.controllers.StormUpdatesController"
+            prefWidth="1100" prefHeight="800"
+            style="-fx-background-color: #f4f6f9;">
+
+    <!-- Navigation sidebar -->
+    <left>
+        <VBox prefWidth="210" spacing="20"
+              style="-fx-background-color: #10182b;">
+            <padding>
+                <Insets top="28" right="20" bottom="28" left="20"/>
+            </padding>
+
+            <Label text="CHH"
+                   style="-fx-text-fill: white;
+                          -fx-font-size: 30px;
+                          -fx-font-weight: bold;"/>
+
+            <Label text="Carolina&#10;Hurricane Helper"
+                   style="-fx-text-fill: white;
+                          -fx-font-size: 16px;"/>
+
+            <Label text="FIND SUPPORT"
+                   style="-fx-text-fill: #a8b8d1;"/>
+
+            <Label text="Home"
+                   style="-fx-text-fill: #d1d9e7;"/>
+
+            <Label text="Find shelter"
+                   style="-fx-text-fill: #d1d9e7;"/>
+
+            <Button text="Storm updates"
+                    maxWidth="Infinity"
+                    onAction="#handleViewEvents"
+                    style="-fx-background-color: #fffbd9;
+                           -fx-text-fill: #10182b;
+                           -fx-padding: 12;
+                           -fx-font-weight: bold;"/>
+
+            <Label text="VOLUNTEER"
+                   style="-fx-text-fill: #a8b8d1;"/>
+
+            <Label text="Browse requests"
+                   style="-fx-text-fill: #d1d9e7;"/>
+
+            <Label text="My requests"
+                   style="-fx-text-fill: #d1d9e7;"/>
+
+            <Label text="Volunteer program"
+                   style="-fx-text-fill: #d1d9e7;"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Label text="Help starts with&#10;our community."
+                   style="-fx-text-fill: #a8b8d1;"/>
+        </VBox>
+    </left>
+
+    <!-- Storm updates content -->
+    <center>
+        <VBox spacing="22">
+            <padding>
+                <Insets top="36" right="36" bottom="36" left="36"/>
+            </padding>
+
+            <Label text="CAROLINA HURRICANE HELPER / STORM UPDATES"
+                   style="-fx-text-fill: #64748b;
+                          -fx-font-size: 11px;"/>
+
+            <Label text="Storm updates"
+                   style="-fx-text-fill: #10182b;
+                          -fx-font-size: 32px;
+                          -fx-font-weight: bold;"/>
+
+            <Label text="Hurricane events from the supplied project data."
+                   wrapText="true"
+                   style="-fx-text-fill: #64748b;
+                          -fx-font-size: 16px;"/>
+
+            <VBox spacing="8">
+                <Label text="Event locations"
+                       labelFor="$locationField"/>
+
+                <TextField fx:id="locationField"
+                           promptText="Enter Florida or Texas; leave blank for all"
+                           onAction="#handleViewEvents"
+                           style="-fx-padding: 12;"/>
+            </VBox>
+
+            <Button text="View events"
+                    onAction="#handleViewEvents"
+                    style="-fx-background-color: #10182b;
+                           -fx-text-fill: white;
+                           -fx-padding: 12 20;
+                           -fx-font-weight: bold;"/>
+
+            <VBox spacing="8"
+                  style="-fx-background-color: #fffbd9;
+                         -fx-background-radius: 12;
+                         -fx-padding: 20;">
+
+                <Label text="Project event records"
+                       style="-fx-font-weight: bold;
+                              -fx-font-size: 16px;"/>
+
+                <Label text="Wind-speed units and update times were not supplied. These are not live advisories."
+                       wrapText="true"
+                       style="-fx-text-fill: #64748b;"/>
+            </VBox>
+
+            <Label fx:id="resultsLabel"
+                   style="-fx-text-fill: #64748b;"/>
+
+            <TableView fx:id="eventsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="statusColumn"
+                                 text="Status" prefWidth="150"/>
+                    <TableColumn fx:id="locationColumn"
+                                 text="Location" prefWidth="220"/>
+                    <TableColumn fx:id="windColumn"
+                                 text="Max wind speed" prefWidth="160"/>
+                    <TableColumn fx:id="pathColumn"
+                                 text="Forecast path" prefWidth="160"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>
