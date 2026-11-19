@@ -12,13 +12,8 @@ import javafx.fxml.FXML;
  */
 public class HomeController {
 
-    /**
-     * Switches the displayed view to the secondary screen.
-     *
-     * @throws IOException if the secondary view cannot be loaded
-     */
     @FXML
-    private void switchToSecondary() throws IOException {
-        App.setRoot("login");
+    private void goToShelters() throws IOException {
+        App.setRoot("NearByShelters");
     }
 }
