@@ -6,6 +6,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.controllers.HomeController"
             prefWidth="1280"
             prefHeight="960"
             style="-fx-background-color: #F4F6F9; -fx-font-family: 'System';">
@@ -164,6 +165,7 @@
 
                             <Button text="Find shelters"
                                     wrapText="true"
+                                    onAction="#goToShelters"
                                     style="-fx-background-color: #10182C; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 12 20; -fx-cursor: hand;"/>
                         </VBox>
 
