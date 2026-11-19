@@ -1,6 +1,5 @@
-package com.controllers;
 
-public class StormUpdatesController {
+
     package com.controllers;
 
 import javafx.beans.property.SimpleStringProperty;
