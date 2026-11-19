@@ -53,4 +53,8 @@ public class SheltersController {
             shelterResults.getChildren().add(shelterDetails);
         }
     }
+    @FXML
+private void goStormUpdates() throws java.io.IOException {
+    com.frontend.App.setRoot("stormupdates");
+}
 }
