@@ -46,6 +46,7 @@
                         style="-fx-background-color: #FFFBD9; -fx-background-radius: 8; -fx-text-fill: #10182C; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 0 12;"/>
 
                 <Button text="Storm updates"
+                        onAction ="#goStormUpdates"
                         alignment="CENTER_LEFT"
                         maxWidth="Infinity"
                         prefHeight="46"
