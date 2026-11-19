@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.controllers.ScreenController"
+            stylesheets="@styles.css"
+            prefWidth="1280"
+            prefHeight="960"
+            styleClass="app-root">
+
+    <left>
+        <VBox styleClass="sidebar"
+              spacing="20"
+              minWidth="224"
+              prefWidth="224"
+              maxWidth="224">
+
+            <Label text="CHH"
+                   styleClass="design-label, text-30-semibold-white"
+                   wrapText="true"
+                   alignment="TOP_LEFT"
+                   textOverrun="CLIP"
+                   minHeight="44"
+                   prefHeight="44"
+                   maxHeight="44"/>
+
+            <Label text="Carolina&#10;Hurricane Helper"
+                   styleClass="design-label, text-15-semibold-white"
+                   wrapText="true"
+                   alignment="TOP_LEFT"
+                   textOverrun="CLIP"
+                   minWidth="176"
+                   prefWidth="176"
+                   maxWidth="176"
+                   minHeight="44"
+                   prefHeight="44"
+                   maxHeight="44"/>
+
+            <VBox spacing="6"
+                  minWidth="176"
+                  prefWidth="176"
+                  maxWidth="176"
+                  minHeight="400"
+                  prefHeight="400"
+                  maxHeight="400">
+
+                <Label text="FIND SUPPORT"
+                       styleClass="design-label, text-10-semibold-99ACC8"
+                       wrapText="true"
+                       alignment="TOP_LEFT"
+                       textOverrun="CLIP"
+                       minHeight="15"
+                       prefHeight="15"
+                       maxHeight="15"/>
+
+                <Button text="Home"
+                        userData="home"
+                        onAction="#navigate"
+                        styleClass="nav-button"
+                        minWidth="176"
+                        prefWidth="176"
+                        maxWidth="176"
+                        minHeight="46"
+                        prefHeight="46"
+                        maxHeight="46"/>
+
+                <Button text="Find shelter"
+                        userData="shelters"
+                        onAction="#navigate"
+                        styleClass="nav-button"
+                        minWidth="176"
+                        prefWidth="176"
+                        maxWidth="176"
+                        minHeight="46"
+                        prefHeight="46"
+                        maxHeight="46"/>
+
+                <Button text="Storm updates"
+                        userData="storms"
+                        onAction="#navigate"
+                        styleClass="nav-button"
+                        minWidth="176"
+                        prefWidth="176"
+                        maxWidth="176"
+                        minHeight="46"
+                        prefHeight="46"
+                        maxHeight="46"/>
+
+                <Label text="VOLUNTEER"
+                       styleClass="design-label, text-10-semibold-99ACC8"
+                       wrapText="true"
+                       alignment="TOP_LEFT"
+                       textOverrun="CLIP"
+                       minHeight="15"
+                       prefHeight="15"
+                       maxHeight="15"/>
+
+                <Button text="Browse requests"
+                        userData="requests"
+                        onAction="#navigate"
+                        styleClass="nav-button"
+                        minWidth="176"
+                        prefWidth="176"
+                        maxWidth="176"
+                        minHeight="46"
+                        prefHeight="46"
+                        maxHeight="46"/>
+
+                <Button text="My requests"
+                        userData="my-requests"
+                        onAction="#navigate"
+                        styleClass="nav-button"
+                        minWidth="176"
+                        prefWidth="176"
+                        maxWidth="176"
+                        minHeight="46"
+                        prefHeight="46"
+                        maxHeight="46"/>
+
+                <Button text="Volunteer program"
+                        userData="volunteer"
+                        onAction="#navigate"
+                        styleClass="nav-button"
+                        minWidth="176"
+                        prefWidth="176"
+                        maxWidth="176"
+                        minHeight="46"
+                        prefHeight="46"
+                        maxHeight="46"/>
+            </VBox>
+
+            <Region minHeight="0"
+                    VBox.vgrow="ALWAYS"/>
+
+            <VBox spacing="8"
+                  styleClass="account-box, panel-1C2943-12-8-plain"
+                  minWidth="176"
+                  prefWidth="176"
+                  maxWidth="176"
+                  minHeight="95"
+                  prefHeight="95"
+                  maxHeight="95">
+
+                <Label text="YOUR ACCOUNT"
+                       styleClass="design-label, text-10-semibold-caption"
+                       wrapText="true"
+                       alignment="TOP_LEFT"
+                       textOverrun="CLIP"
+                       minHeight="15"
+                       prefHeight="15"
+                       maxHeight="15"/>
+
+                <Hyperlink text="Sign in / Register"
+                           onAction="#navigate"
+                           userData="login"
+                           styleClass="text-link"/>
+            </VBox>
+
+            <Label text="Help starts with&#10;our community."
+                   styleClass="design-label, text-13-regular-caption"
+                   wrapText="true"
+                   alignment="TOP_LEFT"
+                   textOverrun="CLIP"
+                   minWidth="176"
+                   prefWidth="176"
+                   maxWidth="176"
+                   minHeight="38"
+                   prefHeight="38"
+                   maxHeight="38"/>
+        </VBox>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true"
+                    hbarPolicy="AS_NEEDED"
+                    vbarPolicy="AS_NEEDED"
+                    styleClass="page-scroll">
+
+            <content>
+                <VBox spacing="24"
+                      minWidth="1056"
+                      prefWidth="1056"
+                      minHeight="960"
+                      styleClass="main-content">
+
+                    <Label text="CAROLINA HURRICANE HELPER  /  CREATE AN ACCOUNT"
+                           styleClass="design-label, text-11-semibold-muted"
+                           wrapText="true"
+                           alignment="TOP_LEFT"
+                           textOverrun="CLIP"
+                           minHeight="16"
+                           prefHeight="16"
+                           maxHeight="16"/>
+
+                    <Label text="Create an account"
+                           styleClass="design-label, text-32-semibold-navy"
+                           wrapText="true"
+                           alignment="TOP_LEFT"
+                           textOverrun="CLIP"
+                           minWidth="976"
+                           prefWidth="976"
+                           maxWidth="976"
+                           minHeight="46"
+                           prefHeight="46"
+                           maxHeight="46"/>
+
+                    <Label text="Example user record: Amy Smith."
+                           styleClass="design-label, text-16-regular-muted"
+                           wrapText="true"
+                           alignment="TOP_LEFT"
+                           textOverrun="CLIP"
+                           minWidth="976"
+                           prefWidth="976"
+                           maxWidth="976"
+                           minHeight="24"
+                           prefHeight="24"
+                           maxHeight="24"/>
+
+                    <VBox spacing="16"
+                          styleClass="panel-white-24-12-plain"
+                          minWidth="540"
+                          prefWidth="540"
+                          maxWidth="540"
+                          minHeight="680"
+                          prefHeight="680"
+                          maxHeight="680">
+
+                        <VBox spacing="8"
+                              minWidth="470"
+                              prefWidth="470"
+                              maxWidth="470"
+                              minHeight="83"
+                              prefHeight="83"
+                              maxHeight="83">
+
+                            <Label text="First name"
+                                   styleClass="design-label, text-14-semibold-navy"
+                                   wrapText="true"
+                                   alignment="TOP_LEFT"
+                                   textOverrun="CLIP"
+                                   minWidth="470"
+                                   prefWidth="470"
+                                   maxWidth="470"
+                                   minHeight="21"
+                                   prefHeight="21"
+                                   maxHeight="21"/>
+
+                            <TextField fx:id="firstName"
+                                       text="Amy"
+                                       minWidth="470"
+                                       prefWidth="470"
+                                       maxWidth="470"
+                                       minHeight="48"
+                                       prefHeight="48"
+                                       maxHeight="48"/>
+                        </VBox>
+
+                        <VBox spacing="8"
+                              minWidth="470"
+                              prefWidth="470"
+                              maxWidth="470"
+                              minHeight="83"
+                              prefHeight="83"
+                              maxHeight="83">
+
+                            <Label text="Last name"
+                                   styleClass="design-label, text-14-semibold-navy"
+                                   wrapText="true"
+                                   alignment="TOP_LEFT"
+                                   textOverrun="CLIP"
+                                   minWidth="470"
+                                   prefWidth="470"
+                                   maxWidth="470"
+                                   minHeight="21"
+                                   prefHeight="21"
+                                   maxHeight="21"/>
+
+                            <TextField fx:id="lastName"
+                                       text="Smith"
+                                       minWidth="470"
+                                       prefWidth="470"
+                                       maxWidth="470"
+                                       minHeight="48"
+                                       prefHeight="48"
+                                       maxHeight="48"/>
+                        </VBox>
+
+                        <VBox spacing="8"
+                              minWidth="470"
+                              prefWidth="470"
+                              maxWidth="470"
+                              minHeight="83"
+                              prefHeight="83"
+                              maxHeight="83">
+
+                            <Label text="Username"
+                                   styleClass="design-label, text-14-semibold-navy"
+                                   wrapText="true"
+                                   alignment="TOP_LEFT"
+                                   textOverrun="CLIP"
+                                   minWidth="470"
+                                   prefWidth="470"
+                                   maxWidth="470"
+                                   minHeight="21"
+                                   prefHeight="21"
+                                   maxHeight="21"/>
+
+                            <TextField fx:id="username"
+                                       text="asmith"
+                                       minWidth="470"
+                                       prefWidth="470"
+                                       maxWidth="470"
+                                       minHeight="48"
+                                       prefHeight="48"
+                                       maxHeight="48"/>
+                        </VBox>
+
+                        <VBox spacing="8"
+                              minWidth="470"
+                              prefWidth="470"
+                              maxWidth="470"
+                              minHeight="83"
+                              prefHeight="83"
+                              maxHeight="83">
+
+                            <Label text="Email"
+                                   styleClass="design-label, text-14-semibold-navy"
+                                   wrapText="true"
+                                   alignment="TOP_LEFT"
+                                   textOverrun="CLIP"
+                                   minWidth="470"
+                                   prefWidth="470"
+                                   maxWidth="470"
+                                   minHeight="21"
+                                   prefHeight="21"
+                                   maxHeight="21"/>
+
+                            <TextField fx:id="email"
+                                       text="amy@email.com"
+                                       minWidth="470"
+                                       prefWidth="470"
+                                       maxWidth="470"
+                                       minHeight="48"
+                                       prefHeight="48"
+                                       maxHeight="48"/>
+                        </VBox>
+
+                        <VBox spacing="8"
+                              minWidth="470"
+                              prefWidth="470"
+                              maxWidth="470"
+                              minHeight="83"
+                              prefHeight="83"
+                              maxHeight="83">
+
+                            <Label text="Password"
+                                   styleClass="design-label, text-14-semibold-navy"
+                                   wrapText="true"
+                                   alignment="TOP_LEFT"
+                                   textOverrun="CLIP"
+                                   minWidth="470"
+                                   prefWidth="470"
+                                   maxWidth="470"
+                                   minHeight="21"
+                                   prefHeight="21"
+                                   maxHeight="21"/>
+
+                            <PasswordField fx:id="signupPassword"
+                                           promptText="••••••••"
+                                           minWidth="470"
+                                           prefWidth="470"
+                                           maxWidth="470"
+                                           minHeight="48"
+                                           prefHeight="48"
+                                           maxHeight="48"/>
+                        </VBox>
+
+                        <Button text="Create account"
+                                onAction="#previewAccount"
+                                styleClass="primary-button"
+                                minHeight="46"
+                                prefHeight="46"
+                                maxHeight="46"/>
+
+                        <Hyperlink text="Already registered? Sign in"
+                                   onAction="#navigate"
+                                   userData="login"
+                                   styleClass="text-link"/>
+                    </VBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
