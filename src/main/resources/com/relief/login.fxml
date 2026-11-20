@@ -171,6 +171,7 @@
                                 style="-fx-background-color: #10182C; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 12 20; -fx-cursor: hand;"/>
 
                         <Hyperlink text="New here? Create an account"
+                                   onAction="#goToSignup"
                                    style="-fx-text-fill: #243E80; -fx-font-size: 14px; -fx-padding: 0; -fx-border-color: transparent;"/>
 
                         <Label fx:id="statusLabel"

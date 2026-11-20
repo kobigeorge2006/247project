@@ -6,7 +6,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.controllers.ScreenController"
+            fx:controller="com.controllers.ReliefScreensController"
             stylesheets="@styles.css"
             prefWidth="1280"
             prefHeight="960"
@@ -380,7 +380,7 @@
                         </VBox>
 
                         <Button text="Create account"
-                                onAction="#previewAccount"
+                                onAction="#createAccount"
                                 styleClass="primary-button"
                                 minHeight="46"
                                 prefHeight="46"

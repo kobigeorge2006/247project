@@ -34,4 +34,9 @@ public class LoginController {
             statusLabel.setText("Incorrect username or password.");
         }
     }
+
+    @FXML
+    private void goToSignup() throws IOException {
+        App.setRoot("signup");
+    }
 }

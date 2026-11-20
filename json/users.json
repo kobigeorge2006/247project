@@ -1,13 +1,1 @@
-[
-    {
-        "firstName": "Rosa",
-        "lastName": "Delgado",
-        "password": "password123",
-        "phoneNumber": "8035551234",
-        "volunteer": true,
-        "id": "cc0f077f-9001-40d7-ba37-46f20e18b01c",
-        "requests": [],
-        "email": "RDelgado@gmail.com",
-        "username": "rdelgado"
-    }
-]
+[{"firstName":"Rosa","lastName":"Delgado","password":"password123","phoneNumber":"8035551234","volunteer":true,"id":"cc0f077f-9001-40d7-ba37-46f20e18b01c","requests":[],"email":"RDelgado@gmail.com","username":"rdelgado"},{"firstName":"John","lastName":"Doe","password":"Jdoe123","phoneNumber":"","volunteer":false,"id":"3dd71b4b-2f39-4c00-93e4-56ef37e4979a","requests":[],"email":"Jdoe@gmail.com","username":"JDoe"},{"firstName":"Kobi","lastName":"Geo","password":"KG123","phoneNumber":"","volunteer":false,"id":"01f7e19a-44e6-4284-8fe8-f3ee0c4ca744","requests":[],"email":"KG@gmail.com","username":"KGeo"},{"firstName":"Amy","lastName":"Smith","password":"amy123","phoneNumber":"","volunteer":false,"id":"77259f9b-4a65-42e2-8661-abefd4d5aaf0","requests":[],"email":"amy@email.com","username":"asmith"}]

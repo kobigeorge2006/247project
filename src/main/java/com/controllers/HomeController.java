@@ -16,4 +16,9 @@ public class HomeController {
     private void goToShelters() throws IOException {
         App.setRoot("NearByShelters");
     }
+
+    @FXML
+    private void goToVolunteerApplication() throws IOException {
+        App.setRoot("volunteerapplication");
+    }
 }

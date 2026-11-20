@@ -241,6 +241,7 @@
 
                             <Button text="Join the program"
                                     wrapText="true"
+                                    onAction="#goToVolunteerApplication"
                                     style="-fx-background-color: #10182C; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 12 20; -fx-cursor: hand;"/>
                         </VBox>
                     </GridPane>
